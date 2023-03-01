@@ -1,12 +1,11 @@
 @import '~node_modules/modern-normalize/modern-normalize.css';
 
-
-body {
-  font-family: "Manrope", sans-serif;
-  font-size: 16px;
-  color: var( --primary-black-color);
-  background:  var( --background-color);
-}
+$background-color: #F4F4F4;
+$background-dark-color: #2E2E2E;
+$primary-black-color: #111321;
+$primary-blue-color: #4440F6;
+$primary-grey-color: #A8A8A8;
+$primary-white-color:#FFFFFF;
 
 h1,
 h2,
@@ -16,8 +15,6 @@ h5,
 p {
   margin: 0;
 }
-
-
 
 img {
   display: block;
@@ -33,6 +30,7 @@ li {
 }
 
 a {
+  display: inline-block;
   list-style-type: none;
   text-decoration: none;
 }
@@ -41,7 +39,6 @@ a {
   font-family: inherit;
   cursor: pointer;
 }
-
 
 .container {
   width: 100%;
