@@ -60,6 +60,7 @@
 .header-menu-container{
     display: none;
 
+    @media screen and (max-width:767px){
     &.is-open {
         display: block;
         position: absolute;
@@ -71,9 +72,10 @@
         background-color: $background-color;
         padding-top: 45px;
     }
+}
 
     @media screen and (min-width:768px){
-        position: static;
+        //position: static;
         display: block;
     }
 }
@@ -274,6 +276,7 @@
 .theme{
     display: none;
 
+    @media (max-width:767px){
     .header-menu-container.is-open ~ &{
     display: flex;
     align-items: center;
@@ -282,6 +285,7 @@
     left: 16px;
     bottom: -85vh;
     }
+}
 
     @media (min-width:768px){
         display: flex;
