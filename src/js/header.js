@@ -1,6 +1,6 @@
 export default (() => {
   const mobileMenu = document.querySelector('.js-menu-container');
-  const openMenuBtn = document.querySelector('.js-open-menu');
+  const openMenuBtn = document.querySelector('.burger-btn-open');
 
   const toggleMenu = () => {
     const isMenuOpen = openMenuBtn.getAttribute('aria-expanded') === 'true' || false;
@@ -9,7 +9,6 @@ export default (() => {
   };
 
   openMenuBtn.addEventListener('click', toggleMenu);
-
 
   // Close the mobile menu on wider screens if the device orientation changes
   window.matchMedia('(min-width: 768px)').addEventListener('change', (e) => {
