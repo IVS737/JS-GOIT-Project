@@ -1,0 +1,90 @@
+
+    <header class="header">
+        <div class="header-container">
+            <a class="header-logo" href="./partials/mainPage.html">
+                <span class="header-logo-text">News</span>
+            </a>
+            <nav class="header-menu-container js-menu-container" id="mobile-menu">
+                <ul class="header-nav">
+                    <li class="header-nav-item home-current"><a class="header-link" href="./partials/mainPage.html"><svg
+                                class="icon-mob-menu" width="32" height="32">
+                                <use href="./images/symbol-defs.svg#icon-icon-for-menu-1"></use>
+                            </svg>
+                            Home
+                            <svg class="icon-mob-menu-arrow" width="8" height="14">
+                                <use href="./images/symbol-defs.svg#icon-mob-menu-arrow"></use>
+                            </svg></a></li>
+                    <li class="header-nav-item favorite-current"><a class="header-link" href="./partials/favoritePage.html"><svg
+                                class="icon-mob-menu" width="32" height="32">
+                                <use href="./images/symbol-defs.svg#icon-icon-for-menu-2"></use>
+                            </svg>
+                            Favorite 
+                            <svg class="icon-mob-menu-arrow" width="8" height="14">
+                                <use href="./images/symbol-defs.svg#icon-mob-menu-arrow"></use>
+                            </svg></a></li>
+                    <li class="header-nav-item read-current"><a class="header-link" href="./partials/readPage.html"><svg
+                                class="icon-mob-menu" width="32" height="32">
+                                <use href="./images/symbol-defs.svg#icon-icon-for-menu-3"></use>
+                            </svg>
+                            Read
+                            <svg class="icon-mob-menu-arrow" width="8" height="14">
+                                <use href="./images/symbol-defs.svg#icon-mob-menu-arrow"></use>
+                            </svg></a></li>
+                </ul>
+
+            </nav>
+
+            <!-- Search form -->
+
+            <button class="header-button-opensearch" type="submit">
+                <svg class="header-icon-search" width="20" height="20">
+                    <use href="./images/symbol-defs.svg#icon-search"></use>
+                </svg>
+            </button>
+
+            <form class="header-search-form">
+                <input class="header-search-input" type="text" name="newsField" autocomplete="off"
+                    placeholder="Search |" />
+                <button class="header-button-makesearch" type="submit">
+                    <svg class="header-icon-search" width="15" height="15">
+                        <use href="./images/symbol-defs.svg#icon-search"></use>
+                    </svg>
+                </button>
+            </form>
+
+            <!-- Switch theme -->
+            
+            <div class="theme">
+                <svg class="theme__icon sun" width="21" height="21">
+                    <use href="./images/symbol-defs.svg#icon-sun"></use>
+                </svg>
+                <p class="theme__light">Light</p>
+            
+                <label class="switch">
+                    <input type="checkbox" class="switch-checkbox" />
+                    <span class="slider round"></span>
+                </label>
+            
+                <p class="theme__dark">Dark</p>
+                <svg class="theme__icon moon" width="21" height="21">
+                    <use href="./images/symbol-defs.svg#icon-moon"></use>
+                </svg>
+            </div>
+
+            <!-- Burger menu -->
+
+            <button class="burger-btn-open js-open-menu" type="button" aria-label="Перемикач мобільного меню"
+                aria-expanded="false">
+                <svg class="burger-icon" width="24" height="24">
+                    <use href="./images/symbol-defs.svg#icon-menu"></use>
+                </svg>
+            </button>
+
+            <button class="burger-btn-close js-open-menu" type="button" aria-label="Перемикач мобільного меню"
+                aria-expanded="false">
+                <svg class="burger-icon" width="24" height="24">
+                    <use href="./images/symbol-defs.svg#icon-close-menu"></use>
+                </svg>
+            </button>
+
+    </header>
