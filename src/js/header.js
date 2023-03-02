@@ -25,4 +25,25 @@ export default (() => {
     openMenuBtn.setAttribute('aria-expanded', false);
     bodyScrollLock.enableBodyScroll(document.body);
   });
+
+// add current page class
+
+const home = document.querySelector('.home-current');
+const favorite = document.querySelector('.favorite-current');
+const read = document.querySelector('.read-current');
+
+const checkCurrentPage = () => {
+  if (window.location.href.includes("#readPage.html")) {
+  read.classList.add('current');
+}
+  if (window.location.href.includes("#favoritePage.html")) {
+  favorite.classList.add('current');
+}
+  if (window.location.href.includes("#mainPage.html" || "#index.html")) {
+  home.classList.add('current');
+}
+}
+
+checkCurrentPage();
+
 })();
