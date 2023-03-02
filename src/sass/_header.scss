@@ -73,7 +73,9 @@
     }
 
     @media screen and (min-width:768px){
-        display: block;}
+        position: static;
+        display: block;
+    }
 }
 
 .header-nav {
@@ -270,17 +272,23 @@
 //Theme
 
 .theme{
+    display: none;
+
+    .header-menu-container.is-open ~ &{
     display: flex;
     align-items: center;
     position: absolute;
     z-index: 2;
     left: 16px;
     bottom: -85vh;
+    }
 
     @media (min-width:768px){
+        display: flex;
         position: static;
     }
 }
+
 
 .switch{
   position: relative;
