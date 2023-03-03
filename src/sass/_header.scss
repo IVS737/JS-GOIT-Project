@@ -13,26 +13,24 @@
     padding-left: 16px;
     padding-top: 24px;
     padding-bottom: 22px;
-    margin-left: auto;
-    margin-right: auto;
-    //position: relative;
+    width: 100%;
+    // margin-left: auto;
+    // margin-right: auto;
+    // position: relative;
     display: flex;
     align-items: center;
     flex-direction: row;
     min-width: 320px;
 
-    @media screen and (min-width: 320px) {
-        width: 320px;}
-
     @media screen and (min-width:768px) {
-        width: 768px;
+        //width: 768px;
         height: 106px;
         padding-top: 32px;
         padding-bottom: 28px;
     }
 
     @media screen and (min-width:1280px) {
-        width: 1280px;
+        //width: 1280px;
         height: 113px;
         padding-top: 28px;
     }
@@ -43,7 +41,6 @@
     color: $primary-black-color;
     font-weight: 700;
     font-size: 24px;
-    margin-right: 165px;
 
     @media screen and (min-width:768px) {
         font-size: 32px;
@@ -88,7 +85,6 @@
 }
 
     @media screen and (min-width:768px){
-        //position: static;
         display: block;
     }
 }
@@ -174,6 +170,8 @@
     border: none;
     background-color: transparent;
 
+    margin-left: auto;
+
     position: relative;
     transform: rotate(0deg);
     transition: .5s ease-in-out;
@@ -239,7 +237,8 @@ opacity: 0;
 }
 
 .header-button-opensearch{
-    margin-right: 15px;
+    position: absolute;
+    right: 55px;
     padding: 0;
     cursor: pointer;
     width: 20px;
@@ -247,23 +246,24 @@ opacity: 0;
     border: none;
     background-color: transparent;
 
+    
+
     @media screen and (min-width:768px) {
         display: none;
     }
 }
 
 .header-search-form {
-    position: relative;
+    position: absolute;
     display: none;
+    right: 55px;
     animation: scale-up-br 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
 
     @media screen and (min-width:768px) {
+        position: relative;
+        right: 0;
         display: block;
-        margin-right: 24px;
         animation: none;
-    }
-
-    @media screen and (min-width: 1280px) {
         margin-right: auto;
         margin-left: auto;
     }
@@ -305,8 +305,8 @@ opacity: 0;
 .header-button-makesearch {
     position: absolute;
     padding: 0;
-    top: 6px;
-    left: 12px;
+    top: 8px;
+    left: 14px;
     border: none;
     background-color: transparent;
 }
