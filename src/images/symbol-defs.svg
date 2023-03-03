@@ -22,4 +22,7 @@
 </symbol>
 <symbol id="icon-loading" viewBox="0 0 32 32"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16.001 2.667v2.666m6.667-.88-1.333 2.31m6.213 2.57-2.31 1.334M29.336 16h-2.667m.88 6.667-2.31-1.334m-2.57 6.214-1.333-2.31M16 29.333v-2.666m-6.666.88 1.333-2.31m-6.213-2.57 2.309-1.334M2.668 16h2.667m-.88-6.667 2.309 1.334m2.57-6.214 1.334 2.31"/></symbol>
 <symbol id="icon-mob-menu-arrow" viewBox="0 0 18 32"><path fill="none" stroke="#f4f4f4" style="stroke: var(--color1, #f4f4f4)" stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="4.5714" d="M2.286 29.714l13.714-13.714-13.714-13.714"></path></symbol>
+<symbol id="icon-ua-flag" viewBox="0 0 30 20">
+<rect width="28" height="9" x="1" y="1" fill="#005bbb"/><rect width="28" height="9" x="1" y="10" fill="#ffd500"/>
+</symbol>
 </defs></svg>
