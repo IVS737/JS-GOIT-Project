@@ -1,27 +1,28 @@
-.footer{
-    height: 120px;
-    background-color: #7A7A7A;
-    display: block;
-    align-items: center;
-    justify-content: center;
+.footer {
+  border-top: 1px solid #000;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   @media screen and (min-width: 768px) {
     height: 146px;
   }
-}
 
-.footer__link{
+  &__link {
     font-family: 'Manrope';
     font-style: normal;
     font-weight: 700;
     font-size: 24px;
-    color: $primary-white-color;
+    color: $primary-black-color;
 
     @media screen and (min-width: 768px) {
-    font-size: 32px;
+      font-size: 32px;
+    }
   }
-}
 
-.footer__text{
+  &__text {
     text-transform: uppercase;
+    color: $green-color;
+  }
 }
