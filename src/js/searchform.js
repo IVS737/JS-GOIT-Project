@@ -47,23 +47,23 @@ function createEmptyMarkup() {
                   <source
                     media="(min-width:1280px)"
                     srcset="
-                      ../images/notfoundDesc.png    1x,
-                      ../images/notfoundDesc@2x.png 2x
+                      ./images/notfoundDesc.png    1x,
+                      ./images/notfoundDesc@2x.png 2x
                     "
                   />
 
                   <source
                     media="(min-width:768px)"
                     srcset="
-                      ../images/notfoundTab.png    1x,
-                      ../images/notfoundTab@2x.png 2x
+                    ./images/notfoundTab.png    1x,
+                      ./images/notfoundTab@2x.png 2x
                     "
                   />
 
                   <img
                     srcset="
-                      ../images/notfoundMob.png    1x,
-                      ../images/notfoundMob@2x.jpg 2x
+                      ./images/notfoundMob.png    1x,
+                      images/notfoundMob@2x.jpg 2x
                     "
                     alt="There aren't news"
                     src="./images/notfoundMob.png"
