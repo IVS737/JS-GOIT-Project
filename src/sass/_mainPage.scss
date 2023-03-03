@@ -17,7 +17,7 @@
         gap: 14px;
     }
 
-    @media screen and (min-width: 1200px) {
+    @media screen and (min-width: 1280px) {
         display: none;
         
     }
@@ -26,7 +26,7 @@
 .filter__list__des {
     display: none; 
 
-    @media screen and (min-width: 1200px) {
+    @media screen and (min-width: 1280px) {
             display: flex;
             align-items: center;
 
@@ -74,7 +74,7 @@
 .description__filter__calendar {
     display: none;
 
-    @media screen and (min-width: 1200px) {
+    @media screen and (min-width: 1280px) {
             display: inline;
 
             margin: 0;
@@ -178,7 +178,7 @@
         height: 675px;
     }
 
-    @media screen and (min-width: 1200px) {
+    @media screen and (min-width: 1280px) {
         width: 394px;
     }
 }
@@ -192,7 +192,7 @@
         grid-gap: 30px;
     }
 
-    @media screen and (min-width: 1200px) {
+    @media screen and (min-width: 1280px) {
         grid-template-columns: 1fr 1fr 1fr;
     
         grid-gap: 40px 32px;
@@ -208,26 +208,26 @@
         height: 675px;
     }
 
-    @media screen and (min-width: 1200px) {
+    @media screen and (min-width: 1280px) {
         width: 395px;
         height: 675px;
     }
 }
 
 .card:nth-child(2) {
-    @media screen and (min-width: 1200px) {
+    @media screen and (min-width: 1280px) {
         width: 394px;
     }
 }
 
 .card:nth-child(4) {
-    @media screen and (min-width: 1200px) {
+    @media screen and (min-width: 1280px) {
         width: 394px;
     }
 }
 
 .card:nth-child(7) {
-    @media screen and (min-width: 1200px) {
+    @media screen and (min-width: 1280px) {
         width: 394px;
     }
 }
@@ -239,14 +239,14 @@
 }
 
 .box1 {
-    @media screen and (min-width: 768px ) and (max-width: 1199px) {
+    @media screen and (min-width: 768px ) and (max-width: 1279px) {
     grid-column-start: 1;
     grid-column-end: 3;
     }
 }
 
 .box3 {
-    @media screen and (min-width: 1200px) {
+    @media screen and (min-width: 1280px) {
         grid-column-start: 1;
     }
 }
