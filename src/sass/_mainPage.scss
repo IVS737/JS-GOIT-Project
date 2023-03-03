@@ -163,7 +163,27 @@
     justify-content: center;
 }
 
-.wrapper {
+.news__weather {
+    width: 288px;
+    height: 469px;
+
+    margin-bottom: 28px;
+
+    @media screen and (min-width: 768px) {
+        position: absolute;
+        top: 0;
+        right: 0;
+
+        width: 353px;
+        height: 675px;
+    }
+
+    @media screen and (min-width: 1200px) {
+        width: 394px;
+    }
+}
+
+.wrapper__list {
     @media screen and (min-width: 768px) {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -215,26 +235,6 @@
 .card:not(:last-child) {
     @media screen and (max-width: 767px) {
         margin-bottom: 28px;
-    }
-}
-
-.news__weather {
-    width: 288px;
-    height: 469px;
-
-    margin-bottom: 28px;
-
-    @media screen and (min-width: 768px) {
-        position: absolute;
-        top: 0;
-        right: 0;
-
-        width: 353px;
-        height: 675px;
-    }
-
-    @media screen and (min-width: 1200px) {
-        width: 394px;
     }
 }
 
