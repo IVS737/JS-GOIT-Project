@@ -3,7 +3,7 @@ const refs = {
     input: document.querySelector(".header-search-input"),
     submitButton: document.querySelector('.header-button-makesearch'),
     openInputButton: document.querySelector('.header-button-opensearch'),
-    withoutNewsContainer: document.querySelector('.container__error'),
+  withoutNewsContainer: document.querySelector('.container__error'),
     newsList: document.querySelector('.wrapper__list'),
 }
 
@@ -24,7 +24,8 @@ function onFormSubmit(event) {
     fetchNews(value)
         .then(data => {
             if (data.response.docs.length === 0) {
-                form.reset();
+              form.reset();
+              newsList.innerHTML =""
                 return createEmptyMarkup();
             }
             makeMarkup(data.response.docs);
@@ -48,26 +49,26 @@ function createEmptyMarkup() {
                   <source
                     media="(min-width:1280px)"
                     srcset="
-                      ../images/notfoundDesc.png    1x,
-                      ../images/notfoundDesc@2x.png 2x
+                      images/notfoundDesc.png    1x,
+                      images/notfoundDesc@2x.png 2x
                     "
                   />
 
                   <source
                     media="(min-width:768px)"
                     srcset="
-                      ../images/notfoundTab.png    1x,
-                      ../images/notfoundTab@2x.png 2x
+                      images/notfoundTab.png    1x,
+                      images/notfoundTab@2x.png 2x
                     "
                   />
 
                   <img
                     srcset="
-                      ../images/notfoundMob.png    1x,
-                      ../images/notfoundMob@2x.jpg 2x
+                    images/notfoundMob.png    1x,
+                    mages/notfoundMob@2x.jpg 2x
                     "
                     alt="There aren't news"
-                    src="./images/notfoundMob.png"
+                    src="images/notfoundMob.png"
                     loading="lazy"
                     class="withoutnews-image"
                   />
@@ -97,9 +98,10 @@ function makeMarkup(array) {
       <div class="card-thumb">
         <img class="card-image" src = "${imageAdress}" alt = "${data.byline}">
         <p class="card-news-category">${data.section_name}</p>
-        <p class="card-text-read">Already read</p>
+        <p class="card-text-read">Already read
+        <svg width="18" height="18" class="check-icon"><use href="../images/symbol-defs.svg#icon-check"</svg></p>
         <button class="favorite-button" type="button" data-action="favorite-button">Add to favorite
-        <svg width ="16" height="16"><use href="../images/symbol-defs.svg#icon-heart"></use><svg></button>
+        <svg class="add-to-favourite"width ="16" height="16"><use href="../images/symbol-defs.svg#icon-heart"></use><svg></button>
       </div>
       <h3 class="card-news-title">${data.headline.main}</h3>
       <p class="card-news-description">${subTitle}</p>
