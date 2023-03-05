@@ -8,6 +8,7 @@ const refs = {
     newsList: document.querySelector('.wrapper__list'),
 }
 
+import { localStorageFunction } from "./favorite/favoriteLocalStorage";
 
 const { form, input, submitButton, openInputButton, withoutNewsContainer, newsList } = refs;
 
@@ -31,8 +32,9 @@ function onFormSubmit(event) {
             }
             makeMarkup(data.response.docs);
             return (data.response.docs);
-        }
-        ).catch(onError);
+        })
+        .then(response => localStorageFunction(response))
+        .catch(onError);
   
 
 }
@@ -135,3 +137,5 @@ function onOpenInputButtonClick(event) {
   openInputButton.style.display = 'none';
   form.style.display = 'block';
 }
+
+export { makeMarkup };
