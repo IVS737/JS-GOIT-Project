@@ -5,7 +5,6 @@ import imagesMob from '../images/notfoundMob.png';
 
 
 
-
 const refs = {
 
     form: document.querySelector(".header-search-form"),
@@ -100,15 +99,14 @@ function makeMarkup(array) {
         imageStartAddress = 'https://static01.nyt.com/';
         imageAddress = imageStartAddress + data.multimedia[0].url;
       }
-      return `<li class = "card-item" data-id = "${data.title}">
+      return `<li class = "card-item" data-id = "${data.uri}">
     <div class="card-wrapper">
       <div class="card-thumb">
         <img class="card-image" src = "${imageAddress}" alt = "${data.byline}">
         <p class="card-news-category">${data.section_name}</p>
         <p class="card-text-read">Already read
         <svg width="18" height="18" class="check-icon"><use href="../images/symbol-defs.svg#icon-check"</svg></p>
-        <button class="favorite-button" type="button" data-action="favorite-button">Add to favorite
-        <svg class="add-to-favourite"width ="16" height="16"><use href="../images/symbol-defs.svg#icon-heart"></use><svg></button>
+        <button class="favourite-button" type="button" data-action="favourite-button">Add to favorite</button>
       </div>
       <h3 class="card-news-title">${data.headline.main}</h3>
       <p class="card-news-description">${subTitle}</p>
@@ -132,4 +130,30 @@ function onError(error) {
 function onOpenInputButtonClick(event) {
   openInputButton.style.display = 'none';
   form.style.display = 'block';
+}
+
+
+newsList.addEventListener('click', addToFavorite);
+
+function addToFavorite(event) {
+  if (event.target.dataset.action === 'favourite-button') {
+    let cardItem =
+      event.target.parentElement.parentElement.parentElement.dataset.id;
+    console.log(cardItem);
+    const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+    if (event.target.classList.contains('removefavourite-button')) {
+      const updatedFavorites = favorites.filter(id => id !== cardItem);
+      localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
+
+      event.target.textContent = 'Add to favorites';
+      event.target.classList.remove('removefavourite-button');
+    } else {
+      favorites.push(cardItem);
+      localStorage.setItem('favorites', JSON.stringify(favorites));
+
+      event.target.textContent = 'Remove from favourites';
+      event.target.classList.add('removefavourite-button');
+    }
+  }
 }
