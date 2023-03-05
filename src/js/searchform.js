@@ -126,6 +126,41 @@ function makeMarkup(array) {
   newsList.innerHTML = markUp;
 }
 
+function addToFavorite(e) {
+  if (e.target.dataset.action === "favorite-button") {
+    let cardItem = e.target.parentElement.parentElement.dataset.id;
+    const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+
+    if (e.target.newsList.contains("removeFavorite-button")) {
+      const updatedFavorites = favorites.filter((id) => id !== cardItem);
+      localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+
+      e.target.textContent = "Add to favorites";
+      e.target.newsList.remove("removeFavorite-button");
+    } else {
+      favorites.push(cardItem);
+      localStorage.setItem("favorites", JSON.stringify(favorites));
+
+      e.target.textContent = "Remove from favorites";
+      e.target.newsList.add("removeFavorite-button");
+    }
+  }
+}
+
+function setFavoritesOnLoad() {
+  const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+
+  favorites.forEach((id) => {
+    const cardItem = document.querySelector(`[data-id="${id}"]`);
+    const favoriteButton = cardItem.querySelector("[data-action='favorite-button']");
+
+    favoriteButton.newsList.add("removeFavorite-button");
+    favoriteButton.textContent = "Remove from fav";
+  });
+}
+cardList.addEventListener("click", addToFavorite);
+
+
 function onError(error) {
   createEmptyMarkup();
   console.log(error);
