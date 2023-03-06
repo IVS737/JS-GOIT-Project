@@ -418,3 +418,14 @@ opacity: 0;
 .theme__dark {
     color:#5F6775;
 }
+
+.sun {
+
+    fill: none;
+    stroke :$primary-blue-color;
+    }
+    
+.moon {
+     fill: none;
+     stroke: $primary-grey-color;
+       }

@@ -1,12 +1,4 @@
 
-.sun{
-fill:$primary-blue-color;
-}
-
-  .moon{
- fill:$primary-grey-color;
-   }
-
 body.darkTheme{
 
     background-color:$background-dark-color; 
@@ -45,11 +37,13 @@ body.darkTheme{
     }
 
     & .sun {
-      fill: $primary-grey-color;
+      fill:none ;
+      stroke: $primary-grey-color;
   }
 
     & .moon{
-      fill:$primary-blue-color;
+      fill:none;
+      stroke: $primary-blue-color;
   }
 
   .withoutnews-title{
