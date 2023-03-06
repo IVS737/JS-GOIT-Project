@@ -2,63 +2,60 @@ body.darkTheme {
   background-color: $background-dark-color;
   color: $background-color;
 
+  .sun {
+    fill: $primary-blue-color;
+  }
 
-.sun{
-fill:$primary-blue-color;
-}
+  .moon {
+    fill: $primary-grey-color;
+  }
 
-  .moon{
- fill:$primary-grey-color;
-   }
+  body.darkTheme {
+    background-color: $background-dark-color;
+    color: $background-color;
 
-body.darkTheme{
-
-    background-color:$background-dark-color; 
-    color: $background-color ;
-
-     & .header{
-        border: 1px solid $background-color;
+    & .header {
+      border: 1px solid $background-color;
     }
 
-      & .header-logo-text{
-          color: $background-color;
-   }
-      
-     & .header-search-input{
-        border: 1px solid $background-color;
-    }
-    
-    & .header-search-input::placeholder {
-        color: $background-color;
-    }
-    
-    & .header-icon-search{
-          fill:$background-color; 
-    }
-    
-    & .description__filter__calendar{
+    & .header-logo-text {
       color: $background-color;
     }
-    
-    & .theme__light{
-        color: $background-color;
+
+    & .header-search-input {
+      border: 1px solid $background-color;
     }
 
+    & .header-search-input::placeholder {
+      color: $background-color;
+    }
 
-  & .theme__dark {
-    color: $primary-blue-color;
-  }
+    & .header-icon-search {
+      fill: $background-color;
+    }
+
+    & .description__filter__calendar {
+      color: $background-color;
+    }
+
+    & .theme__light {
+      color: $background-color;
+    }
+
+    & .theme__dark {
+      color: $primary-blue-color;
+    }
 
     & .sun {
       fill: $primary-grey-color;
-  }
+    }
 
-    & .moon{
-      fill:$primary-blue-color;
-  }
+    & .moon {
+      fill: $primary-blue-color;
+    }
 
-  .withoutnews-title{
-    color: $background-color;
-
+    .withoutnews-title {
+      color: $background-color;
+    }
   }
 }
