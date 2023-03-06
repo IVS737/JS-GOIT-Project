@@ -1,54 +1,28 @@
-import { getFromStorage } from "./favoriteLocalStorage";
 import { makeMarkup } from "../searchform";
 
 const favoriteBtn = document.querySelector('[data-action="favorite-button"]');
-const cardItem = document.querySelector('.card-item');
-
-// import { renderCollection } from './create-movie-markup';
+// const cardItem = document.querySelector('.card-item');
+// console.log(cardItem)
 
 if(favoriteBtn) {
-  favoriteBtn.addEventListener('click', handleClickFavorite);
+  favoriteBtn.addEventListener('click', renderSavedNews);
 }
 
-renderSavedNews('news');
+const getFromStorage = key => {
+ return JSON.parse(localStorage.getItem('favorites'));
+};
 
-function handleClickFavorite() {
-  renderSavedNews('news');
-  // removeDisabled(favoriteBtn);
-  setDisabled(favoriteBtn);
-  true;
-  // refs.isWatchTabActive = false;
-}
-
-// function handleClickWatched() {
-//   renderSavedFilms('watch');
-//   setDisabled(refs.watchedButton);
-//   removeDisabled(refs.queueButton);
-//   refs.isWatchTabActive = true;
-// }
+renderSavedNews('favorites');
 
 function renderSavedNews(name) {
-  clearNewsList();
+  // clearNewsList();
   const addedNews = getFromStorage(name);
 
   if (addedNews && addedNews.length > 0) {
-
     makeMarkup(addedNews);
-
-    // refs.noFilmsMessage.classList.add('visually-hidden');
-  } else {
-    // refs.noFilmsMessage.classList.remove('visually-hidden');
   }
 }
 
-function setDisabled(el) {
-  el.setAttribute('disabled', '');
-  el.classList.add('button-active');
-}
-function removeDisabled(el) {
-  el.removeAttribute('disabled');
-  el.classList.remove('button-active');
-}
-function clearNewsList() {
-  // cardItem.innerHTML = '';
-}
+// function clearNewsList() {
+//   cardItem.innerHTML = '';
+// }

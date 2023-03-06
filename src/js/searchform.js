@@ -135,8 +135,9 @@ function onOpenInputButtonClick(event) {
 
 export { makeMarkup };
 
-
-newsList.addEventListener('click', addToFavorite);
+if(newsList) {
+  newsList.addEventListener('click', addToFavorite);
+}
 
 function addToFavorite(event) {
   if (event.target.dataset.action === 'favourite-button') {
