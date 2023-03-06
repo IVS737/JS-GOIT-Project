@@ -7,15 +7,25 @@ body.darkTheme{
      & .header{
         border: 1px solid $background-color;
     }
+
       & .header-logo-text{
     color: $background-color;
    }
-
-    & .header-search-input{
+      
+     & .header-search-input{
         border: 1px solid $background-color;
     }
+    
     & .header-search-input::placeholder {
         color: $background-color;
+    }
+    
+    & .header-icon-search{
+          fill:$background-color; 
+    }
+    
+    & .description__filter__calendar{
+      color: $background-color;
     }
     
     & .theme__light{
@@ -26,11 +36,11 @@ body.darkTheme{
         color: $primary-blue-color;
     }
 
-    & .sun {
+    &.sun {
     fill:$primary-grey-color;
   }
 
-    & .moon{
+    &.moon{
     fill: $primary-blue-color;
   }
       
