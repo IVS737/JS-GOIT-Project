@@ -1,10 +1,17 @@
+import imagesDesc from '../images/notfoundDesc.png';
+import imagesTab from '../images/notfoundTab.png';
+import imagesMob from '../images/notfoundMob.png';
+
+
+
+
 const refs = {
 
     form: document.querySelector(".header-search-form"),
     input: document.querySelector(".header-search-input"),
     submitButton: document.querySelector('.header-button-makesearch'),
     openInputButton: document.querySelector('.header-button-opensearch'),
-  withoutNewsContainer: document.querySelector('.container__error'),
+    withoutNewsContainer: document.querySelector('.container__error'),
     newsList: document.querySelector('.wrapper__list'),
 }
 
@@ -52,32 +59,22 @@ function createEmptyMarkup() {
   const emptyMarkup = `<h2 class="withoutnews-title">We haven’t found news from <br> this category</h2><picture>
                   <source
                     media="(min-width:1280px)"
-                    srcset="
-
-                      images/notfoundDesc.png    1x,
-                      images/notfoundDesc@2x.png 2x
-
-                    "
+                    srcset="${imagesDesc}"
                   />
 
                   <source
                     media="(min-width:768px)"
                     srcset="
-                      images/notfoundTab.png    1x,
-                      images/notfoundTab@2x.png 2x
-
+                      ${imagesTab}
                     "
                   />
 
                   <img
                     srcset="
-
-                    images/notfoundMob.png    1x,
-                    mages/notfoundMob@2x.jpg 2x
-
+                      ${imagesMob}
                     "
                     alt="There aren't news"
-                    src="images/notfoundMob.png"
+                    src="${imagesMob}"
                     loading="lazy"
                     class="withoutnews-image"
                   />
@@ -102,15 +99,18 @@ function makeMarkup(array) {
         imageStartAddress = 'https://static01.nyt.com/';
         imageAddress = imageStartAddress + data.multimedia[0].url;
       }
+
       return `<li class = "card-item" data-id = "${data.headline.main}">
+
     <div class="card-wrapper">
       <div class="card-thumb">
         <img class="card-image" src = "${imageAddress}" alt = "${data.byline}">
         <p class="card-news-category">${data.section_name}</p>
+
         <p class="card-text-read">Already read
         <svg width="18" height="18" class="check-icon"><use href="../images/symbol-defs.svg#icon-check"</svg></p>
-        <button class="favorite-button" type="button" data-action="favorite-button">Add to favorite
-        <svg class="add-to-favourite"width ="16" height="16"><use href="../images/symbol-defs.svg#icon-heart"></use><svg></button>
+        <button class="favourite-button" type="button" data-action="favourite-button">Add to favorite</button>
+
       </div>
       <h3 class="card-news-title">${data.headline.main}</h3>
       <p class="card-news-description">${subTitle}</p>
@@ -134,4 +134,30 @@ function onError(error) {
 function onOpenInputButtonClick(event) {
   openInputButton.style.display = 'none';
   form.style.display = 'block';
+}
+
+
+newsList.addEventListener('click', addToFavorite);
+
+function addToFavorite(event) {
+  if (event.target.dataset.action === 'favourite-button') {
+    let cardItem =
+      event.target.parentElement.parentElement.parentElement.dataset.id;
+    console.log(cardItem);
+    const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+    if (event.target.classList.contains('removefavourite-button')) {
+      const updatedFavorites = favorites.filter(id => id !== cardItem);
+      localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
+
+      event.target.textContent = 'Add to favorites';
+      event.target.classList.remove('removefavourite-button');
+    } else {
+      favorites.push(cardItem);
+      localStorage.setItem('favorites', JSON.stringify(favorites));
+
+      event.target.textContent = 'Remove from favourites';
+      event.target.classList.add('removefavourite-button');
+    }
+  }
 }
