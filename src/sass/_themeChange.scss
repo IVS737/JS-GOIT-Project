@@ -2,6 +2,8 @@ body.darkTheme {
   background-color: $background-dark-color;
   color: $background-color;
 
+
+body.darkTheme{
   .sun {
     fill: $primary-blue-color;
   }
@@ -10,9 +12,7 @@ body.darkTheme {
     fill: $primary-grey-color;
   }
 
-  body.darkTheme {
-    background-color: $background-dark-color;
-    color: $background-color;
+
 
     & .header {
       border: 1px solid $background-color;
@@ -47,12 +47,15 @@ body.darkTheme {
     }
 
     & .sun {
-      fill: $primary-grey-color;
-    }
+      fill:none ;
+      stroke: $primary-grey-color;
+  }
 
-    & .moon {
-      fill: $primary-blue-color;
-    }
+    & .moon{
+      fill:none;
+      stroke: $primary-blue-color;
+  }
+
 
     .withoutnews-title {
       color: $background-color;
