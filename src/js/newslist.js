@@ -5,8 +5,8 @@ const KEY = 'kAFi92vRzv66C7DQ6coSA3C5NLbSIILk';
 
   export default class NewsApiServise {
     constructor() {
-      this.news = "cat";
-      this.filter = "home";
+      this.news = "";
+      this.filter = "";
       this.date = "";
       this.page=1;
     };
