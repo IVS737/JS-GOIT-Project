@@ -5,7 +5,47 @@
     <div class="filter__calendar__container"></div>
   </div>
   <div class="news">
-    <div class="news__weather"></div>
+    <div class="news__weather">
+      <div class="weatherBlock_main-container" id="weather-loader">
+        <div class="lds-grid">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+      <div class="weatherBlock_main-container hidden" id="weather-block">
+        <div class="weatherBlock_weather-nav">
+          <div class="weatherBlock_city-temp">
+            <span id="weather-block-temp"></span>
+            <sup>&deg;</sup>
+          </div>
+
+          <div class="weatherBlock_city-info">
+            <p class="weatherBlock_weather-description" id="weather-block-description"></p>
+            <p class="weatherBlock_city-name">
+              <span class="weatherBlock_weather-name" id="weather-block-name"></span>
+            </p>
+          </div>
+        </div>
+        <div class="weatherBlock_clean" id="for-day">
+          <div class="weatherBlock_info-icon" id="weather-block-icon"></div>
+
+          <div class="weatherBlock_info-down">
+            <p class="weatherBlock_info-date" id="weather-block-date"></p>
+          </div>
+        </div>
+        <div class="weatherBlock_clean hidden" id="for-week"></div>
+        <div class="weatherBlock_Btn">
+          <button type="button" class="weatherBlock_weatherBtn" id="load-weather-button">weather for week</button>
+        </div>
+      </div>
+    </div>
     <div class="wrapper">
       <ul class="wrapper__list"></ul>
     </div>
