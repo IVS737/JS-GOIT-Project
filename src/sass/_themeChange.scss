@@ -1,4 +1,12 @@
 
+.sun{
+fill:$primary-blue-color;
+}
+
+  .moon{
+ fill:$primary-grey-color;
+   }
+
 body.darkTheme{
 
     background-color:$background-dark-color; 
@@ -9,7 +17,7 @@ body.darkTheme{
     }
 
       & .header-logo-text{
-    color: $background-color;
+          color: $background-color;
    }
       
      & .header-search-input{
@@ -36,12 +44,16 @@ body.darkTheme{
         color: $primary-blue-color;
     }
 
-    &.sun {
-    fill:$primary-grey-color;
+    & .sun {
+      fill: $primary-grey-color;
   }
 
-    &.moon{
-    fill: $primary-blue-color;
+    & .moon{
+      fill:$primary-blue-color;
+  }
+
+  .withoutnews-title{
+    color: $background-color;
   }
       
 }
