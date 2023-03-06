@@ -1,0 +1,55 @@
+.calendar {
+  border: 1px solid #111321;
+  border-radius: 20px;
+  width: 151px;
+  height: 31px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-left: auto;
+  margin-right: 16px;
+  padding-top: 6px;
+  padding-left: 12px;
+  padding-right: 12px;
+  cursor: pointer;
+
+  &:hover,
+  &:focus {
+    background-color: $primary-blue-color;
+    border-color: $primary-blue-color;
+    transition: 0.5s ease-in-out;
+  }
+
+  &:hover &__librarySvg,
+  &:focus &__librarySvg {
+    fill: $primary-white-color;
+    transition: 0.5s ease-in-out;
+  }
+
+  &:hover &__arrowSvg,
+  &:focus &__arrowSvg {
+    fill: $primary-white-color;
+    transform: rotate(180deg);
+    transition: 0.5s ease-in-out;
+  }
+
+  &__librarySvg {
+    display: block;
+    fill: $primary-blue-color;
+    width: 19px;
+    height: 19px;
+  }
+
+  &__arrowSvg {
+    display: block;
+    fill: $primary-grey-color;
+    width: 9px;
+    height: 15px;
+  }
+
+  &__buttons {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+  }
+}
