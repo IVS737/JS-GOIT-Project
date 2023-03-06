@@ -42,7 +42,11 @@
     color: #00DD73;
 }
 
-.check-icon {
+.card-text-read::after {
+    content: "";
+background-image: url("../images/checked.svg");
+    width: 18px;
+    height: 18px;
     margin-left: 4px;
 }
 

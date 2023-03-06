@@ -105,8 +105,7 @@ function makeMarkup(array) {
       <div class="card-thumb">
         <img class="card-image" src = "${imageAddress}" alt = "${data.byline}">
         <p class="card-news-category">${data.section_name}</p>
-        <p class="card-text-read">Already read
-        <svg width="18" height="18" class="check-icon"><use href="../images/symbol-defs.svg#icon-check"</svg></p>
+        <p class="card-text-read">Already read</p>
         <button class="favorite-button" type="button" data-action="favorite-button">Add to favorite
         <svg class="add-to-favourite"width ="16" height="16"><use href="../images/symbol-defs.svg#icon-heart"></use><svg></button>
       </div>
