@@ -139,7 +139,7 @@ if(newsList) {
   newsList.addEventListener('click', addToFavorite);
 }
 
-function addToFavorite(event) {
+export function addToFavorite(event) {
   if (event.target.dataset.action === 'favourite-button') {
     let cardItem =
       event.target.parentElement.parentElement.parentElement.dataset.id;
