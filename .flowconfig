@@ -1,0 +1,2 @@
+[options]
+module.name_mapper = '^images/\(.*\)$' -> 'src/\1'
