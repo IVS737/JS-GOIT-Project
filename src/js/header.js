@@ -19,21 +19,15 @@ export default (() => {
 
   // add current page class
 
-  const home = document.querySelector('.home-current');
-  const favorite = document.querySelector('.favorite-current');
-  const read = document.querySelector('.read-current');
+  window.addEventListener('DOMContentLoaded', function() {
+  var path = window.location.href;
+  var links = document.querySelectorAll('.header-link');
 
-  const checkCurrentPage = () => {
-    if (window.location.href.includes('#readPage.html')) {
-      read.classList.add('current');
+  links.forEach(function(link) {
+    if (link.href === path) {
+      link.classList.add('current');
     }
-    if (window.location.href.includes('#favoritePage.html')) {
-      favorite.classList.add('current');
-    }
-    if (window.location.href.includes('#mainPage.html' || '#index.html')) {
-      home.classList.add('current');
-    }
-  };
-
-  checkCurrentPage();
+  });
+  });
+  
 })();
