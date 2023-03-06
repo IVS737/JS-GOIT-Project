@@ -5,9 +5,10 @@
 }
 
 .card-image {
+    height: 395px;
+    object-fit: cover;
     display: block;
     width: 100%;
-    height: auto;
 }
 
 .card-news-category {
@@ -18,12 +19,11 @@
     width: 112px;
     height: 24px;
     background-color: rgba(68, 64, 247, 0.7);
-    font-family: 'Manrope';
     font-weight: 500;
     font-size: 12px;
     line-height: 1.33;
     text-align: center;
-    color: #FFFFFF;
+    color: $primary-white-color;
     border-radius: 0px 4px 4px 0px;
 }
 
@@ -35,11 +35,11 @@
     // display: flex;
     align-items: center;
 
-    font-family: 'Manrope';
+    
     font-weight: 700;
     font-size: 14px;
     line-height: 1.36;
-    color: #00DD73;
+    color: $green-color;
 }
 
 .card-text-read::after {
@@ -50,7 +50,7 @@ background-image: url("../images/checked.svg");
     margin-left: 4px;
 }
 
-.favorite-button {
+.favourite-button {
     position: absolute;
     bottom: 15px;
     right: 15px;
@@ -61,30 +61,66 @@ background-image: url("../images/checked.svg");
     width: 126px;
     height: 28px;
 
-    font-family: 'Manrope';
+    
     font-weight: 500;
     font-size: 12px;
     line-height: 1.33;
     text-align: center;
-    color: #111321;
-    background-color: #FFFFFF;
+    color: $primary-black-color;
+    background-color: $primary-white-color;
     border-radius: 20px;
     border-color: transparent;
 }
 
-.add-to-favourite {
+.favourite-button::after {
+    content: "";
+    background-image: url('../images/heart-icon.svg');
+    width: 16px;
+    height: 16px;
+    background-repeat: no-repeat;
     margin-left: 4px;
 }
+
+.removefavourite-button {
+    position: absolute;
+        bottom: 15px;
+        right: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        // padding: 6px 12px;
+        width: 168px;
+        height: 28px;
+    
+        font-family: 'Manrope';
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 1.33;
+        text-align: center;
+        color: $primary-black-color;
+        background-color: $primary-white-color;
+        border-radius: 20px;
+        border-color: transparent;
+}
+
+.removefavourite-button::after {
+    content: '';
+    width: 16px;
+    height: 16px;
+    background-image: url("../images/filledheart.svg");
+    margin-left: 4px;
+}
+
 
 .card-news-title {
     margin-top: 20px;
     margin-bottom: 20px;
-    font-family: 'Manrope';
+   
     font-weight: 700;
     font-size: 24px;
     line-height: 1.38;
     letter-spacing: -0.01em;
-    color: #111321;
+    color: $primary-black-color;
 
     @media screen and (min-width: 768px) {
         font-size: 32px;
@@ -95,11 +131,10 @@ background-image: url("../images/checked.svg");
 .card-news-description {
     margin-top: 0;
     margin-bottom: 20px;
-    font-family: 'Manrope';
     font-weight: 400;
     font-size: 14px;
     line-height: 1.36;
-    color: #111321;
+    color: $primary-black-color;
 
     @media screen and (min-width: 768px) {
         font-size: 16px;
@@ -114,7 +149,7 @@ background-image: url("../images/checked.svg");
     font-size: 14px;
     line-height: 1.36;
     text-align: right;
-    color: #A8A8A8;
+    color: $primary-grey-color;
 
     @media screen and (min-width:768px) {
         font-size: 16px;
@@ -137,7 +172,7 @@ background-image: url("../images/checked.svg");
     font-size: 14px;
     line-height: 1.36;
     text-align: left;
-    color: #4440F7;
+    color: $primary-blue-color;
 
     @media screen and (min-width:768px) {
         font-size: 16px;
