@@ -1,3 +1,7 @@
+body.darkTheme {
+  background-color: $background-dark-color;
+  color: $background-color;
+
 
 .sun{
 fill:$primary-blue-color;
@@ -40,9 +44,10 @@ body.darkTheme{
         color: $background-color;
     }
 
-    & .theme__dark{
-        color: $primary-blue-color;
-    }
+
+  & .theme__dark {
+    color: $primary-blue-color;
+  }
 
     & .sun {
       fill: $primary-grey-color;
@@ -54,7 +59,6 @@ body.darkTheme{
 
   .withoutnews-title{
     color: $background-color;
-  }
-      
-}
 
+  }
+}

@@ -1,0 +1,145 @@
+.card-thumb {
+    position: relative;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.card-image {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.card-news-category {
+    position: absolute;
+    top: 60px;
+    left: 0;
+    padding: 4px 8px;
+    width: 112px;
+    height: 24px;
+    background-color: rgba(68, 64, 247, 0.7);
+    font-family: 'Manrope';
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 1.33;
+    text-align: center;
+    color: #FFFFFF;
+    border-radius: 0px 4px 4px 0px;
+}
+
+.card-text-read {
+    display: none;
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    // display: flex;
+    align-items: center;
+
+    font-family: 'Manrope';
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 1.36;
+    color: #00DD73;
+}
+
+.card-text-read::after {
+    content: "";
+background-image: url("../images/checked.svg");
+    width: 18px;
+    height: 18px;
+    margin-left: 4px;
+}
+
+.favorite-button {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    // padding: 6px 12px;
+    width: 126px;
+    height: 28px;
+
+    font-family: 'Manrope';
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 1.33;
+    text-align: center;
+    color: #111321;
+    background-color: #FFFFFF;
+    border-radius: 20px;
+    border-color: transparent;
+}
+
+.add-to-favourite {
+    margin-left: 4px;
+}
+
+.card-news-title {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-family: 'Manrope';
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 1.38;
+    letter-spacing: -0.01em;
+    color: #111321;
+
+    @media screen and (min-width: 768px) {
+        font-size: 32px;
+    }
+
+}
+
+.card-news-description {
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-family: 'Manrope';
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.36;
+    color: #111321;
+
+    @media screen and (min-width: 768px) {
+        font-size: 16px;
+
+    }
+
+}
+
+.card-datetime {
+    font-family: 'Manrope';
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.36;
+    text-align: right;
+    color: #A8A8A8;
+
+    @media screen and (min-width:768px) {
+        font-size: 16px;
+
+    }
+}
+
+.card-info-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+.card-link {
+    text-decoration: none;
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.36;
+    text-align: left;
+    color: #4440F7;
+
+    @media screen and (min-width:768px) {
+        font-size: 16px;
+    }
+}
