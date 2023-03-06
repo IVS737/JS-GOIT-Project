@@ -99,7 +99,9 @@ function makeMarkup(array) {
         imageStartAddress = 'https://static01.nyt.com/';
         imageAddress = imageStartAddress + data.multimedia[0].url;
       }
-      return `<li class = "card-item" data-id = "${data.uri}">
+
+      return `<li class = "card-item" data-id = "${data.headline.main}">
+
     <div class="card-wrapper">
       <div class="card-thumb">
         <img class="card-image" src = "${imageAddress}" alt = "${data.byline}">
