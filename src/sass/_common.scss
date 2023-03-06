@@ -62,17 +62,14 @@ a {
   margin: 0 auto;
 
   @media screen and (min-width: 320px) {
-    max-width: 320px;
   }
 
   @media screen and (min-width: 768px) {
-    max-width: 768px;
     padding-top: 48px;
     padding-bottom: 100px;
   }
 
   @media screen and (min-width: 1280px) {
-    max-width: 1280px;
     padding-top: 120px;
     padding-bottom: 150px;
   }

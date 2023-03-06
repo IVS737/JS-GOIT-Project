@@ -1,253 +1,251 @@
 .filter {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 
-    margin-top: 24px;
-    margin-bottom: 40px;
-};
+  margin-top: 24px;
+  margin-bottom: 40px;
+
+  @media screen and (min-width: 1280px) {
+    justify-content: space-around;
+  }
+}
 
 .filter__list__tab {
+  display: none;
+
+  @media screen and (min-width: 768px) {
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+  }
+
+  @media screen and (min-width: 1280px) {
     display: none;
-
-    @media screen and (min-width: 768px) {
-        display: flex;
-        align-items: center;
-
-        gap: 14px;
-    }
-
-    @media screen and (min-width: 1280px) {
-        display: none;
-        
-    }
+  }
 }
 
 .filter__list__des {
-    display: none; 
+  display: none;
 
-    @media screen and (min-width: 1280px) {
-            display: flex;
-            align-items: center;
+  @media screen and (min-width: 1280px) {
+    display: flex;
+    align-items: center;
 
-            gap: 16px;
-        }
+    gap: 16px;
+  }
 }
 
 .filter__item__btn {
-    padding: 8px 21px;
+  padding: 8px 21px;
 }
 
 .filter__btn {
-    height: 31px;
+  height: 31px;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    
-    font-family: 'Manrope';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 12px;
-    line-height: 16px;
-    text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-    background-color: transparent;
-    border-radius: 20px;
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  text-align: center;
 
-    gap: 10px;
+  background-color: transparent;
+  border-radius: 20px;
 
-};
+  gap: 10px;
+}
 
 .filter__categories {
-    width: 112px;
+  width: 112px;
 
-    border: 1px solid #4440F7;
+  border: 1px solid #4440f7;
 
-    color: #4B48DB;
+  color: #4b48db;
 
-    @media screen and (min-width: 768px) {
-            display: none;
-        }
-};
+  @media screen and (min-width: 768px) {
+    display: none;
+  }
+}
 
 .description__filter__calendar {
-    display: none;
+  display: none;
 
-    @media screen and (min-width: 1280px) {
-            display: inline;
+  @media screen and (min-width: 1280px) {
+    display: inline;
 
-            margin: 0;
+    margin: 0;
 
-            font-family: 'Manrope';
-            font-style: normal;
-            font-weight: 700;
-            font-size: 18px;
-            line-height: 25px;
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 25px;
 
-            color: #111321;
-        }
-
+    color: #111321;
+  }
 }
 
 .filter__calendar {
-    width: 152px;
+  width: 152px;
 
-    border: 1px solid #111321;
+  border: 1px solid #111321;
 
-    @media screen and (min-width: 768px) {
-            width: 168px;
-            height: 31px;
+  @media screen and (min-width: 768px) {
+    width: 168px;
+    height: 31px;
 
-            font-size: 14px;
-        }
-    
+    font-size: 14px;
+  }
 }
 
 .filter__calendar__text {
-    letter-spacing: 0.02em;
-    opacity: 0.4;
+  letter-spacing: 0.02em;
+  opacity: 0.4;
 }
 
 .categories__btn__post__el {
-    width: 14px;
-    height: 14px;
+  width: 14px;
+  height: 14px;
 
-    background-color: #4440F7;
+  background-color: #4440f7;
 }
 
 .calendar__btn__pre__el {
-    width: 19px;
-    height: 19px;
+  width: 19px;
+  height: 19px;
 
-    background-color: #4440F7;
+  background-color: #4440f7;
 }
 
 .calendar__btn__post__el {
-    width: 9px;
-    height: 15px;
-    
-    background-color: #A2A2A2;
+  width: 9px;
+  height: 15px;
 
-    transform: rotate(-90deg);
+  background-color: #a2a2a2;
+
+  transform: rotate(-90deg);
 }
 
 .filter__item__btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-    font-family: 'Manrope';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 12px;
-    line-height: 16px;
-    text-align: center;
-    
-    color: #4440F7;
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  text-align: center;
 
-    background-color: transparent;
-    border: 1px solid #4440F7;
-    border-radius: 20px;
+  color: #4440f7;
+
+  background-color: transparent;
+  border: 1px solid #4440f7;
+  border-radius: 20px;
 }
 
 .others {
-    gap: 10px;
+  gap: 10px;
 }
 
-
 .news {
-    position: relative;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .news__weather {
-    width: 288px;
-    height: 469px;
+  width: 288px;
+  height: 469px;
 
-    margin-bottom: 28px;
+  margin-bottom: 28px;
 
-    @media screen and (min-width: 768px) {
-        position: absolute;
-        top: 0;
-        right: 0;
+  @media screen and (min-width: 768px) {
+    position: absolute;
+    top: 0;
+    right: 0;
 
-        width: 353px;
-        height: 675px;
-    }
+    width: 353px;
+    height: 675px;
+  }
 
-    @media screen and (min-width: 1280px) {
-        width: 394px;
-    }
+  @media screen and (min-width: 1280px) {
+    width: 394px;
+  }
 }
 
 .wrapper__list {
-    @media screen and (min-width: 768px) {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        
-        grid-auto-rows: auto;
-        grid-gap: 30px;
-    }
+  @media screen and (min-width: 768px) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
 
-    @media screen and (min-width: 1280px) {
-        grid-template-columns: 1fr 1fr 1fr;
-    
-        grid-gap: 40px 32px;
-    }
+    grid-auto-rows: auto;
+    grid-gap: 30px;
+  }
+
+  @media screen and (min-width: 1280px) {
+    grid-template-columns: 1fr 1fr 1fr;
+
+    grid-gap: 40px 32px;
+  }
 }
 
 .card-item {
-    width: 288px;
-    height: 630px;
+  width: 288px;
+  height: 630px;
 
-    @media screen and (min-width: 768px) {
-        width: 353px;
-        height: 675px;
-    }
+  @media screen and (min-width: 768px) {
+    width: 353px;
+    height: 675px;
+  }
 
-    @media screen and (min-width: 1280px) {
-        width: 395px;
-        height: 675px;
-    }
+  @media screen and (min-width: 1280px) {
+    width: 395px;
+    height: 675px;
+  }
 }
 
 .card-item:nth-child(2) {
-    @media screen and (min-width: 1280px) {
-        width: 394px;
-    }
+  @media screen and (min-width: 1280px) {
+    width: 394px;
+  }
 }
 
 .card-item:nth-child(4) {
-    @media screen and (min-width: 1280px) {
-        width: 394px;
-    }
+  @media screen and (min-width: 1280px) {
+    width: 394px;
+  }
 }
 
 .card-item:nth-child(7) {
-    @media screen and (min-width: 1280px) {
-        width: 394px;
-    }
+  @media screen and (min-width: 1280px) {
+    width: 394px;
+  }
 }
 
 .card-item:not(:last-child) {
-    @media screen and (max-width: 767px) {
-        margin-bottom: 28px;
-    }
+  @media screen and (max-width: 767px) {
+    margin-bottom: 28px;
+  }
 }
 
 .card-item:nth-child(1) {
-    @media screen and (min-width: 768px ) and (max-width: 1279px) {
+  @media screen and (min-width: 768px) and (max-width: 1279px) {
     grid-column-start: 1;
     grid-column-end: 3;
-    }
+  }
 }
 
 .card-item:nth-child(3) {
-    @media screen and (min-width: 1280px) {
-        grid-column-start: 1;
-    }
+  @media screen and (min-width: 1280px) {
+    grid-column-start: 1;
+  }
 }
-
