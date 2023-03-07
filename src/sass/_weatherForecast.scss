@@ -12,7 +12,7 @@
         font-size: 18px;
         align-items: end;
 
-        padding-top: 5px;
+        padding-top: 10px;
         padding-bottom: 5px;
 }
 
@@ -25,7 +25,7 @@
         font-size: 18px;
         align-items: end;
 
-        padding-top: 10px;
+        padding-top: 20px;
 }
 
 
@@ -62,11 +62,13 @@
         .weatherForecast {
     
             &_item {
-                font-size: 20px; 
+                font-size: 22px; 
+                padding-top: 15px;
             }
 
             &_item-a {
-                font-size: 22px;  
+                font-size: 22px; 
+                padding-top: 30px; 
             }
 
             &_weatherBtn {

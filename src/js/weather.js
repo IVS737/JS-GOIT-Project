@@ -9,19 +9,19 @@ const URL2 = 'https://api.openweathermap.org/data/2.5/forecast';
 
 const API_KEY = 'be0f81a8f9f4c462088b51501fa506a7'
 
-const weatherTemp = document.getElementById("weather-block-temp");
-const weatherDescription = document.getElementById("weather-block-description");
-const weatherName = document.getElementById("weather-block-name");
-const weatherIcon = document.getElementById("weather-block-icon");
-const weatherDate = document.getElementById("weather-block-date");
-const loadWeather = document.getElementById("load-weather-button");
+const weatherTemp = document.querySelector('#weather-block-temp');
+const weatherDescription = document.querySelector('#weather-block-description');
+const weatherName = document.querySelector('#weather-block-name');
+const weatherIcon = document.querySelector('#weather-block-icon');
+const weatherDate = document.querySelector('#weather-block-date');
+const loadWeather = document.querySelector('#load-weather-button');
 const forDayEl = document.getElementById("for-day");
 const forWeekEl = document.getElementById("for-week");
 
 
 
-day =  moment(new Date()).format('ddd')
-date = moment(new Date()).format('DD MMM YYYY')
+let day =  moment(new Date()).format('ddd')
+let date = moment(new Date()).format('DD MMM YYYY')
 
 
 const fetchWeatherGeo = async (lat, lon, units='metric') => {
@@ -66,9 +66,9 @@ const geoWeatherApp = () => {
     
 const renderWeather = (weather) => {
 //   closetWeatherLoader();
-
-  forDayEl.classList = "weatherBlock_clean";
-  forWeekEl.classList = "weatherBlock_clean hidden";
+  
+  forDayEl.classList.remove("weatherBlock_hidden");
+  forWeekEl.classList.add("weatherBlock_hidden");
 
 
   weatherTemp.innerHTML = `${Math.round(weather.main.temp)}`;
@@ -126,13 +126,10 @@ const fetchWeatherForecastCity = async (
 }
 
  const renderWeatherForecast = obj => {  
-            //  closetWeatherLoader();
-
-            //  console.log('вот прогноз', obj)
-
-             forDayEl.classList = "weatherBlock_clean hidden";
-             forWeekEl.classList = "weatherBlock_clean";
-
+            
+            forWeekEl.classList.remove("weatherBlock_hidden");
+            forDayEl.classList.add("weatherBlock_hidden");
+            
              const day0 = obj.list[0];
              const day1 = obj.list[8];
              const day2 = obj.list[16];
