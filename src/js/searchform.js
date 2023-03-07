@@ -12,12 +12,11 @@ const refs = {
   readMoreLink: document.querySelector('.card-link'),
 };
 
-const { form, input, submitButton, openInputButton, withoutNewsContainer, newsList, readMoreLink} = refs;
+const { form, input, submitButton, openInputButton, withoutNewsContainer, newsList, readMoreLink } = refs;
 
 const KEY = 'kAFi92vRzv66C7DQ6coSA3C5NLbSIILk';
 form.addEventListener('submit', onFormSubmit);
 openInputButton.addEventListener('click', onOpenInputButtonClick);
-
 
 let value = '';
 
@@ -94,7 +93,6 @@ function makeMarkup(array) {
         imageAddress = imageStartAddress + data.multimedia[0].url;
       }
 
-
       return `<li class = "card-item" data-id = "${data.uri}">
     <div class="card-wrapper">
       <div class="card-thumb">
@@ -160,9 +158,8 @@ const LOCAL_STORAGE_KEY = 'read_key';
 function addToReed(event) {
   const currentLink = event.target;
   if (currentLink.className === 'card-link') {
-
     const currentCard = currentLink.parentElement.parentElement.parentElement;
-    currentCard.classList.add("read");
+    currentCard.classList.add('read');
     setItemToLocalStorage(currentCard.dataset.id);
   }
 }
@@ -171,9 +168,7 @@ function setItemToLocalStorage(item) {
   const dataLocalStorage = localStorage.getItem(LOCAL_STORAGE_KEY);
   //Конвертація формату дати 00/00/00
   const currentData = new Date();
-  const currentDataString = `${currentData.getDate()}/${
-    currentData.getMonth() + 1
-  }/${currentData.getFullYear()}`; // *******
+  const currentDataString = `${currentData.getDate()}/${currentData.getMonth() + 1}/${currentData.getFullYear()}`; // *******
 
   if (!dataLocalStorage) {
     const newData = [{ data: currentDataString, items: [item] }];
@@ -185,7 +180,7 @@ function setItemToLocalStorage(item) {
 
   let goodDataFlag = true; //прапорець перевірки запису в локалсторидж
 
-  const newDataArr = dataArr.map(elItem => {
+  const newDataArr = dataArr.map((elItem) => {
     if (elItem.data === currentDataString) {
       goodDataFlag = false;
       elItem.items.push(item);
@@ -201,3 +196,4 @@ function setItemToLocalStorage(item) {
   localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(newDataArr));
 }
 
+export { addToReed, setItemToLocalStorage };
