@@ -1,9 +1,8 @@
 let debounce = require('lodash.debounce');
-import newsApiService from '../newslist';
 import NewsApiService from './fetchNews';
-const fetchNews = new NewsApiService;
-const NewsLoad = new newsApiService;
-
+const fetchNews = new NewsApiService; 
+import RenderCategory from './renderCategoryList';
+const render = new RenderCategory;
 
 export default (()=>{
 const categoryListWrap = document.getElementById('categoryList');
@@ -13,6 +12,7 @@ const categoryListButtonWrap = document.querySelector('.category__list__btn__wra
 categoryListButtonWrap.addEventListener('click', showOtherCategoryList);
 openCategoryListBtn.addEventListener('click', showCategoryList);
 categoryListWrap.addEventListener('click',categoryHandler);
+
 
 window.addEventListener("resize", debounce(onResized, 500));
 document.addEventListener("click", (e) => {
@@ -55,11 +55,42 @@ function showOtherCategoryList(e) {
         setTimeout(()=>(clickBtn.disabled = false), 1500);
 
         currentBtn(e)
-
-        NewsLoad.setNewFilter(e.target.dataset.name);
+         
+        fetchNews.changeCategory = e.target.dataset.name;
+        categoryListResult()
 
     }
 }
+function categoryListResult() {
+
+     fetchNews.fetchNewsListOfCategory().then(prom =>{return prom.results})
+    .then((newsArray) => {
+        const articles = newsArray.map(result => {
+            const date = result.published_date.toString().slice(0, 10).replace(`-`, '/').replace(`-`, '/');
+            return {
+              title: result.title,
+              image:  imageValidation(result),
+              description: result.abstract,
+              date: new Date(date),
+              url: result.url,
+              section: result.section,
+            };
+          })
+
+          render.makeMarkup(articles);
+
+    }).catch((error)=> {render.emptyMarkup() 
+    })
+
+}
+function imageValidation (data) {
+    if (!data.multimedia) {
+    return 'https://st.depositphotos.com/1000558/53737/v/1600/depositphotos_537370102-stock-illustration-image-photo-sign-symbol-template.jpg';
+    } else if (data.multimedia.length > 0) {
+    return data.multimedia[2].url;
+    }
+}
+
 function currentBtn(e) {
     const currentActiveBtn = document.querySelector('.category__active-btn');
     if (e.target.nodeName === "A" || !categoryListButtonWrap.contains(e.target)) {
@@ -103,7 +134,8 @@ async function categoryHandler(e) {
         return
     }
 
-    NewsLoad.setNewFilter(e.target.dataset.name);
+    fetchNews.changeCategory = e.target.dataset.name;
+    categoryListResult()
 
     currentBtn(e)
     svgToggle(e)
@@ -132,13 +164,13 @@ function renderCategoryListButton(data,value = 0) {
 }
 function onResized () {
     if (window.innerWidth > 1279) {
-        // fetchNews.limitValue = 8;
+        fetchNews.limitValue = 8;
         renderCategoryListButton(fetchNews.categoryListArray,6)
     }else if (window.innerWidth > 767) {
-        // fetchNews.limitValue = 7;
+        fetchNews.limitValue = 7;
         renderCategoryListButton(fetchNews.categoryListArray,4)
     }else{
-        // fetchNews.limitValue = 4;
+        fetchNews.limitValue = 4;
         renderCategoryListButton(fetchNews.categoryListArray)
     }
 }
