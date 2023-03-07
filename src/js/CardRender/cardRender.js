@@ -30,7 +30,7 @@ export default function Makemarkup(array) {
         }
       }
 
-      return `<li class = "card-item" data-id = "${data.headline.main}">
+      return `<li class = "card-item" data-id = "${data.uri}">
 
     <div class="card-wrapper">
       <div class="card-thumb">
