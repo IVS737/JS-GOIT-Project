@@ -65,7 +65,6 @@ function categoryListResult() {
 
      fetchNews.fetchNewsListOfCategory().then(prom =>{return prom.results})
     .then((newsArray) => {
-        console.log(newsArray);
         const articles = newsArray.map(result => {
             const date = result.published_date.toString().slice(0, 10).replace(`-`, '/').replace(`-`, '/');
             return {
