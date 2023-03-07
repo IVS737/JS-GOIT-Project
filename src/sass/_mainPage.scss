@@ -80,6 +80,16 @@
     grid-gap: 40px 32px;
   }
 }
+.card-wrapper{
+  @media screen and (max-width: 767px) {
+    height: 630px;
+  }
+  height: 675px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+}
 
 .card-item {
   width: 288px;
