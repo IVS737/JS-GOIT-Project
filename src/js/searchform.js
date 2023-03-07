@@ -146,7 +146,7 @@ function addToFavorite(event) {
       favorites.push(cardItem);
       localStorage.setItem('favorites', JSON.stringify(favorites));
 
-      event.target.textContent = 'Remove from favourites';
+      event.target.textContent = 'Remove from favorites';
       event.target.classList.add('removefavourite-button');
     }
   }
