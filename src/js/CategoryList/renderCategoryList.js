@@ -1,4 +1,5 @@
 import { format } from 'date-fns';
+
 import imagesDesc from '../../images/notfoundDesc.png';
 import imagesTab from '../../images/notfoundTab.png';
 import imagesMob from '../../images/notfoundMob.png';
@@ -8,8 +9,11 @@ export default class RenderCategory {
     const newsList = document.querySelector('.wrapper__list');
     const markUp = array
       .map((data) => {
-        const { image, section, title, description, date, url } = data;
-        return `<li class = "card-item" data-id = "${date.uri}">
+        console.log(data);
+
+        const { image, section, title, description, date, url, uri } = data;
+
+        return `<li class = "card-item" data-id = "${uri}">
       <div class="card-wrapper">
         <div class="card-thumb">
           <img class="card-image" src = "${image}" alt = "${description}">
