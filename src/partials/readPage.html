@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Read Page</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700&family=Poppins&family=Roboto&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../sass/index.scss" />
+  </head>
+  <!-- <include src="../header.html"></include> -->
+
+  <body>
+    <main class="main">
+      <div class="container">
+        <ul class="date-list-search is-hidden"></ul>
+        <ul class="list-news"></ul>
+        <ul class="date-list"></ul>
+
+        <section class="underfined underfined-hidden">
+          <p class="underfined___title">You don't have any read news yet</p>
+
+          <picture>
+            <source
+              srcset="../images/notfoundMob.png 1x, ../images/notfoundMob@2x.png 2x"
+              type="image/png"
+              media="(max-width: 480px)"
+              alt="underfined-picture"
+            />
+
+            <source
+              srcset="../images/notfoundTab.png 1x, ../images/notfoundTab@2x.png 2x"
+              type="image/png"
+              media="(max-width:768px)"
+              alt="underfined-picture"
+            />
+
+            <source
+              srcset="../images/notfoundDesc.png 1x, ../images/notfoundTab@2x.png 2x"
+              type="image/png"
+              media="(min-width: 1280px)"
+              alt="underfined-picture"
+            />
+
+            <img
+              class="underfined___picture"
+              src="../images/notfoundMob.png"
+              alt="underfined-picture"
+              width="248"
+              height="198"
+            />
+          </picture>
+        </section>
+      </div>
+    </main>
+    <!-- <include src="./footer.html"></include> -->
+
+    <script type="module" src="../js/read.js"></script>
+    <!-- <script type="module" src="../js/readSearch.js"></script> -->
+  </body>
+</html>
