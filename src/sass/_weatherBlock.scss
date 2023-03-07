@@ -21,6 +21,9 @@
    
     padding-top: 32px;
     padding-bottom: 32px;
+
+    // 
+    min-height: 100%;
     
 }
 
@@ -131,6 +134,10 @@
     justify-content: flex-start;
     margin-left: 53px;
     margin-right: 53px;
+}
+
+&_clean {
+flex: 1 1 auto;
 }
 
 &_weather-description {
