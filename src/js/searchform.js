@@ -9,13 +9,15 @@ const refs = {
   openInputButton: document.querySelector('.header-button-opensearch'),
   withoutNewsContainer: document.querySelector('.container__error'),
   newsList: document.querySelector('.wrapper__list'),
+  readMoreLink: document.querySelector('.card-link'),
 };
 
-const { form, input, submitButton, openInputButton, withoutNewsContainer, newsList } = refs;
+const { form, input, submitButton, openInputButton, withoutNewsContainer, newsList, readMoreLink} = refs;
 
 const KEY = 'kAFi92vRzv66C7DQ6coSA3C5NLbSIILk';
 form.addEventListener('submit', onFormSubmit);
 openInputButton.addEventListener('click', onOpenInputButtonClick);
+
 
 let value = '';
 
@@ -108,8 +110,8 @@ function makeMarkup(array) {
       <p class="card-news-description">${subTitle}</p>
       <div class="card-info-container">
         <p class="card-datetime">${date}</p>
-        <a class="card-link" href="${data.web_url}" target="_blank" rel="noopener noreferrer nofollow">Read more</a>
-      </div>
+        <a class="card-link" href="${data.web_url}" target="_blank" rel="noopener noreferrer nofollow" onclick='addToReed()'>Read more</a>
+      </div>   
     </div>
 </li>`;
     })
@@ -129,6 +131,7 @@ function onOpenInputButtonClick(event) {
 }
 
 newsList.addEventListener('click', addToFavorite);
+readMoreLink.addEventListener('click', addToReed);
 
 function addToFavorite(event) {
   if (event.target.dataset.action === 'favourite-button') {
@@ -150,4 +153,22 @@ function addToFavorite(event) {
       event.target.classList.add('removefavourite-button');
     }
   }
+}
+
+function addToReed(event) {
+  readMoreLink.classList.add(read);
+  console.log(readMoreLink);
+if (readMoreLink.classlist.contains(read)) {
+  localStorage.setItem('read', readMoreLink)
+}
+//   if (event.target.dataset.action === 'card-link') {
+//     // let cardItem = event.target.parentElement.parentElement.parentElement.dataset.id;
+//     // console.log(cardItem);
+//     // const read = JSON.parse(localStorage.getItem('read')) || [];
+
+//     // if (event.target.textContent = 'Add to reed') {
+//     //    read.push(cardItem);
+//     //   localStorage.setItem('read', JSON.stringify(read));}
+// console.log(help);
+//   }
 }
