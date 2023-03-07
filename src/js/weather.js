@@ -28,6 +28,9 @@ day =  moment(new Date()).format('ddd')
 date = moment(new Date()).format('DD MMM YYYY')
 
 
+// ------------------------- LOADER ----------------------------- //
+// Loader  не получаеться сделать - не пойму как работает логика
+
 // const setWeatherLoader = () => {
 //     weatherEl.classList.add = "hidden";
 //     weatherLoaderEl.classList = "weatherBlock_main-container";
@@ -42,6 +45,9 @@ date = moment(new Date()).format('DD MMM YYYY')
   };
 
   closetWeatherLoader() 
+
+  
+// ------------------------- LOADER ----------------------------- //
 
 
 const fetchWeatherGeo = async (lat, lon, units='metric') => {
