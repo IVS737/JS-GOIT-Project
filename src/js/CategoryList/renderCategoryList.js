@@ -1,15 +1,15 @@
-import { format } from 'date-fns';
+import {format } from 'date-fns';
 import imagesDesc from '../../images/notfoundDesc.png';
 import imagesTab from '../../images/notfoundTab.png';
 import imagesMob from '../../images/notfoundMob.png';
 
 export default class RenderCategory {
-  makeMarkup(array) {
-    const newsList = document.querySelector('.wrapper__list');
+   makeMarkup(array) {
+    const newsList = document.querySelector('.wrapper__list')
     const markUp = array
       .map((data) => {
         const { image, section, title, description, date, url } = data;
-        return `<li class = "card-item" data-id = "${date.uri}">
+        return `<li class = "card-item" data-id = "${title}">
       <div class="card-wrapper">
         <div class="card-thumb">
           <img class="card-image" src = "${image}" alt = "${description}">
@@ -30,11 +30,14 @@ export default class RenderCategory {
   </li>`;
       })
       .join('');
-
+  
     newsList.innerHTML = markUp;
   }
-  emptyMarkup() {
-    const newsList = document.querySelector('.wrapper__list');
+emptyMarkup() {
+  const clearWrap = document.querySelector('.wrapper__list')
+  const newsList = document.querySelector('.container__error')
+  clearWrap.innerHTML = '';
+
     const emptyMarkup = `<h2 class="withoutnews-title">We haven’t found news from <br> this category</h2><picture>
                     <source
                       media="(min-width:1280px)"
@@ -58,6 +61,6 @@ export default class RenderCategory {
                       class="withoutnews-image"
                     />
                   </picture>`;
-    newsList.innerHTML = emptyMarkup;
+      newsList.innerHTML = emptyMarkup;
   }
 }
