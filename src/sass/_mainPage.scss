@@ -3,11 +3,13 @@
   align-items: center;
   justify-content: space-between;
 
-  margin-top: 24px;
   margin-bottom: 40px;
+}
 
+.calendar__container {
   @media screen and (min-width: 1280px) {
-    justify-content: space-around;
+    display: flex;
+    align-items: center;
   }
 }
 
@@ -16,8 +18,9 @@
 
   @media screen and (min-width: 1280px) {
     display: inline;
-
+    
     margin: 0;
+    margin-right: 37px;
 
     font-family: 'Manrope';
     font-style: normal;
@@ -26,6 +29,12 @@
     line-height: 25px;
 
     color: #111321;
+  }
+}
+
+.filter__calendar__container {
+  @media screen and (min-width: 1280px) {
+    margin-right: 36px;
   }
 }
 
