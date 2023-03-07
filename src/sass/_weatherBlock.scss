@@ -1,17 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
 
-.hidden{
-    display: none;
-}
-
 .weatherBlock {
+
 &_main-container {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 
-    background:#4440F7;
+background:  #4440f6;
     color: white;
     background-size: cover;
     background-position: center;
@@ -190,6 +187,9 @@ text-align: center;
 
 }
 
+&_hidden {
+    display: none;
+}
 }
 
 @media screen and (min-width: 786px) {
