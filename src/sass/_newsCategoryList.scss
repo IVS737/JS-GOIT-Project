@@ -26,6 +26,7 @@
     filter: drop-shadow(0px 10px 60px rgba(0, 0, 0, 0.1));
 
     overflow-y: scroll;
+    scroll-behavior: smooth;
 
     @media screen and (min-width: 768px) {
         right: -26px;
