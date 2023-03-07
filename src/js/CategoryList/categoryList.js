@@ -56,6 +56,7 @@ export default (() => {
       fetchNews.changeCategory = e.target.dataset.name;
       categoryListResult();
     }
+
   }
   function categoryListResult() {
     fetchNews
