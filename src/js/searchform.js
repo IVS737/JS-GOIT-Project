@@ -9,13 +9,15 @@ const refs = {
   openInputButton: document.querySelector('.header-button-opensearch'),
   withoutNewsContainer: document.querySelector('.container__error'),
   newsList: document.querySelector('.wrapper__list'),
+  readMoreLink: document.querySelector('.card-link'),
 };
 
-const { form, input, submitButton, openInputButton, withoutNewsContainer, newsList } = refs;
+const { form, input, submitButton, openInputButton, withoutNewsContainer, newsList, readMoreLink} = refs;
 
 const KEY = 'kAFi92vRzv66C7DQ6coSA3C5NLbSIILk';
 form.addEventListener('submit', onFormSubmit);
 openInputButton.addEventListener('click', onOpenInputButtonClick);
+
 
 let value = '';
 
@@ -92,8 +94,8 @@ function makeMarkup(array) {
         imageAddress = imageStartAddress + data.multimedia[0].url;
       }
 
-      return `<li class = "card-item" data-id = "${data.uri}">
 
+      return `<li class = "card-item" data-id = "${data.uri}">
     <div class="card-wrapper">
       <div class="card-thumb">
         <img class="card-image" src = "${imageAddress}" alt = "${data.byline}">
@@ -108,8 +110,8 @@ function makeMarkup(array) {
       <p class="card-news-description">${subTitle}</p>
       <div class="card-info-container">
         <p class="card-datetime">${date}</p>
-        <a class="card-link" href="${data.web_url}" target="_blank" rel="noopener noreferrer nofollow">Read more</a>
-      </div>
+        <a class="card-link" href="${data.web_url}" target="_blank" rel="noopener noreferrer nofollow" data-action="link"'>Read more</a>
+      </div>   
     </div>
 </li>`;
     })
@@ -129,6 +131,7 @@ function onOpenInputButtonClick(event) {
 }
 
 newsList.addEventListener('click', addToFavorite);
+newsList.addEventListener('click', addToReed);
 
 function addToFavorite(event) {
   if (event.target.dataset.action === 'favourite-button') {
@@ -151,3 +154,50 @@ function addToFavorite(event) {
     }
   }
 }
+
+const LOCAL_STORAGE_KEY = 'read_key';
+
+function addToReed(event) {
+  const currentLink = event.target;
+  if (currentLink.className === 'card-link') {
+
+    const currentCard = currentLink.parentElement.parentElement.parentElement;
+    currentCard.classList.add("read");
+    setItemToLocalStorage(currentCard.dataset.id);
+  }
+}
+
+function setItemToLocalStorage(item) {
+  const dataLocalStorage = localStorage.getItem(LOCAL_STORAGE_KEY);
+  //Конвертація формату дати 00/00/00
+  const currentData = new Date();
+  const currentDataString = `${currentData.getDate()}/${
+    currentData.getMonth() + 1
+  }/${currentData.getFullYear()}`; // *******
+
+  if (!dataLocalStorage) {
+    const newData = [{ data: currentDataString, items: [item] }];
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(newData));
+    return;
+  }
+
+  const dataArr = JSON.parse(dataLocalStorage);
+
+  let goodDataFlag = true; //прапорець перевірки запису в локалсторидж
+
+  const newDataArr = dataArr.map(elItem => {
+    if (elItem.data === currentDataString) {
+      goodDataFlag = false;
+      elItem.items.push(item);
+      return elItem;
+    }
+    return elItem;
+  });
+
+  if (goodDataFlag) {
+    newDataArr.push({ data: currentDataString, items: [item] });
+  }
+
+  localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(newDataArr));
+}
+

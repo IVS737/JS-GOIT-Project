@@ -9,6 +9,7 @@ const refs = {
 const { form, input, submitButton, openInputButton, withoutNewsContainer, newsList } = refs;
 
 export default function MakeStartMarkup(array) {
+
   const markUp = array
     .map((data) => {
       const subTitle = data.abstract.slice(0, 100) + `...`;
