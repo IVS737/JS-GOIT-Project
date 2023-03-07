@@ -110,7 +110,7 @@ function makeMarkup(array) {
       <p class="card-news-description">${subTitle}</p>
       <div class="card-info-container">
         <p class="card-datetime">${date}</p>
-        <a class="card-link" href="${data.web_url}" target="_blank" rel="noopener noreferrer nofollow" onclick='addToReed()'>Read more</a>
+        <a class="card-link" href="${data.web_url}" target="_blank" rel="noopener noreferrer nofollow" data-action="link"'>Read more</a>
       </div>   
     </div>
 </li>`;
