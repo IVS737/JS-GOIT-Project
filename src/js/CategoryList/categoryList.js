@@ -59,12 +59,17 @@ export default (() => {
 
   }
   function categoryListResult() {
+    const newsBox = document.querySelector('.news')
     fetchNews
       .fetchNewsListOfCategory()
       .then((prom) => {
         return prom.results;
       })
       .then((newsArray) => {
+        if(newsBox.style.display === "none"){
+          newsBox.style.display = "block"
+        }
+       
         const articles = newsArray.map((result) => {
           const date = result.published_date.toString().slice(0, 10).replace(`-`, '/').replace(`-`, '/');
           return {
@@ -81,6 +86,8 @@ export default (() => {
         render.makeMarkup(articles);
       })
       .catch((error) => {
+        
+        newsBox.style.display = "none"
         render.emptyMarkup();
       });
   }

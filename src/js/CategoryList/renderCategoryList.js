@@ -10,9 +10,6 @@ export default class RenderCategory {
     const newsList = document.querySelector('.wrapper__list')
     const markUp = array
       .map((data) => {
-
-        console.log(data);
-
         const { image, section, title, description, date, url, uri } = data;
 
         return `<li class = "card-item" data-id = "${uri}">
