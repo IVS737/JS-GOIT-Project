@@ -35,7 +35,7 @@ const { form, input, submitButton, openInputButton, withoutNewsContainer, newsLi
         
   
 
-        return `<li class = "card-item" data-id = "${data.title}">
+        return `<li class = "card-item" data-id = "${data._id}">
       <div class="card-wrapper">
         <div class="card-thumb">
           <img class="card-image" src = "${imageAddress}" alt = "${data.byline}">

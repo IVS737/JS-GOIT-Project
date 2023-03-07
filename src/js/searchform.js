@@ -93,8 +93,8 @@ function makeMarkup(array) {
         imageStartAddress = 'https://static01.nyt.com/';
         imageAddress = imageStartAddress + data.multimedia[0].url;
       }
-
-      return `<li class = "card-item" data-id = "${data.headline.main}">
+      console.log(data);
+      return `<li class = "card-item" data-id = "${data._id}">
 
     <div class="card-wrapper">
       <div class="card-thumb">
@@ -131,7 +131,7 @@ function onOpenInputButtonClick(event) {
 }
 
 newsList.addEventListener('click', addToFavorite);
-readMoreLink.addEventListener('click', addToReed);
+newsList.addEventListener('click', addToReed);
 
 function addToFavorite(event) {
   if (event.target.dataset.action === 'favourite-button') {
@@ -155,20 +155,49 @@ function addToFavorite(event) {
   }
 }
 
-function addToReed(event) {
-  readMoreLink.classList.add(read);
-  console.log(readMoreLink);
-if (readMoreLink.classlist.contains(read)) {
-  localStorage.setItem('read', readMoreLink)
-}
-//   if (event.target.dataset.action === 'card-link') {
-//     // let cardItem = event.target.parentElement.parentElement.parentElement.dataset.id;
-//     // console.log(cardItem);
-//     // const read = JSON.parse(localStorage.getItem('read')) || [];
+const LOCAL_STORAGE_KEY = 'read_key';
 
-//     // if (event.target.textContent = 'Add to reed') {
-//     //    read.push(cardItem);
-//     //   localStorage.setItem('read', JSON.stringify(read));}
-// console.log(help);
-//   }
+function addToReed(event) {
+  const currentLink = event.target;
+  if (currentLink.className === 'card-link') {
+
+    const currentCard = currentLink.parentElement.parentElement.parentElement;
+    currentCard.classList.add("read");
+    setItemToLocalStorage(currentCard.dataset.id);
+  }
 }
+
+function setItemToLocalStorage(item) {
+  const dataLocalStorage = localStorage.getItem(LOCAL_STORAGE_KEY);
+  //Конвертація формату дати 00/00/00
+  const currentData = new Date();
+  const currentDataString = `${currentData.getDate()}/${
+    currentData.getMonth() + 1
+  }/${currentData.getFullYear()}`; // *******
+
+  if (!dataLocalStorage) {
+    const newData = [{ data: currentDataString, items: [item] }];
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(newData));
+    return;
+  }
+
+  const dataArr = JSON.parse(dataLocalStorage);
+
+  let goodDataFlag = true; //прапорець перевірки запису в локалсторидж
+
+  const newDataArr = dataArr.map(elItem => {
+    if (elItem.data === currentDataString) {
+      goodDataFlag = false;
+      elItem.items.push(item);
+      return elItem;
+    }
+    return elItem;
+  });
+
+  if (goodDataFlag) {
+    newDataArr.push({ data: currentDataString, items: [item] });
+  }
+
+  localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(newDataArr));
+}
+
