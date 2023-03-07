@@ -7,11 +7,14 @@
   flex-direction: row;
   justify-content: space-between;
   margin-left: auto;
-  margin-right: 16px;
   padding-top: 6px;
   padding-left: 12px;
   padding-right: 12px;
   cursor: pointer;
+
+  @media screen and (min-width: 768px) {
+    width: 168px;
+  }
 
   &:hover,
   &:focus {

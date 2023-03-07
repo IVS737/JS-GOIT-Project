@@ -93,9 +93,9 @@ function makeMarkup(array) {
         imageStartAddress = 'https://static01.nyt.com/';
         imageAddress = imageStartAddress + data.multimedia[0].url;
       }
-      console.log(data);
-      return `<li class = "card-item" data-id = "${data._id}">
 
+
+      return `<li class = "card-item" data-id = "${data.uri}">
     <div class="card-wrapper">
       <div class="card-thumb">
         <img class="card-image" src = "${imageAddress}" alt = "${data.byline}">
@@ -149,7 +149,7 @@ function addToFavorite(event) {
       favorites.push(cardItem);
       localStorage.setItem('favorites', JSON.stringify(favorites));
 
-      event.target.textContent = 'Remove from favourites';
+      event.target.textContent = 'Remove from favorites';
       event.target.classList.add('removefavourite-button');
     }
   }
