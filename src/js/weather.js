@@ -24,7 +24,7 @@ day =  moment(new Date()).format('ddd')
 date = moment(new Date()).format('DD MMM YYYY')
 
 
-const fetchWeatherGeo = async (lat=33.44, lon=-94.04, units='metric') => {
+const fetchWeatherGeo = async (lat=50.54345, lon=30.21201, units='metric') => {
  
   const { data } = await axios.get(`${URL}/?lat=${lat}&lon=${lon}&units=${units}&exclude=deyly&APPID=${API_KEY}`);
      return data;
@@ -55,10 +55,10 @@ const renderWeather = (weather) => {
   forWeekEl.classList = "weatherBlock_clear hidden";
 
 
-  weatherTemp.innerHTML = Math.round(weather?.main.temp) ?? "";
-  weatherDescription.innerHTML = weather?.weather[0].description ?? "";
-  weatherDescription.innerHTML = weather?.weather[0].description ?? "";
-  weatherName.innerHTML = weather?.name ?? "";
+  weatherTemp.innerHTML = `${Math.round(weather.main.temp)}`;
+  weatherDescription.innerHTML = `${weather.weather[0].description}`;
+  weatherDescription.innerHTML = `${weather.weather[0].description}`;
+  weatherName.innerHTML = `${weather.name}`;
   weatherIcon.innerHTML = `<img class="weatherBlock_city-icon" src="https://openweathermap.org/img/wn/${weather?.weather[0].icon}@2x.png" />`;
   weatherDate.innerHTML = `${day} <br> ${date}`;
 
@@ -73,7 +73,7 @@ geoWeatherApp();
 // // ----------------------------- 7 DAY -------------------------------
 
 
-const fetchWeatherForecast = async (lat=33.44, lon=-94.04, units='metric') => {
+const fetchWeatherForecast = async (lat=50.54245, lon=30.21201, units='metric') => {
  
   const { data } = await axios.get(`${URL2}?lat=${lat}&lon=${lon}&units=${units}&APPID=${API_KEY}`);
      console.log(data)

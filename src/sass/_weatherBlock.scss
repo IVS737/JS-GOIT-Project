@@ -5,8 +5,6 @@
     display: none;
 }
 
-
-
 .weatherBlock {
 &_main-container {
     display: flex;
@@ -64,6 +62,7 @@
 &_temp-sup {
     padding-top: 10px;
     top: 0%;
+    vertical-align: super;
 
 }
 
@@ -111,7 +110,8 @@
     height: 121px;
     margin: auto;
     flex: 1;
-    justify-content: center
+    justify-content: center;
+    align-items: center;
 }
 
 &_city-icon {
