@@ -8,8 +8,8 @@ export default class RenderCategory {
     const newsList = document.querySelector('.wrapper__list')
     const markUp = array
       .map((data) => {
-        const { image, section, title, description, date, url } = data;
-        return `<li class = "card-item" data-id = "${title}">
+        const { image, section, title, description, date, url, id } = data;
+        return `<li class = "card-item" data-id = "${id}">
       <div class="card-wrapper">
         <div class="card-thumb">
           <img class="card-image" src = "${image}" alt = "${description}">
@@ -23,7 +23,7 @@ export default class RenderCategory {
         <h3 class="card-news-title">${title}</h3>
         <p class="card-news-description">${description}</p>
         <div class="card-info-container">
-          <p class="card-datetime">${format(date, 'yyyy-MM-dd')}</p>
+          <p class="card-datetime">${format(date, 'dd/MM/yyyy')}</p>
           <a class="card-link" href="${url}" target="_blank" rel="noopener noreferrer nofollow">Read more</a>
         </div>
       </div>
