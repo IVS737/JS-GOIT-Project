@@ -1,3 +1,5 @@
+import { format } from 'date-fns';
+
 import imagesDesc from '../images/notfoundDesc.png';
 import imagesTab from '../images/notfoundTab.png';
 import imagesMob from '../images/notfoundMob.png';
@@ -9,10 +11,11 @@ const refs = {
   openInputButton: document.querySelector('.header-button-opensearch'),
   withoutNewsContainer: document.querySelector('.container__error'),
   newsList: document.querySelector('.wrapper__list'),
-  readMoreLink: document.querySelector('.card-link'),
+  weatherContainer: document.querySelector('.news__weather')
 };
 
-const { form, input, submitButton, openInputButton, withoutNewsContainer, newsList, readMoreLink } = refs;
+const { form, input, submitButton, openInputButton, withoutNewsContainer, newsList, weatherContainer } = refs;
+
 
 const KEY = 'kAFi92vRzv66C7DQ6coSA3C5NLbSIILk';
 form.addEventListener('submit', onFormSubmit);
@@ -72,6 +75,7 @@ function createEmptyMarkup() {
                     class="withoutnews-image"
                   />
                 </picture>`;
+  weatherContainer.innerHTML = "";
   withoutNewsContainer.innerHTML = emptyMarkup;
 }
 
@@ -81,6 +85,7 @@ function makeMarkup(array) {
       const subTitle = data.abstract.slice(0, 100) + `...`;
       const title = data.headline.main.slice(0, 60) + `...`;
       const date = data.pub_date.toString().slice(0, 10).replace(`-`, '/').replace(`-`, '/');
+    
 
       let imageAddress;
       let imageStartAddress;
@@ -94,6 +99,7 @@ function makeMarkup(array) {
       }
 
       return `<li class = "card-item" data-id = "${data.uri}">
+
     <div class="card-wrapper">
       <div class="card-thumb">
         <img class="card-image" src = "${imageAddress}" alt = "${data.byline}">
@@ -107,9 +113,9 @@ function makeMarkup(array) {
       <h3 class="card-news-title">${data.headline.main}</h3>
       <p class="card-news-description">${subTitle}</p>
       <div class="card-info-container">
-        <p class="card-datetime">${date}</p>
-        <a class="card-link" href="${data.web_url}" target="_blank" rel="noopener noreferrer nofollow" data-action="link"'>Read more</a>
-      </div>   
+        <p class="card-datetime">${format(new Date(date), 'dd/MM/yyyy')}</p>
+        <a class="card-link" href="${data.web_url}" target="_blank" rel="noopener noreferrer nofollow">Read more</a>
+      </div>
     </div>
 </li>`;
     })
@@ -129,7 +135,6 @@ function onOpenInputButtonClick(event) {
 }
 
 newsList.addEventListener('click', addToFavorite);
-newsList.addEventListener('click', addToReed);
 
 function addToFavorite(event) {
   if (event.target.dataset.action === 'favourite-button') {
@@ -153,47 +158,3 @@ function addToFavorite(event) {
   }
 }
 
-const LOCAL_STORAGE_KEY = 'read_key';
-
-function addToReed(event) {
-  const currentLink = event.target;
-  if (currentLink.className === 'card-link') {
-    const currentCard = currentLink.parentElement.parentElement.parentElement;
-    currentCard.classList.add('read');
-    setItemToLocalStorage(currentCard.dataset.id);
-  }
-}
-
-function setItemToLocalStorage(item) {
-  const dataLocalStorage = localStorage.getItem(LOCAL_STORAGE_KEY);
-  //Конвертація формату дати 00/00/00
-  const currentData = new Date();
-  const currentDataString = `${currentData.getDate()}/${currentData.getMonth() + 1}/${currentData.getFullYear()}`; // *******
-
-  if (!dataLocalStorage) {
-    const newData = [{ data: currentDataString, items: [item] }];
-    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(newData));
-    return;
-  }
-
-  const dataArr = JSON.parse(dataLocalStorage);
-
-  let goodDataFlag = true; //прапорець перевірки запису в локалсторидж
-
-  const newDataArr = dataArr.map((elItem) => {
-    if (elItem.data === currentDataString) {
-      goodDataFlag = false;
-      elItem.items.push(item);
-      return elItem;
-    }
-    return elItem;
-  });
-
-  if (goodDataFlag) {
-    newDataArr.push({ data: currentDataString, items: [item] });
-  }
-
-  localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(newDataArr));
-}
-
-export { addToReed, setItemToLocalStorage };
