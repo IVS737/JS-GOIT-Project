@@ -16,6 +16,7 @@ const refs = {
 
 const { form, input, submitButton, openInputButton, withoutNewsContainer, newsList, weatherContainer } = refs;
 
+
 const KEY = 'kAFi92vRzv66C7DQ6coSA3C5NLbSIILk';
 form.addEventListener('submit', onFormSubmit);
 openInputButton.addEventListener('click', onOpenInputButtonClick);
@@ -156,3 +157,4 @@ function addToFavorite(event) {
     }
   }
 }
+
