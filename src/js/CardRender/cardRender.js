@@ -1,3 +1,5 @@
+import { format } from 'date-fns';
+
 const refs = {
   form: document.querySelector('.header-search-form'),
   input: document.querySelector('.header-search-input'),
@@ -47,7 +49,7 @@ export default function Makemarkup(array) {
       <h3 class="card-news-title">${data.headline.main}</h3>
       <p class="card-news-description">${subTitle}</p>
       <div class="card-info-container">
-        <p class="card-datetime">${date}</p>
+        <p class="card-datetime">${format(new Date(date), 'dd/MM/yyyy')}</p>
         <a class="card-link" href="${data.web_url}" target="_blank" rel="noopener noreferrer nofollow">Read more</a>
       </div>
     </div>
