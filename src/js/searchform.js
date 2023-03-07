@@ -106,7 +106,7 @@ function makeMarkup(array) {
 
         <p class="card-text-read">Already read
         <svg width="18" height="18" class="check-icon"><use href="../images/symbol-defs.svg#icon-check"</svg></p>
-        <button class="favourite-button" type="button" data-action="favourite-button">Add to favorite</button>
+        <button class="favorite-button" type="button" data-action="favorite-button">Add to favorite</button>
 
       </div>
       <h3 class="card-news-title">${data.headline.main}</h3>
@@ -140,7 +140,7 @@ if(newsList) {
 }
 
 export function addToFavorite(event) {
-  if (event.target.dataset.action === 'favourite-button') {
+  if (event.target.dataset.action === 'favorite-button') {
     let cardItem =
       event.target.parentElement.parentElement.parentElement.dataset.id;
     console.log(cardItem);
