@@ -25,7 +25,7 @@ export default function MakeStartMarkup(array) {
         imageStartAddress = 'https://static01.nyt.com/';
         imageAddress = data.multimedia[1].url;
       }
-      return `<li class = "card-item" data-id = "${data.headline.main}">
+      return `<li class = "card-item" data-id = "${data.uri}">
 
     <div class="card-wrapper">
       <div class="card-thumb">
