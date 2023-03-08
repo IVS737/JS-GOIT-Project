@@ -211,7 +211,7 @@ function addToFavorite(event) {
       localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
 
       event.target.textContent = 'Add to favorites';
-      event.target.classList.remove('removefavourite-button');
+      event.target.classList.add('removefavourite-button');
     } else {
       favorites.push(oneCard);
       localStorage.setItem('favorites', JSON.stringify(favorites));
