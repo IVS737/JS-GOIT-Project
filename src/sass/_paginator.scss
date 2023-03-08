@@ -30,16 +30,17 @@ html {
   cursor: pointer;
   border: 1px solid $primary-blue-color;
   border-radius: 2px;
-  background-color: transparent;
+  background-color: $background-color;
   transition: background-color 250ms linear;
 
   @media screen and (min-width: 768px) {
-    width: 33px;
+    width: 35px;
     height: 33px;
   }
 }
 .paginator__button--notbordered {
   color: $primary-black-color;
+  background-color: transparent;
   border: none;
 }
 .paginator__button:hover,

@@ -1,4 +1,5 @@
 import { format } from 'date-fns';
+
 // import imagesDesc from './images/notfoundDesc.png';
 // import imagesTab from './images/notfoundTab.png';
 
@@ -11,6 +12,7 @@ import NewsServise from './newslist.js';
 import makeMarkup from './CardRender/cardRender';
 import createEmptyMarkup from './renderEmptyMarkup';
 const LogNews = new NewsServise();
+
 const refs = {
   form: document.querySelector('.header-search-form'),
   input: document.querySelector('.header-search-input'),
@@ -18,14 +20,15 @@ const refs = {
   openInputButton: document.querySelector('.header-button-opensearch'),
   withoutNewsContainer: document.querySelector('.container__error'),
   newsList: document.querySelector('.wrapper__list'),
-  weatherContainer: document.querySelector('.news__weather')
+  weatherContainer: document.querySelector('.news__weather'),
+  newsContainer: document.querySelector('.news'),
+
 };
 
-const { form, input, submitButton, openInputButton, withoutNewsContainer, newsList, weatherContainer } = refs;
-
+const { form, input, submitButton, openInputButton, withoutNewsContainer, newsList, weatherContainer, newsContainer } = refs;
 
 const KEY = 'kAFi92vRzv66C7DQ6coSA3C5NLbSIILk';
-form.addEventListener('submit', onFormSubmit);
+// form.addEventListener('submit', onFormSubmit);
 openInputButton.addEventListener('click', onOpenInputButtonClick);
 
 export let mar = 0;
@@ -33,6 +36,7 @@ export let Value = "";
 
 
 function onFormSubmit(event) {
+
 
   Value = event.currentTarget.elements.newsField.value.trim();
   event.preventDefault();
@@ -56,6 +60,7 @@ function onFormSubmit(event) {
       return data.response.docs;
     })
     .catch(onError);
+
 }
 
 function fetchNews(value) {
@@ -68,6 +73,7 @@ function fetchNews(value) {
     },
   );
 }
+
 
 // function createEmptyMarkup() {
 //   const emptyMarkup = `<h2 class="withoutnews-title">We haven’t found news from <br> this category</h2><picture>
@@ -142,6 +148,7 @@ function fetchNews(value) {
 //   newsList.innerHTML = markUp;
 // }
 
+
 function onError(error) {
   createEmptyMarkup();
   console.log(error);
@@ -175,4 +182,3 @@ function addToFavorite(event) {
     }
   }
 }
-
