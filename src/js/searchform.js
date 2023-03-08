@@ -1,13 +1,14 @@
 import { format } from 'date-fns';
 // import imagesDesc from './images/notfoundDesc.png';
 // import imagesTab from './images/notfoundTab.png';
-
+import createEmptyMarkup from './renderEmptyMarkup'
 // import imagesMob from './images/notfoundMob.png';
 // import imagesDesc from '../images/notfoundDesc.png';
 // import imagesTab from '../images/notfoundTab.png';
 import NewsServise from './newslist.js';
 // import imagesMob from '../images/notfoundMob.png';
 // import createEmptyMarkup from './renderEmptyMarkup';
+import geoWeatherApp from './weather'
 import makeMarkup from './CardRender/cardRender';
 import createEmptyMarkup from './renderEmptyMarkup';
 const LogNews = new NewsServise();
@@ -33,7 +34,7 @@ export let Value = "";
 
 
 function onFormSubmit(event) {
-
+ 
   Value = event.currentTarget.elements.newsField.value.trim();
   event.preventDefault();
   mar = 1;
@@ -43,10 +44,17 @@ function onFormSubmit(event) {
       if (data.response.docs.length === 0) {
         form.reset();
         newsList.innerHTML = '';
-        // return createEmptyMarkup();
+        return createEmptyMarkup();
       }
       if (!localStorage.getItem("date")) {
-        LogNews.getSerchList().then((data) => {makeMarkup(data.response.docs)})
+        LogNews.getSerchList().then((data) => {
+          if (data.response.docs.length === 0) {
+            form.reset();
+            newsList.innerHTML = '';
+          return createEmptyMarkup();
+          }
+          
+          makeMarkup(data.response.docs)})
       }
       // else{
       //   LogNews.NewDate = localStorage.getItem("date")

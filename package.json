@@ -16,7 +16,8 @@
     "js-datepicker": "^5.18.2",
     "lodash.debounce": "^4.0.8",
     "modern-normalize": "^1.1.0",
-    "moment": "^2.29.4"
+    "moment": "^2.29.4",
+    "notiflix": "^3.2.6"
   },
   "devDependencies": {
     "@parcel/transformer-sass": "^2.8.3",
