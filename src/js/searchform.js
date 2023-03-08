@@ -205,8 +205,17 @@ function addToFavorite(event) {
  const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
 
     if (event.target.classList.contains('removefavourite-button')) {
-      const updatedFavorites = favorites.filter((id) => id.cardEl == cardItem);
-      localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
+    const indexArray = favorites.map(el => el.title);
+    const index = indexArray.indexOf(oneCard.title);
+
+    favorites.splice(index, 1);
+    localStorage.setItem('favorites', JSON.stringify(favorites));
+
+
+
+
+      // const updatedFavorites = favorites.filter((id) => id.cardEl == cardItem);
+      // localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
 
       event.target.textContent = 'Add to favorites';
       event.target.classList.remove('removefavourite-button');
