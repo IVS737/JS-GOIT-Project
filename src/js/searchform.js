@@ -22,38 +22,32 @@ const refs = {
   newsList: document.querySelector('.wrapper__list'),
   weatherContainer: document.querySelector('.news__weather'),
   newsContainer: document.querySelector('.news'),
-
 };
-
 
 //mob menu
 
-  const mobileMenu = document.querySelector('.js-menu-container');
-  const openMenuBtn = document.querySelector('.burger-btn-open');
+const mobileMenu = document.querySelector('.js-menu-container');
+const openMenuBtn = document.querySelector('.burger-btn-open');
 
-  const toggleMenu = () => {
-    const isMenuOpen = openMenuBtn.getAttribute('aria-expanded') === 'true' || false;
-    openMenuBtn.setAttribute('aria-expanded', !isMenuOpen);
-    mobileMenu.classList.toggle('is-open');
-  };
+const toggleMenu = () => {
+  const isMenuOpen = openMenuBtn.getAttribute('aria-expanded') === 'true' || false;
+  openMenuBtn.setAttribute('aria-expanded', !isMenuOpen);
+  mobileMenu.classList.toggle('is-open');
+};
 
 //
 
-
-const { form, input, submitButton, openInputButton, withoutNewsContainer, newsList, weatherContainer, newsContainer } = refs;
-
+const { form, input, submitButton, openInputButton, withoutNewsContainer, newsList, weatherContainer, newsContainer } =
+  refs;
 
 const KEY = 'kAFi92vRzv66C7DQ6coSA3C5NLbSIILk';
 // form.addEventListener('submit', onFormSubmit);
 openInputButton.addEventListener('click', onOpenInputButtonClick);
 
 export let mar = 0;
-export let Value = "";
-
+export let Value = '';
 
 function onFormSubmit(event) {
-
-
   Value = event.currentTarget.elements.newsField.value.trim();
   event.preventDefault();
   mar = 1;
@@ -65,8 +59,10 @@ function onFormSubmit(event) {
         newsList.innerHTML = '';
         // return createEmptyMarkup();
       }
-      if (!localStorage.getItem("date")) {
-        LogNews.getSerchList().then((data) => {makeMarkup(data.response.docs)})
+      if (!localStorage.getItem('date')) {
+        LogNews.getSerchList().then((data) => {
+          makeMarkup(data.response.docs);
+        });
       }
       // else{
       //   LogNews.NewDate = localStorage.getItem("date")
@@ -76,11 +72,10 @@ function onFormSubmit(event) {
       return data.response.docs;
     })
     .catch(onError);
-  
-  if (mobileMenu.classList.contains('is-open')) { 
-  toggleMenu();
-}
 
+  if (mobileMenu.classList.contains('is-open')) {
+    toggleMenu();
+  }
 }
 
 function fetchNews(value) {
@@ -93,7 +88,6 @@ function fetchNews(value) {
     },
   );
 }
-
 
 // function createEmptyMarkup() {
 //   const emptyMarkup = `<h2 class="withoutnews-title">We haven’t found news from <br> this category</h2><picture>
@@ -129,7 +123,6 @@ function fetchNews(value) {
 //       const subTitle = data.abstract.slice(0, 100) + `...`;
 //       const title = data.headline.main.slice(0, 60) + `...`;
 //       const date = data.pub_date.toString().slice(0, 10).replace(`-`, '/').replace(`-`, '/');
-    
 
 //       let imageAddress;
 //       let imageStartAddress;
@@ -168,7 +161,6 @@ function fetchNews(value) {
 //   newsList.innerHTML = markUp;
 // }
 
-
 function onError(error) {
   createEmptyMarkup();
   console.log(error);
@@ -184,13 +176,13 @@ newsList.addEventListener('click', addToFavorite);
 function addToFavorite(event) {
   if (event.target.dataset.action === 'favourite-button') {
     let cardItem = event.target.parentElement.parentElement.parentElement.dataset.id;
-    console.log(cardItem);// сardId
+    console.log(cardItem); // сardId
     const card = event.currentTarget.firstChild; //li
     const image = card.querySelector('.card-image'); //img
     const category = card.querySelector('.card-news-category'); //categoryconst
-    const cardTitle = card.querySelector('.card-news-title');//title
+    const cardTitle = card.querySelector('.card-news-title'); //title
     const newsDescription = card.querySelector('.card-news-description'); //description
-    const dateTime = card.querySelector('.card-datetime');//date
+    const dateTime = card.querySelector('.card-datetime'); //date
     const newsLink = card.querySelector('.card-link'); //link
     // console.log(image);
     // console.log(card);
@@ -208,10 +200,10 @@ function addToFavorite(event) {
       description: newsDescription.textContent,
       data: dateTime.textContent,
       link: newsLink.href,
-    }
+    };
     console.log(oneCard);
 
-  const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+    const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
 
     if (event.target.classList.contains('removefavourite-button')) {
       const updatedFavorites = favorites.filter((element) => element.cardEl != cardItem);
@@ -220,22 +212,17 @@ function addToFavorite(event) {
 
       event.target.textContent = 'Add to favorites';
       event.target.classList.remove('removefavourite-button');
-    
-    }else {
+    } else {
       favorites.push(oneCard);
       localStorage.setItem('favorites', JSON.stringify(favorites));
 
       event.target.textContent = 'Remove from favorites';
-      event.target.classList.add('removefavourite-button');
+      event.target.classList.remove('removefavourite-button');
     }
   }
-    
-  }
+}
 
-
-
-  
-//     
+//
 
 //     if (event.target.classList.contains('removefavourite-button')) {
 //       const updatedFavorites = favorites.filter((id) => id !== cardItem);
@@ -243,10 +230,5 @@ function addToFavorite(event) {
 
 //       event.target.textContent = 'Add to favorites';
 //       event.target.classList.remove('removefavourite-button');
-//     } 
+//     }
 // }
-
-
-
-
-  
