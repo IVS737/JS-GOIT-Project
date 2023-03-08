@@ -1,25 +1,78 @@
 import axios from 'axios';
 
+import RenderCategory from './CategoryList/renderCategoryList';
+const render = new RenderCategory();
+
 const searchForm = document.querySelector('.header-search-form');
 const paginator = document.getElementById('paginator');
 
 let currentPage = 1;
 let totalPages = 0;
 let filterNameByDefaul = 'sports';
-
-searchByFilter(filterNameByDefaul); /// Cюди передати значення фільтру.
-
+searchByFilter();
+export default function changeFilterName(name) {
+  filterNameByDefaul = name;
+  searchByFilter();
+}
 async function searchByFilter() {
-  const response = await axios.get(
-    `https://api.nytimes.com/svc/search/v2/articlesearch.json?limit=10&fq=news_desk:(${filterNameByDefaul})&api-key=kAFi92vRzv66C7DQ6coSA3C5NLbSIILk&page=${
-      currentPage - 1
-    }`,
-  );
-  const articles = response.data.response.docs.slice(0, 8); // 8 articles
+  const newsBox = document.querySelector('.news');
+  const paginationBox = document.getElementById('paginator');
+  const newsError = document.querySelector('.container__error')
+  try {
+    const response = await axios.get(
+      `https://api.nytimes.com/svc/search/v2/articlesearch.json?limit=8&fq=news_desk:(${filterNameByDefaul})&api-key=71s3mUNKm6z5TjxLJwNR66epaTNpAApf&page=${
+        currentPage - 1
+      }`,
+    );
+    newsError.style.display = 'none';
+    newsBox.style.display === 'none' && (newsBox.style.display = 'block');
+    paginationBox.style.display === 'none'&& (paginationBox.style.display = 'block');
 
-  totalPages = Math.ceil(response.data.response.meta.hits / 1000);
-  // foo(articles); //? Тут рендеремо розмітку
-  displayPagination();
+         const articles = response.data.response.docs.slice(0, 8); // 8 articles
+
+         totalPages = Math.ceil(response.data.response.meta.hits / 10);
+       
+         newsListRender(articles);
+       
+         displayPagination();
+        
+  } catch (error) {
+    newsError.style.display === 'none' && (newsError.style.display = 'block');
+    paginationBox.style.display = 'none'
+    newsBox.style.display = 'none';
+    render.emptyMarkup();
+    return;
+  }
+
+
+
+}
+
+function newsListRender(newsArray) {
+  const newsBox = document.querySelector('.news');
+
+  const articles = newsArray.map((result) => {
+    const date = result.pub_date.toString().slice(0, 10).replace(`-`, '/').replace(`-`, '/');
+
+    return {
+      title: result.headline.main,
+      image: imageValidation(result),
+      description: result.abstract,
+      date: new Date(date),
+      url: result.web_url,
+      section: result.section_name,
+      uri: result.uri,
+    };
+  });
+  render.makeMarkup(articles);
+}
+
+function imageValidation(data) {
+  if (!data.multimedia || data.multimedia.length === 0) {
+    return 'https://st.depositphotos.com/1000558/53737/v/1600/depositphotos_537370102-stock-illustration-image-photo-sign-symbol-template.jpg';
+  } else if (data.multimedia.length > 0) {
+    return `http://www.nytimes.com/${data.multimedia[0].url}`;
+  }
 }
 
 function displayPagination() {
@@ -95,8 +148,8 @@ function displayPagination() {
     paginator.appendChild(firstPageButton);
 
     const dotsButton = document.createElement('button');
-    dotsButton.classList.add('paginator__button', 'paginator__button--notbordered');
-
+    dotsButton.classList.add('paginator__button--notbordered');
+    dotsButton.setAttribute('disabled', true);
     dotsButton.innerText = '...';
     dotsButton.disabled = true;
     paginator.appendChild(dotsButton);
@@ -123,7 +176,7 @@ function displayPagination() {
 
   if (endPage < totalPages - 1) {
     const dotsButton = document.createElement('button');
-    dotsButton.classList.add('paginator__button', 'paginator__button--notbordered');
+    dotsButton.classList.add('paginator__button--notbordered');
 
     dotsButton.innerText = '...';
     dotsButton.disabled = true;
@@ -165,10 +218,10 @@ function displayPagination() {
     }
   }
 
-  searchForm.addEventListener('submit', (event) => {
-    event.preventDefault();
-    currentPage = 1;
-    searchByFilter();
-    window.scrollTo(0, 0);
-  });
+  // searchForm.addEventListener('submit', (event) => {
+  //   event.preventDefault();
+  //   currentPage = 1;
+  //   searchByFilter();
+  //   window.scrollTo(0, 0);
+  // });
 }

@@ -1,4 +1,5 @@
 import { format } from 'date-fns';
+
 // import imagesDesc from './images/notfoundDesc.png';
 // import imagesTab from './images/notfoundTab.png';
 import createEmptyMarkup from './renderEmptyMarkup'
@@ -12,6 +13,7 @@ import geoWeatherApp from './weather'
 import makeMarkup from './CardRender/cardRender';
 import createEmptyMarkup from './renderEmptyMarkup';
 const LogNews = new NewsServise();
+
 const refs = {
   form: document.querySelector('.header-search-form'),
   input: document.querySelector('.header-search-input'),
@@ -19,22 +21,35 @@ const refs = {
   openInputButton: document.querySelector('.header-button-opensearch'),
   withoutNewsContainer: document.querySelector('.container__error'),
   newsList: document.querySelector('.wrapper__list'),
-  weatherContainer: document.querySelector('.news__weather')
+  weatherContainer: document.querySelector('.news__weather'),
+  newsContainer: document.querySelector('.news'),
 };
 
-const { form, input, submitButton, openInputButton, withoutNewsContainer, newsList, weatherContainer } = refs;
+//mob menu
 
+const mobileMenu = document.querySelector('.js-menu-container');
+const openMenuBtn = document.querySelector('.burger-btn-open');
+
+const toggleMenu = () => {
+  const isMenuOpen = openMenuBtn.getAttribute('aria-expanded') === 'true' || false;
+  openMenuBtn.setAttribute('aria-expanded', !isMenuOpen);
+  mobileMenu.classList.toggle('is-open');
+};
+
+//
+
+const { form, input, submitButton, openInputButton, withoutNewsContainer, newsList, weatherContainer, newsContainer } =
+  refs;
 
 const KEY = 'kAFi92vRzv66C7DQ6coSA3C5NLbSIILk';
-form.addEventListener('submit', onFormSubmit);
+// form.addEventListener('submit', onFormSubmit);
 openInputButton.addEventListener('click', onOpenInputButtonClick);
 
 export let mar = 0;
-export let Value = "";
-
+export let Value = '';
 
 function onFormSubmit(event) {
- 
+
   Value = event.currentTarget.elements.newsField.value.trim();
   event.preventDefault();
   mar = 1;
@@ -64,6 +79,10 @@ function onFormSubmit(event) {
       return data.response.docs;
     })
     .catch(onError);
+
+  if (mobileMenu.classList.contains('is-open')) {
+    toggleMenu();
+  }
 }
 
 function fetchNews(value) {
@@ -111,7 +130,6 @@ function fetchNews(value) {
 //       const subTitle = data.abstract.slice(0, 100) + `...`;
 //       const title = data.headline.main.slice(0, 60) + `...`;
 //       const date = data.pub_date.toString().slice(0, 10).replace(`-`, '/').replace(`-`, '/');
-    
 
 //       let imageAddress;
 //       let imageStartAddress;
@@ -165,17 +183,44 @@ newsList.addEventListener('click', addToFavorite);
 function addToFavorite(event) {
   if (event.target.dataset.action === 'favourite-button') {
     let cardItem = event.target.parentElement.parentElement.parentElement.dataset.id;
-    console.log(cardItem);
+    console.log(cardItem); // сardId
+    const card = event.currentTarget.firstChild; //li
+    const image = card.querySelector('.card-image'); //img
+    const category = card.querySelector('.card-news-category'); //categoryconst
+    const cardTitle = card.querySelector('.card-news-title'); //title
+    const newsDescription = card.querySelector('.card-news-description'); //description
+    const dateTime = card.querySelector('.card-datetime'); //date
+    const newsLink = card.querySelector('.card-link'); //link
+    // console.log(image);
+    // console.log(card);
+    // console.log(category);
+    // console.log(cardTitle);
+    // console.log(newsDescription);
+    // console.log(dateTime);
+    // console.log(newsLink);
+
+    const oneCard = {
+      cardEl: card.dataset.id,
+      image: image.src,
+      category: category.textContent,
+      title: cardTitle.textContent,
+      description: newsDescription.textContent,
+      data: dateTime.textContent,
+      link: newsLink.href,
+    };
+    console.log(oneCard);
+
     const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
 
     if (event.target.classList.contains('removefavourite-button')) {
-      const updatedFavorites = favorites.filter((id) => id !== cardItem);
+      const updatedFavorites = favorites.filter((element) => element.cardEl != cardItem);
+      console.log(updatedFavorites);
       localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
 
       event.target.textContent = 'Add to favorites';
-      event.target.classList.remove('removefavourite-button');
+      event.target.classList.add('removefavourite-button');
     } else {
-      favorites.push(cardItem);
+      favorites.push(oneCard);
       localStorage.setItem('favorites', JSON.stringify(favorites));
 
       event.target.textContent = 'Remove from favorites';
@@ -184,3 +229,13 @@ function addToFavorite(event) {
   }
 }
 
+//
+
+//     if (event.target.classList.contains('removefavourite-button')) {
+//       const updatedFavorites = favorites.filter((id) => id !== cardItem);
+//       localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
+
+//       event.target.textContent = 'Add to favorites';
+//       event.target.classList.remove('removefavourite-button');
+//     }
+// }
