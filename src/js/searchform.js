@@ -149,8 +149,7 @@ function fetchNews(value) {
 //         <img class="card-image" src = "${imageAddress}" alt = "${data.byline}">
 //         <p class="card-news-category">${data.section_name}</p>
 
-//         <p class="card-text-read">Already read
-//         <svg width="18" height="18" class="check-icon"><use href="../images/symbol-defs.svg#icon-check"</svg></p>
+//         <p class="card-text-read">Already read</p>
 //         <button class="favourite-button" type="button" data-action="favourite-button">Add to favorite</button>
 
 //       </div>
@@ -210,15 +209,23 @@ function addToFavorite(event) {
     };
     console.log(oneCard);
 
-    const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+ const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
 
     if (event.target.classList.contains('removefavourite-button')) {
-      const updatedFavorites = favorites.filter((element) => element.cardEl != cardItem);
-      console.log(updatedFavorites);
-      localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
+    const indexArray = favorites.map(el => el.title);
+    const index = indexArray.indexOf(oneCard.title);
+
+    favorites.splice(index, 1);
+    localStorage.setItem('favorites', JSON.stringify(favorites));
+
+
+
+
+      // const updatedFavorites = favorites.filter((id) => id.cardEl == cardItem);
+      // localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
 
       event.target.textContent = 'Add to favorites';
-      event.target.classList.add('removefavourite-button');
+      event.target.classList.remove('removefavourite-button');
     } else {
       favorites.push(oneCard);
       localStorage.setItem('favorites', JSON.stringify(favorites));
@@ -227,15 +234,53 @@ function addToFavorite(event) {
       event.target.classList.add('removefavourite-button');
     }
   }
-}
 
-//
+
+
+  }
+
+
+
+
+
+
+
+
+
+
+//     const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
 
 //     if (event.target.classList.contains('removefavourite-button')) {
-//       const updatedFavorites = favorites.filter((id) => id !== cardItem);
-//       localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
+//       console.log('bye')
+//       // const updatedFavorites = favorites.filter((element) => element.cardEl != cardItem);
+//       // console.log(updatedFavorites);
+//       // localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
 
 //       event.target.textContent = 'Add to favorites';
-//       event.target.classList.remove('removefavourite-button');
+//       // event.target.classList.add('favourite-button');
+//       // event.target.classList.remove('removefavourite-button');
+
 //     }
+//     if (event.target.classList.contains('favourite-button')) {
+//       console.log('hi')
+//       // favorites.push(oneCard);
+//       // localStorage.setItem('favorites', JSON.stringify(favorites));
+
+//       event.target.textContent = 'Remove from favorites';
+//       event.target.classList.remove('favourite-button');
+//       event.target.classList.add('removefavourite-button');
+//       // 
+//     }
+//   }
 // }
+
+// //
+
+// //     if (event.target.classList.contains('favourite-button')) {
+// //       const updatedFavorites = favorites.filter((id) => id !== cardItem);
+// //       localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
+
+// //       event.target.textContent = 'Add to favorites';
+// //       event.target.classList.remove('removefavourite-button');
+// //     }
+
