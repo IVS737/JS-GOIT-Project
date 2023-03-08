@@ -20,11 +20,12 @@ const options = {
         console.log('Please choose a date in the future');
         // StartBtn.disabled = true;
       }
-      else{console.log(Value);
-        chosenYear = selectedDates[0].getFullYear();
-        chosenMonth = selectedDates[0].getMonth() + 1;
-        console.log(chosenMonth);
-        chosenDay= selectedDates[0].getDate();
+      else{
+        // console.log(Value);
+         const chosenYear = selectedDates[0].getFullYear();
+         const chosenMonth = selectedDates[0].getMonth() + 1;
+        
+        const chosenDay= selectedDates[0].getDate();
       fullDate = `${chosenYear}-${addLeadingZero(chosenMonth)}-${addLeadingZero(chosenDay)}`;
 
     //   console.log(fullDate);
@@ -45,7 +46,7 @@ const options = {
       }
     else if(Value.length ===0){ 
       LogNews.NewDate = localStorage.getItem("date");
-      console.log(LogNews.NewDate);
+    //   console.log(LogNews.NewDate);
       LogNews.getdatelist().then((data) => {makeMarkup(data.response.docs)});
     }
     }}
