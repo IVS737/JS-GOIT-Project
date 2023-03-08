@@ -1,54 +1,84 @@
+body.darkTheme {
+  background-color: $background-dark-color;
+  color: $background-color;
 
-body.darkTheme{
-
-    background-color:$background-dark-color; 
-    color: $background-color ;
-
-     & .header{
-        border: 1px solid $background-color;
-    }
-
-      & .header-logo-text{
-          color: $background-color;
-   }
-      
-     & .header-search-input{
-        border: 1px solid $background-color;
-    }
-
-    & .header-search-input::placeholder {
-        color: $background-color;
-    }
-    
-    & .header-icon-search{
-          fill:$background-color; 
-    }
-    
-    & .description__filter__calendar{
-      color: $background-color;
-    }
-    
-    & .theme__light{
-        color: $background-color;
-    }
-
-    & .theme__dark{
-        color: $primary-blue-color;
-    }
-
-    & .sun {
-      fill:none ;
-      stroke: $primary-grey-color;
+  .sun {
+    fill: $primary-blue-color;
   }
 
-    & .moon{
-      fill:none;
-      stroke: $primary-blue-color;
+  .moon {
+    fill: $primary-grey-color;
   }
 
-  .withoutnews-title{
+  .header {
+    border-bottom: 1px solid rgba(244, 244, 244, 0.2);
+    background-color: $background-dark-color;
+  }
+
+  .header-logo-text {
     color: $background-color;
   }
-      
-}
+
+  .header-search-input {
+    border: 1px solid $background-color;
+    color: $background-color;
+  }
+
+  .header-search-input::placeholder {
+    color: $background-color;
+  }
+
+  .header-icon-search {
+    fill: $background-color;
+  }
+
+  .description__filter__calendar {
+    color: $background-color;
+  }
+
+  .theme__light {
+    color: $background-color;
+    opacity: 0.4;
+  }
+
+  .theme__dark {
+    color: $primary-blue-color;
+  }
+
+
+
+  .withoutnews-title {
+    color: $background-color;
+  }
+
+  .card-news-title {
+    color: $background-color;
+  }
+
+  .card-news-description {
+    color: $background-color;
+  }
+
+  .category__list__btn:active,
+  .category__list__btn:focus,
+  .category__list__btn:hover {
+        background-color: $primary-blue-color;
+        color:$primary-white-color; 
+  } 
+
+    .category__active-btn {
+      background-color: $primary-blue-color;
+      color: $primary-white-color;
+    }
+
+    .calendar{
+          background-color: $background-dark-color;
+          color: $background-color;
+          border: 1px solid #F4F4F4;
+        }
+    .calendar__arrowSvg{
+      fill:$primary-white-color ;
+    }
+  }
+
 
