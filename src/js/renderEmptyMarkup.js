@@ -11,8 +11,9 @@ const refs = {
     openInputButton: document.querySelector('.header-button-opensearch'),
   withoutNewsContainer: document.querySelector('.container__error'),
     newsList: document.querySelector('.wrapper__list'),
+    weatherContainer: document.querySelector('.news__weather')
 }
-const { form, input, submitButton, openInputButton, withoutNewsContainer, newsList } = refs;
+const { form, input, submitButton, openInputButton, withoutNewsContainer, newsList, weatherContainer } = refs;
 
 
 export default function createEmptyMarkup() {

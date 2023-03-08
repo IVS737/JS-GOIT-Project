@@ -33,6 +33,7 @@
 }
 
 .filter__calendar__container {
+  position: relative;
   @media screen and (min-width: 1280px) {
     margin-right: 36px;
   }
