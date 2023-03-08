@@ -2,6 +2,7 @@ let debounce = require('lodash.debounce');
 import NewsApiService from './fetchNews';
 const fetchNews = new NewsApiService();
 import RenderCategory from './renderCategoryList';
+import changeFilterName from '../filteredPagination';
 const render = new RenderCategory();
 
 export default (() => {
@@ -53,44 +54,42 @@ export default (() => {
 
       currentBtn(e);
 
-      fetchNews.changeCategory = e.target.dataset.name;
-      categoryListResult();
+      changeFilterName(e.target.dataset.name);
+      // categoryListResult();
     }
-
   }
-  function categoryListResult() {
-    const newsBox = document.querySelector('.news')
-    fetchNews
-      .fetchNewsListOfCategory()
-      .then((prom) => {
-        return prom.results;
-      })
-      .then((newsArray) => {
-        if(newsBox.style.display === "none"){
-          newsBox.style.display = "block"
-        }
-       
-        const articles = newsArray.map((result) => {
-          const date = result.published_date.toString().slice(0, 10).replace(`-`, '/').replace(`-`, '/');
-          return {
-            title: result.title,
-            image: imageValidation(result),
-            description: result.abstract,
-            date: new Date(date),
-            url: result.url,
-            section: result.section,
-            uri: result.uri,
-          };
-        });
+  // function categoryListResult() {
+  //   const newsBox = document.querySelector('.news');
+  //   fetchNews
+  //     .fetchNewsListOfCategory()
+  //     .then((prom) => {
+  //       return prom.results;
+  //     })
+  //     .then((newsArray) => {
+  //       if (newsBox.style.display === 'none') {
+  //         newsBox.style.display = 'block';
+  //       }
 
-        render.makeMarkup(articles);
-      })
-      .catch((error) => {
-        
-        newsBox.style.display = "none"
-        render.emptyMarkup();
-      });
-  }
+  //       const articles = newsArray.map((result) => {
+  //         const date = result.published_date.toString().slice(0, 10).replace(`-`, '/').replace(`-`, '/');
+  //         return {
+  //           title: result.title,
+  //           image: imageValidation(result),
+  //           description: result.abstract,
+  //           date: new Date(date),
+  //           url: result.url,
+  //           section: result.section,
+  //           uri: result.uri,
+  //         };
+  //       });
+
+  //       render.makeMarkup(articles);
+  //     })
+  //     .catch((error) => {
+  //       newsBox.style.display = 'none';
+  //       render.emptyMarkup();
+  //     });
+  // }
   function imageValidation(data) {
     if (!data.multimedia) {
       return 'https://st.depositphotos.com/1000558/53737/v/1600/depositphotos_537370102-stock-illustration-image-photo-sign-symbol-template.jpg';
@@ -142,7 +141,7 @@ export default (() => {
       return;
     }
 
-    fetchNews.changeCategory = e.target.dataset.name;
+    changeFilterName(e.target.dataset.name);
     categoryListResult();
 
     currentBtn(e);
