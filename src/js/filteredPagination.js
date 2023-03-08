@@ -53,11 +53,13 @@ function newsListRender(newsArray) {
 
   const articles = newsArray.map((result) => {
     const date = result.pub_date.toString().slice(0, 10).replace(`-`, '/').replace(`-`, '/');
+    const subTitle = result.abstract.slice(0, 100) + `...`;
+    const title = result.headline.main.slice(0, 60) + `...`;
 
     return {
-      title: result.headline.main,
+      title: title,
       image: imageValidation(result),
-      description: result.abstract,
+      description: subTitle,
       date: new Date(date),
       url: result.web_url,
       section: result.section_name,
