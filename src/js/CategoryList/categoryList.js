@@ -90,13 +90,13 @@ export default (() => {
   //       render.emptyMarkup();
   //     });
   // }
-  function imageValidation(data) {
-    if (!data.multimedia) {
-      return 'https://st.depositphotos.com/1000558/53737/v/1600/depositphotos_537370102-stock-illustration-image-photo-sign-symbol-template.jpg';
-    } else if (data.multimedia.length > 0) {
-      return data.multimedia[2].url;
-    }
-  }
+  // function imageValidation(data) {
+  //   if (!data.multimedia) {
+  //     return 'https://st.depositphotos.com/1000558/53737/v/1600/depositphotos_537370102-stock-illustration-image-photo-sign-symbol-template.jpg';
+  //   } else if (data.multimedia.length > 0) {
+  //     return data.multimedia[2].url;
+  //   }
+  // }
 
   function currentBtn(e) {
     const currentActiveBtn = document.querySelector('.category__active-btn');
@@ -142,7 +142,7 @@ export default (() => {
     }
 
     changeFilterName(e.target.dataset.name);
-    categoryListResult();
+    // categoryListResult();------------------------------------------прибрати цю строчку
 
     currentBtn(e);
     svgToggle(e);

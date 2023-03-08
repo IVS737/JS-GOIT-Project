@@ -1,5 +1,7 @@
 import axios from 'axios';
 import { format } from 'date-fns';
+import RenderCategory from './CategoryList/renderCategoryList';
+const render = new RenderCategory();
 const apiKey = 'kAFi92vRzv66C7DQ6coSA3C5NLbSIILk';
 const searchForm = document.querySelector('.header-search-form');
 const searchInput = document.querySelector('.header-search-input');
@@ -16,18 +18,36 @@ function setName(name) {
 }
 
 async function searchArticles() {
+  const newsBox = document.querySelector('.news');
+  const paginationBox = document.getElementById('paginator');
+  
   try {
     const response = await axios.get(
       `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${searchInput.value}&api-key=${apiKey}&page=${
         currentPage - 1
       }`,
     );
-    const articles = response.data.response.docs.slice(0, 8); // 8 articles
-    totalPages = Math.ceil(response.data.response.meta.hits / 1000);
-    makeMarkup(articles); ///? Тут рендер карток, передати аргументом articles
-    displayPagination();
+    
+    if (response.data.response.docs.length === 0) {
+      paginationBox.style.display = 'none';
+      newsBox.style.display = 'none';
+      render.emptyMarkup();
+      return;
+    }
+    newsBox.style.display === 'none' && (newsBox.style.display = 'block');
+    paginationBox.style.display === 'none'&& (paginationBox.style.display = 'block');
+        const articles = response.data.response.docs.slice(0, 8); // 8 articles
+
+        totalPages = Math.ceil(response.data.response.meta.hits / 1000);
+
+        makeMarkup(articles); 
+        displayPagination();
   } catch (error) {
-    console.error(error);
+    console.log(error);
+    paginationBox.style.display = 'none';
+    newsBox.style.display = 'none';
+    render.emptyMarkup();
+    return;
   }
 }
 

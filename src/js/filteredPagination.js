@@ -15,19 +15,34 @@ export default function changeFilterName(name) {
   searchByFilter();
 }
 async function searchByFilter() {
-  const response = await axios.get(
-    `https://api.nytimes.com/svc/search/v2/articlesearch.json?limit=8&fq=news_desk:(${filterNameByDefaul})&api-key=71s3mUNKm6z5TjxLJwNR66epaTNpAApf&page=${
-      currentPage - 1
-    }`,
-  );
+  const newsBox = document.querySelector('.news');
+  const paginationBox = document.getElementById('paginator');
+  try {
+    const response = await axios.get(
+      `https://api.nytimes.com/svc/search/v2/articlesearch.json?limit=8&fq=news_desk:(${filterNameByDefaul})&api-key=71s3mUNKm6z5TjxLJwNR66epaTNpAApf&page=${
+        currentPage - 1
+      }`,
+    );
+    newsBox.style.display === 'none' && (newsBox.style.display = 'block');
+    paginationBox.style.display === 'none'&& (paginationBox.style.display = 'block');
 
-  const articles = response.data.response.docs.slice(0, 8); // 8 articles
+         const articles = response.data.response.docs.slice(0, 8); // 8 articles
 
-  totalPages = Math.ceil(response.data.response.meta.hits / 10);
+         totalPages = Math.ceil(response.data.response.meta.hits / 10);
+       
+         newsListRender(articles);
+       
+         displayPagination();
+        
+  } catch (error) {
+    paginationBox.style.display = 'none'
+    newsBox.style.display = 'none';
+    render.emptyMarkup();
+    return;
+  }
 
-  newsListRender(articles);
 
-  displayPagination();
+
 }
 
 function newsListRender(newsArray) {
