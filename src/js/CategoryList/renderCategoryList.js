@@ -4,6 +4,18 @@ import {format } from 'date-fns';
 import imagesDesc from '../../images/notfoundDesc.png';
 import imagesTab from '../../images/notfoundTab.png';
 import imagesMob from '../../images/notfoundMob.png';
+const refs = {
+  form: document.querySelector('.header-search-form'),
+  input: document.querySelector('.header-search-input'),
+  submitButton: document.querySelector('.header-button-makesearch'),
+  openInputButton: document.querySelector('.header-button-opensearch'),
+  withoutNewsContainer: document.querySelector('.container__error'),
+  newsList: document.querySelector('.wrapper__list'),
+  weatherContainer: document.querySelector('.news__weather')
+};
+
+const { form, input, submitButton, openInputButton, withoutNewsContainer, newsList, weatherContainer } = refs;
+
 
 export default class RenderCategory {
    makeMarkup(array) {

@@ -26,7 +26,7 @@ const options = {
          const chosenMonth = selectedDates[0].getMonth() + 1;
         
         const chosenDay= selectedDates[0].getDate();
-      fullDate = `${chosenYear}-${addLeadingZero(chosenMonth)}-${addLeadingZero(chosenDay)}`;
+        const fullDate = `${chosenYear}-${addLeadingZero(chosenMonth)}-${addLeadingZero(chosenDay)}`;
 
     //   console.log(fullDate);
       localStorage.setItem("date", fullDate);
