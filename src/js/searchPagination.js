@@ -20,6 +20,7 @@ function setName(name) {
 async function searchArticles() {
   const newsBox = document.querySelector('.news');
   const paginationBox = document.getElementById('paginator');
+  const newsError = document.querySelector('.container__error')
   
   try {
     const response = await axios.get(
@@ -29,11 +30,13 @@ async function searchArticles() {
     );
     
     if (response.data.response.docs.length === 0) {
+      newsError.style.display === 'none' && (newsError.style.display = 'block');
       paginationBox.style.display = 'none';
       newsBox.style.display = 'none';
       render.emptyMarkup();
       return;
     }
+    newsError.style.display = 'none';
     newsBox.style.display === 'none' && (newsBox.style.display = 'block');
     paginationBox.style.display === 'none'&& (paginationBox.style.display = 'block');
         const articles = response.data.response.docs.slice(0, 8); // 8 articles
@@ -44,6 +47,7 @@ async function searchArticles() {
         displayPagination();
   } catch (error) {
     console.log(error);
+    newsError.style.display === 'none' && (newsError.style.display = 'block');
     paginationBox.style.display = 'none';
     newsBox.style.display = 'none';
     render.emptyMarkup();
