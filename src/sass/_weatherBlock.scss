@@ -55,6 +55,8 @@ background:  #4440f6;
     padding-right: 8px;
     width: 45%;
 
+    justify-content: flex-end;
+
     transition-property: height, width, background-color;
     transition: 250ms top cubic-bezier(0.4, 0, 0.2, 1);transition: 250ms top cubic-bezier(0.4, 0, 0.2, 1);
 }

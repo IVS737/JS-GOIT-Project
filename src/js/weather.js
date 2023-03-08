@@ -98,7 +98,7 @@ const fetchWeatherForecast = async (lat, lon, units='metric') => {
 
 // Weather City
 const fetchWeatherForecastCity = async (
-    cityName = 'Kyiv',
+    cityName = 'Helsinki',
     units = "metric") => {
  
     const { data } = await axios.get(`${URL2}?q=${cityName}&units=${units}&APPID=${API_KEY}`);
