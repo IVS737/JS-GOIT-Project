@@ -17,12 +17,14 @@ export default function changeFilterName(name) {
 async function searchByFilter() {
   const newsBox = document.querySelector('.news');
   const paginationBox = document.getElementById('paginator');
+  const newsError = document.querySelector('.container__error')
   try {
     const response = await axios.get(
       `https://api.nytimes.com/svc/search/v2/articlesearch.json?limit=8&fq=news_desk:(${filterNameByDefaul})&api-key=71s3mUNKm6z5TjxLJwNR66epaTNpAApf&page=${
         currentPage - 1
       }`,
     );
+    newsError.style.display = 'none';
     newsBox.style.display === 'none' && (newsBox.style.display = 'block');
     paginationBox.style.display === 'none'&& (paginationBox.style.display = 'block');
 
@@ -35,6 +37,7 @@ async function searchByFilter() {
          displayPagination();
         
   } catch (error) {
+    newsError.style.display === 'none' && (newsError.style.display = 'block');
     paginationBox.style.display = 'none'
     newsBox.style.display = 'none';
     render.emptyMarkup();
