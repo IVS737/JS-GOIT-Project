@@ -11,10 +11,11 @@ const refs = {
   openInputButton: document.querySelector('.header-button-opensearch'),
   withoutNewsContainer: document.querySelector('.container__error'),
   newsList: document.querySelector('.wrapper__list'),
-  weatherContainer: document.querySelector('.news__weather')
+  weatherContainer: document.querySelector('.news__weather'),
+  newsContainer: document.querySelector('.news'),
 };
 
-const { form, input, submitButton, openInputButton, withoutNewsContainer, newsList, weatherContainer } = refs;
+const { form, input, submitButton, openInputButton, withoutNewsContainer, newsList, weatherContainer, newsContainer } = refs;
 
 
 const KEY = 'kAFi92vRzv66C7DQ6coSA3C5NLbSIILk';
@@ -76,6 +77,7 @@ function createEmptyMarkup() {
                   />
                 </picture>`;
   weatherContainer.innerHTML = "";
+  newsContainer.style.display = "none";
   withoutNewsContainer.innerHTML = emptyMarkup;
 }
 
