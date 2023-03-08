@@ -24,7 +24,7 @@ async function searchByFilter() {
         currentPage - 1
       }`,
     );
-    newsError.style.display = 'none';
+    // newsError.style.display = 'none';
     newsBox.style.display === 'none' && (newsBox.style.display = 'block');
     paginationBox.style.display === 'none'&& (paginationBox.style.display = 'block');
 
