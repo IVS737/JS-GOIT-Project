@@ -144,9 +144,19 @@
 .icon-mob-menu-arrow {
     fill: transparent;
     margin-left: auto;
+    display: none;
 
     @media screen and (min-width:768px){
     display: none;
+    }
+}
+
+.header-link.current {
+   @media screen and (max-width:767px){
+     
+    & .icon-mob-menu-arrow {
+      display: block;
+    }
     }
 }
 

@@ -1,16 +1,16 @@
 import axios from 'axios';
-
 import RenderCategory from './CategoryList/renderCategoryList';
 const render = new RenderCategory();
 
-const searchForm = document.querySelector('.header-search-form');
 const paginator = document.getElementById('paginator');
 
-let currentPage = 1;
+let currentPage = 0;
 let totalPages = 0;
 let filterNameByDefaul = 'sports';
-searchByFilter();
+// searchByFilter();
+displayPagination()
 export default function changeFilterName(name) {
+  currentPage = 0;
   filterNameByDefaul = name;
   searchByFilter();
 }
@@ -21,16 +21,17 @@ async function searchByFilter() {
   try {
     const response = await axios.get(
       `https://api.nytimes.com/svc/search/v2/articlesearch.json?limit=8&fq=news_desk:(${filterNameByDefaul})&api-key=71s3mUNKm6z5TjxLJwNR66epaTNpAApf&page=${
-        currentPage - 1
+        currentPage
       }`,
     );
-    // newsError.style.display = 'none';
+    newsError.style.display = 'none';
     newsBox.style.display === 'none' && (newsBox.style.display = 'block');
     paginationBox.style.display === 'none'&& (paginationBox.style.display = 'block');
 
          const articles = response.data.response.docs.slice(0, 8); // 8 articles
 
          totalPages = Math.ceil(response.data.response.meta.hits / 10);
+    totalPages = totalPages > 200 ? 200 : totalPages;
        
          newsListRender(articles);
        
@@ -43,9 +44,6 @@ async function searchByFilter() {
     render.emptyMarkup();
     return;
   }
-
-
-
 }
 
 function newsListRender(newsArray) {
@@ -101,11 +99,12 @@ function displayPagination() {
   paginatorBtnTitleNext.classList.add('paginator__button-title-next');
   paginatorBtnTitleNext.innerText = 'Next';
   nextButton.classList.add('paginator__button', 'paginator__button-nav');
-
+ 
   if (currentPage >= totalPages) {
     nextButton.classList.add('isDisabled');
     nextButton.setAttribute('disabled', true);
   }
+
 
   nextButton.append(paginatorBtnTitleNext);
 
@@ -117,14 +116,17 @@ function displayPagination() {
 
   let startPage, endPage;
   let maxVisibleButtons = 2;
+
   if (window.innerWidth >= 425) {
     maxVisibleButtons = 3;
-  }
+
   if (totalPages <= maxVisibleButtons) {
     startPage = 1;
     endPage = totalPages;
-  } else {
+  } 
+  else {
     const halfVisibleButtons = Math.floor((maxVisibleButtons - 1) / 2);
+
     if (currentPage <= halfVisibleButtons + 1) {
       startPage = 1;
       endPage = maxVisibleButtons;
@@ -158,6 +160,10 @@ function displayPagination() {
   }
 
   for (let i = startPage; i <= endPage; i++) {
+    // ---------------------------------------------------------add for max create button = 200
+    if (i === 200) {
+      break;
+    }
     let numButtons = 0;
     const pageButton = document.createElement('button');
     pageButton.innerText = i;
@@ -185,7 +191,9 @@ function displayPagination() {
     paginator.appendChild(dotsButton);
 
     const lastPageButton = document.createElement('button');
+
     lastPageButton.innerText = totalPages;
+
     lastPageButton.classList.add('paginator__button');
     lastPageButton.addEventListener('click', () => {
       currentPage = totalPages;
@@ -220,10 +228,4 @@ function displayPagination() {
     }
   }
 
-  // searchForm.addEventListener('submit', (event) => {
-  //   event.preventDefault();
-  //   currentPage = 1;
-  //   searchByFilter();
-  //   window.scrollTo(0, 0);
-  // });
-}
+}}

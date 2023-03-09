@@ -8,13 +8,15 @@ const searchInput = document.querySelector('.header-search-input');
 const paginator = document.getElementById('paginator');
 const newsList = document.querySelector('.wrapper__list');
 
-let currentPage = 1;
+let currentPage = 0;
 let totalPages = 0;
 
 let searchName = '';
 
 function setName(name) {
+  currentPage = 0;
   searchName = name;
+  searchArticles()
 }
 
 async function searchArticles() {
@@ -25,7 +27,7 @@ async function searchArticles() {
   try {
     const response = await axios.get(
       `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${searchInput.value}&api-key=${apiKey}&page=${
-        currentPage - 1
+        currentPage
       }`,
     );
     
@@ -42,6 +44,7 @@ async function searchArticles() {
         const articles = response.data.response.docs.slice(0, 8); // 8 articles
 
         totalPages = Math.ceil(response.data.response.meta.hits / 1000);
+      totalPages = totalPages > 200 ? 200 : totalPages;
 
         makeMarkup(articles); 
         displayPagination();
@@ -129,6 +132,7 @@ function displayPagination() {
     nextButton.setAttribute('disabled', true);
   }
 
+
   nextButton.append(paginatorBtnTitleNext);
 
   nextButton.addEventListener('click', () => {
@@ -180,6 +184,7 @@ function displayPagination() {
   }
 
   for (let i = startPage; i <= endPage; i++) {
+
     let numButtons = 0;
     const pageButton = document.createElement('button');
     pageButton.innerText = i;
@@ -207,10 +212,12 @@ function displayPagination() {
     paginator.appendChild(dotsButton);
 
     const lastPageButton = document.createElement('button');
+
     lastPageButton.innerText = totalPages;
+
     lastPageButton.classList.add('paginator__button');
     lastPageButton.addEventListener('click', () => {
-      currentPage = totalPages;
+      currentPage = totalPages > 200 ? 200 : totalPages;
       window.scrollTo(0, 0);
       searchArticles();
     });
@@ -218,7 +225,9 @@ function displayPagination() {
     paginator.appendChild(nextButton);
   } else if (currentPage !== totalPages) {
     const lastPageButton = document.createElement('button');
+
     lastPageButton.innerText = totalPages;
+
     lastPageButton.classList.add('paginator__button');
     paginator.appendChild(lastPageButton);
     paginator.appendChild(nextButton);
