@@ -22,7 +22,7 @@ function createGetCardList() {
       <h3 class="card-news-title">${element.title}</h3>
       <p class="card-news-description">${element.description}</p>
       <div class="card-info-container">
-        <p class="card-datetime">${element.data}</p>
+        <p class="card-datetime">${element.date}</p>
         <a class="card-link" href="${element.link}" target="_blank" rel="noopener noreferrer nofollow">Read more</a>
       </div>
     </div>
