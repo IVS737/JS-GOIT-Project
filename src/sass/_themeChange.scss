@@ -24,6 +24,7 @@ body.darkTheme {
     color: $background-color;
   }
 
+
   .header-search-input::placeholder {
     color: $background-color;
   }
@@ -38,7 +39,50 @@ body.darkTheme {
 
   .theme__light {
     color: $background-color;
+    opacity: 0.4;
   }
+
+  .theme__dark {
+    color: $primary-blue-color;
+  }
+
+
+
+  .withoutnews-title {
+    color: $background-color;
+  }
+
+  .card-news-title {
+    color: $background-color;
+  }
+
+  .card-news-description {
+    color: $background-color;
+  }
+
+  .category__list__btn:active,
+  .category__list__btn:focus,
+  .category__list__btn:hover {
+        background-color: $primary-blue-color;
+        color:$primary-white-color; 
+  } 
+
+    .category__active-btn {
+      background-color: $primary-blue-color;
+      color: $primary-white-color;
+    }
+
+    .calendar{
+          background-color: $background-dark-color;
+          color: $background-color;
+          border: 1px solid #F4F4F4;
+        }
+    .calendar__arrowSvg{
+      fill:$primary-white-color ;
+    }
+  }
+
+
 
   .theme__dark {
     color: $primary-blue-color;
