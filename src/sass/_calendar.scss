@@ -1,5 +1,32 @@
+
+.filter__calendar__container{
+  &:hover{
+    .calendar{
+      background-color: $primary-blue-color;
+      border-color: $primary-blue-color;
+      transition: 0.5s ease-in-out;
+      color: #FFFFFF;
+      opacity: 100;
+    }
+  .calendar__arrowSvg{
+    fill: #FFFFFF;
+    
+    transform: translate(0, -50%) rotate(180deg);
+    // transform: rotate(180deg);
+    transition: 0.5s ease-in-out;
+  }
+.calendar__librarySvg{
+  fill: #FFFFFF;
+  transition: 0.5s ease-in-out;
+}
+  }
+}
+
 .calendar {
   border: 1px solid #111321;
+  color: #111321;
+
+opacity: 0.4;
   border-radius: 20px;
   width: 151px;
   height: 31px;
@@ -16,25 +43,28 @@
     width: 168px;
   }
 
-  &:hover,
-  &:focus {
-    background-color: $primary-blue-color;
-    border-color: $primary-blue-color;
-    transition: 0.5s ease-in-out;
-  }
+  // &:hover,
+  // &:focus {
+  //   background-color: $primary-blue-color;
+  //   border-color: $primary-blue-color;
+  //   transition: 0.5s ease-in-out;
+    
+  // }
 
-  &:hover &__librarySvg,
-  &:focus &__librarySvg {
-    fill: $primary-white-color;
-    transition: 0.5s ease-in-out;
-  }
+  // &:hover &__librarySvg,
+  // &:focus &__librarySvg {
+  //   fill: #FFFFFF;
+  //   transition: 0.5s ease-in-out;
 
-  &:hover &__arrowSvg,
-  &:focus &__arrowSvg {
-    fill: $primary-white-color;
-    transform: rotate(180deg);
-    transition: 0.5s ease-in-out;
-  }
+  // }
+
+  // &:hover &__arrowSvg,
+  // &:focus &__arrowSvg {
+  //   fill: #FFFFFF;
+  
+  //   transform: matrix(0, 1, 1, 0, 0, 0);
+  //   transition: 0.5s ease-in-out;
+  // }
 
   &__librarySvg {
     position: absolute;
@@ -42,19 +72,21 @@
     top: 50%;
   transform: translate(0, -50%);
     display: block;
-    fill: $primary-blue-color;
+    fill: 
+    #4440F6;
     width: 19px;
     height: 19px;
   }
 
   &__arrowSvg {
     position: absolute;
+  
     right: 12px;
     top: 50%;
     transform: translate(0, -50%);
     display: block;
-    fill: $primary-grey-color;
-    width: 9px;
+    fill: #A2A2A2;
+    width: 12px;
     height: 15px;
     cursor: url("../images/cursor.svg"), auto;
   }
@@ -65,3 +97,5 @@
     cursor: pointer;
   }
 }
+
+

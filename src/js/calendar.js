@@ -24,10 +24,14 @@ const refs = {
   
   const { form, input, submitButton, openInputButton, withoutNewsContainer, newsList, weatherContainer } = refs;
   
-  
+
 localStorage.removeItem("date");
 const options = {
     dateFormat: "Y-m-d",
+    conjunction:"YYYY-MM-DD",
+    maxDate: new Date(),
+    defaultDate: new Date(),
+    shorthand: true,
     // altFormat: "DD-MM-YYYY",
     minuteIncrement: 1,
     onClose(selectedDates) { 
