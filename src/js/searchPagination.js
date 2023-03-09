@@ -14,7 +14,7 @@ let totalPages = 0;
 let searchName = '';
 
 function setName(name) {
-  currentPage = 0;
+  currentPage = 1;
   searchName = name;
   searchArticles()
 }
@@ -40,10 +40,10 @@ async function searchArticles() {
     }
     newsError.style.display = 'none';
     newsBox.style.display === 'none' && (newsBox.style.display = 'block');
-    paginationBox.style.display === 'none'&& (paginationBox.style.display = 'block');
+    paginationBox.style.display === 'none'&& (paginationBox.style.display = 'flex');
         const articles = response.data.response.docs.slice(0, 8); // 8 articles
 
-        totalPages = Math.ceil(response.data.response.meta.hits / 1000);
+      totalPages = Math.ceil(response.data.response.meta.hits / 1000);
       totalPages = totalPages > 200 ? 200 : totalPages;
 
         makeMarkup(articles); 
@@ -168,7 +168,7 @@ function displayPagination() {
     firstPageButton.innerText = 1;
     firstPageButton.classList.add('paginator__button');
     firstPageButton.addEventListener('click', () => {
-      currentPage = 1;
+      currentPage = 0;
       window.scrollTo(0, 0);
       searchArticles();
     });
