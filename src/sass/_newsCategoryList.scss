@@ -73,11 +73,17 @@
     
         color: #4440F7;
     }
-    &>li>a:hover,
+
     &>li>a:focus{
         cursor: pointer;
         text-decoration: underline;
     }
+
+    &>li>a:hover {
+    cursor: url("../images/cursor.svg"), auto;
+    text-decoration: underline;
+    }
+    
     &__btn{
         display: flex;
         flex-direction: row;
@@ -154,6 +160,7 @@
     color: #FFFFFF;
 }
 
+
 .category__is-hidden{
     z-index: 0;
     display: none;
@@ -176,4 +183,8 @@
     .category__list__btn__wrap{
         display: none;
     }
+}
+
+.category__list__btn:hover {
+cursor: url("../images/cursor.svg"), auto;
 }
