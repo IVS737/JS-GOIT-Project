@@ -8,7 +8,7 @@ import _debounce from 'lodash.debounce';
 const URL = 'https://api.openweathermap.org/data/2.5/weather';
 const URL2 = 'https://api.openweathermap.org/data/2.5/forecast';
 
-const STORAGE_KEY = 'city-input';
+const STORAGE_KEY_WEATHER = 'city-input';
 const API_KEY = 'be0f81a8f9f4c462088b51501fa506a7'
 
 const weatherTemp = document.querySelector('#weather-block-temp');
@@ -85,9 +85,6 @@ const renderWeather = (weather) => {
 
 
 const renderWeatherCityInput = (weather) => {
-
-
-  console.log('покажи погоду')
   
   renderWeather(weather)
   weatherName.classList.add("weatherBlock_hidden");
@@ -213,7 +210,7 @@ const fetchWeatherForecastCity = async (
                   if(event.target?.classList.contains("weatherBlock_seach")){    
                     
                     const input = seachEl.value.trim();
-                    localStorage.setItem(STORAGE_KEY, input);
+                    localStorage.setItem(STORAGE_KEY_WEATHER, input);
                     
                       fetchWeatherCity(input)
                       .then(renderWeather)
@@ -228,7 +225,8 @@ const fetchWeatherForecastCity = async (
 
                       document.addEventListener("click", (event)=>{
                         if(event.target?.classList.contains("weatherBlock_weatherBtnInputCity")){        
-                          const savedCityInput = localStorage.getItem(STORAGE_KEY);
+                          const savedCityInput = localStorage.getItem(STORAGE_KEY_WEATHER);
+                          console.log("сохраненный город", savedCityInput)
                           fetchWeatherForecastCity(savedCityInput)
                           .then(renderWeatherForecast)
                                 .catch(error => {});
@@ -239,11 +237,12 @@ const fetchWeatherForecastCity = async (
 
                       }
                           )
-                          seachEl.value =  ``
-                          geoWeatherApp()
+                          
                     }
+                    seachEl.value =  ``
+                    // geoWeatherApp()
                   }            
-                      )
+                  )
 
                   
 
