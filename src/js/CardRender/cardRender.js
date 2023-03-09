@@ -46,7 +46,7 @@ export default function Makemarkup(array) {
 
 
       </div>
-      <h3 class="card-news-title">${data.headline.main}</h3>
+      <h3 class="card-news-title">${title}</h3>
       <p class="card-news-description">${subTitle}</p>
       <div class="card-info-container">
         <p class="card-datetime">${format(new Date(date), 'dd/MM/yyyy')}</p>

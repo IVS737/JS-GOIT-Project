@@ -38,7 +38,7 @@ export default function MakeStartMarkup(array) {
         <button class="favourite-button" type="button" data-action="favourite-button">Add to favorite</button>
 
       </div>
-      <h3 class="card-news-title">${data.title}</h3>
+      <h3 class="card-news-title">${title}</h3>
       <p class="card-news-description">${subTitle}</p>
       <div class="card-info-container">
         <p class="card-datetime">${date}</p>
