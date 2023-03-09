@@ -1,16 +1,16 @@
 import axios from 'axios';
-
 import RenderCategory from './CategoryList/renderCategoryList';
 const render = new RenderCategory();
 
-const searchForm = document.querySelector('.header-search-form');
 const paginator = document.getElementById('paginator');
 
 let currentPage = 1;
 let totalPages = 0;
 let filterNameByDefaul = 'sports';
-searchByFilter();
+// searchByFilter();
+displayPagination()
 export default function changeFilterName(name) {
+  currentPage = 1;
   filterNameByDefaul = name;
   searchByFilter();
 }
@@ -24,7 +24,7 @@ async function searchByFilter() {
         currentPage - 1
       }`,
     );
-    // newsError.style.display = 'none';
+    newsError.style.display = 'none';
     newsBox.style.display === 'none' && (newsBox.style.display = 'block');
     paginationBox.style.display === 'none'&& (paginationBox.style.display = 'block');
 
@@ -43,9 +43,6 @@ async function searchByFilter() {
     render.emptyMarkup();
     return;
   }
-
-
-
 }
 
 function newsListRender(newsArray) {
@@ -101,8 +98,13 @@ function displayPagination() {
   paginatorBtnTitleNext.classList.add('paginator__button-title-next');
   paginatorBtnTitleNext.innerText = 'Next';
   nextButton.classList.add('paginator__button', 'paginator__button-nav');
-
-  if (currentPage >= totalPages) {
+  console.log(currentPage , totalPages);
+  // if (currentPage >= totalPages) {
+  //   nextButton.classList.add('isDisabled');
+  //   nextButton.setAttribute('disabled', true);
+  // }
+  // змінив умову бо для коректної роботи після обможень в 200 кнопок
+  if (currentPage >= 199) {
     nextButton.classList.add('isDisabled');
     nextButton.setAttribute('disabled', true);
   }
@@ -117,14 +119,17 @@ function displayPagination() {
 
   let startPage, endPage;
   let maxVisibleButtons = 2;
+
   if (window.innerWidth >= 425) {
     maxVisibleButtons = 3;
-  }
+  // ---------------------------------------
   if (totalPages <= maxVisibleButtons) {
     startPage = 1;
     endPage = totalPages;
-  } else {
+  } 
+  else {
     const halfVisibleButtons = Math.floor((maxVisibleButtons - 1) / 2);
+
     if (currentPage <= halfVisibleButtons + 1) {
       startPage = 1;
       endPage = maxVisibleButtons;
@@ -158,6 +163,10 @@ function displayPagination() {
   }
 
   for (let i = startPage; i <= endPage; i++) {
+    // ---------------------------------------------------------add for max create button = 200
+    if (i === 200) {
+      break;
+    }
     let numButtons = 0;
     const pageButton = document.createElement('button');
     pageButton.innerText = i;
@@ -177,18 +186,21 @@ function displayPagination() {
   }
 
   if (endPage < totalPages - 1) {
-    const dotsButton = document.createElement('button');
-    dotsButton.classList.add('paginator__button--notbordered');
+    // const dotsButton = document.createElement('button');
+    // dotsButton.classList.add('paginator__button--notbordered');
 
-    dotsButton.innerText = '...';
-    dotsButton.disabled = true;
-    paginator.appendChild(dotsButton);
-
+    // dotsButton.innerText = '...';
+    // dotsButton.disabled = true;
+    // paginator.appendChild(dotsButton);
+//----------------------закоментив dotsButton бо при кліку по послідній сторінкі там все було погано=)
     const lastPageButton = document.createElement('button');
-    lastPageButton.innerText = totalPages;
+    // ------------------------------------------------------------------------add end button value (max 200)
+    lastPageButton.innerText = totalPages > 200 ? 200 : totalPages;
+    // ------------------------------------------------------------------------
     lastPageButton.classList.add('paginator__button');
     lastPageButton.addEventListener('click', () => {
-      currentPage = totalPages;
+    // -------------------------------------------- 
+      currentPage = totalPages > 200 ? 200 : totalPages;
       window.scrollTo(0, 0);
       searchByFilter();
     });
@@ -220,10 +232,4 @@ function displayPagination() {
     }
   }
 
-  // searchForm.addEventListener('submit', (event) => {
-  //   event.preventDefault();
-  //   currentPage = 1;
-  //   searchByFilter();
-  //   window.scrollTo(0, 0);
-  // });
-}
+}}

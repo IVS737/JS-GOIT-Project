@@ -18,7 +18,7 @@ inputEl.addEventListener('click', function(){
 function addDarkClass() {
     try {
       if (localStorage.getItem('theme') === 'dark') {
-        bodyTheme.classList.add('darkTheme');
+        bodyEl.classList.add('darkTheme');
         inputEl.checked = true;
       }
      
