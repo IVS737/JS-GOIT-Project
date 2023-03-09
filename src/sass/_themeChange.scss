@@ -69,29 +69,27 @@ body.darkTheme {
   .category__list__btn:active,
   .category__list__btn:focus,
   .category__list__btn:hover {
+    background-color: $primary-blue-color;
+    color: $primary-white-color;
+  }
 
-        background-color: $primary-blue-color;
-        color:$primary-white-color; 
-  } 
+  .category__active-btn {
+    background-color: $primary-blue-color;
+    color: $primary-white-color;
+  }
 
-    .category__active-btn {
-      background-color: $primary-blue-color;
-      color: $primary-white-color;
-    }
+  .calendar {
+    background-color: $background-dark-color;
+    color: $background-color;
+    border: 1px solid #f4f4f4;
+  }
 
-    .calendar{
-          background-color: $background-dark-color;
-          color: $background-color;
-          border: 1px solid #F4F4F4;
-        }
-
-    .calendar__arrowSvg{
-      fill:$primary-white-color ;
-    }
+  .calendar__arrowSvg {
+    fill: $primary-white-color;
+  }
 
   .theme__dark {
     color: $primary-blue-color;
-
   }
 
   .calendar {
@@ -128,7 +126,4 @@ body.darkTheme {
 
 .card-news-description {
   color: $background-color;
-}
-
-
 }
