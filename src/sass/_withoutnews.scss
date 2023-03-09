@@ -1,0 +1,26 @@
+.withoutnews-title {
+    margin-top: 40px;
+    margin-bottom: 40px;
+    
+    font-weight: 700;
+    font-size: 20px;
+    text-align: center;
+    letter-spacing: -0.01em;
+    color: $primary-black-color;
+
+    @media screen and (min-width: 768px) {
+        margin-top: 88px;
+        font-size: 40px;
+        line-height: 1.38;
+    }
+
+    @media screen and (min-width: 1280px) {
+        margin-top: 121px;
+    }
+}
+
+.withoutnews-image {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}

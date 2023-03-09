@@ -24,6 +24,7 @@ body.darkTheme {
     color: $background-color;
   }
 
+
   .header-search-input::placeholder {
     color: $background-color;
   }
@@ -82,3 +83,39 @@ body.darkTheme {
   }
 
 
+
+  .theme__dark {
+    color: $primary-blue-color;
+  }
+
+  .sun {
+    fill: none;
+    stroke: $primary-grey-color;
+  }
+
+  .moon {
+    fill: none;
+    stroke: $primary-blue-color;
+  }
+
+  .withoutnews-title {
+    color: $background-color;
+  }
+
+  .card-news-title {
+    color: $background-color;
+  }
+
+  .card-news-description {
+    color: $background-color;
+  }
+
+  .category__list__btn {
+    background-color: $background-color;
+
+    .category__active-btn {
+      background-color: $primary-blue-color;
+      color: $primary-white-color;
+    }
+  }
+}

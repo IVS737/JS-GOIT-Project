@@ -1,0 +1,119 @@
+html {
+  scroll-behavior: smooth;
+}
+
+.pagination-list {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  width: 288px;
+  margin: 40px auto;
+
+  list-style: none;
+
+  @media screen and (min-width: 425px) {
+    width: 415px;
+    font-size: 16px;
+    gap: 10px;
+    margin: 60px auto;
+  }
+}
+
+.paginator__button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 28px;
+  height: 28px;
+  padding: 4px 12px;
+  font-weight: 500;
+  cursor: pointer;
+  border: 1px solid $primary-blue-color;
+  border-radius: 2px;
+  background-color: $background-color;
+  transition: background-color 250ms linear;
+
+  @media screen and (min-width: 768px) {
+    width: 35px;
+    height: 33px;
+  }
+}
+.paginator__button--notbordered {
+  color: $primary-black-color;
+  background-color: transparent;
+  border: none;
+}
+.paginator__button:hover,
+.paginator__button:hover {
+  background-color: $primary-blue-color;
+  color: $primary-white-color;
+  fill: $primary-white-color;
+}
+.paginator__button-nav {
+  width: 72px;
+  @media screen and (min-width: 768px) {
+    width: 82px;
+  }
+}
+
+.paginator__button-title-prew::before {
+  content: '';
+  height: 24px;
+  width: 24px;
+  display: block;
+
+  background-image: url(../images/left-arrow-black.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: auto;
+}
+.paginator__button-title-next::after {
+  content: '';
+  display: block;
+  height: 24px;
+  width: 24px;
+
+  background-image: url(../images/right-arrow-black.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: auto;
+}
+
+.paginator__button-title-next,
+.paginator__button-title-prew {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.paginator__button-nav:hover .paginator__button-title-next::after {
+  background-image: url(../images/right-arrow-white.svg);
+}
+.paginator__button-nav:hover .paginator__button-title-prew::before {
+  background-image: url(../images/left-arrow-white.svg);
+}
+
+.isSelected {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 28px;
+  height: 28px;
+  padding: 4px 12px;
+  pointer-events: none;
+
+  border-radius: 2px;
+  background-color: $primary-blue-color;
+  color: $primary-white-color;
+
+  @media screen and (min-width: 768px) {
+    width: 33px;
+    height: 33px;
+  }
+}
+
+.isDisabled {
+  background-color: $primary-grey-color;
+  border-color: $primary-grey-color;
+  pointer-events: none;
+}

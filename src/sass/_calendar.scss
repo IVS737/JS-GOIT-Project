@@ -1,0 +1,67 @@
+.calendar {
+  border: 1px solid #111321;
+  border-radius: 20px;
+  width: 151px;
+  height: 31px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-left: auto;
+  padding: 5px;
+  // padding-left: 12px;
+  // padding-right: 12px;
+  cursor: pointer;
+  text-align: center;
+  @media screen and (min-width: 768px) {
+    width: 168px;
+  }
+
+  &:hover,
+  &:focus {
+    background-color: $primary-blue-color;
+    border-color: $primary-blue-color;
+    transition: 0.5s ease-in-out;
+  }
+
+  &:hover &__librarySvg,
+  &:focus &__librarySvg {
+    fill: $primary-white-color;
+    transition: 0.5s ease-in-out;
+  }
+
+  &:hover &__arrowSvg,
+  &:focus &__arrowSvg {
+    fill: $primary-white-color;
+    transform: rotate(180deg);
+    transition: 0.5s ease-in-out;
+  }
+
+  &__librarySvg {
+    position: absolute;
+    left:16px;
+    top: 50%;
+  transform: translate(0, -50%);
+    display: block;
+    fill: $primary-blue-color;
+    width: 19px;
+    height: 19px;
+  }
+
+  &__arrowSvg {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translate(0, -50%);
+    display: block;
+    fill: $primary-grey-color;
+    width: 9px;
+    height: 15px;
+    cursor: url("../images/cursor.svg"), auto;
+  }
+
+  &__buttons {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+  }
+}
