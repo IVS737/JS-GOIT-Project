@@ -68,6 +68,7 @@
   background-color: $primary-white-color;
   border-radius: 20px;
   border-color: transparent;
+    cursor: url("../images/cursor.svg"), auto;
 }
 
 .favourite-button::after {
@@ -99,6 +100,7 @@
   background-color: $primary-white-color;
   border-radius: 20px;
   border-color: transparent;
+  cursor: url("../images/cursor.svg"), auto;
 }
 
 .removefavourite-button::after {
@@ -165,6 +167,7 @@
   line-height: 1.36;
   text-align: left;
   color: $primary-blue-color;
+  cursor: url("../images/cursor.svg"), auto;
 
   @media screen and (min-width: 768px) {
     font-size: 16px;
