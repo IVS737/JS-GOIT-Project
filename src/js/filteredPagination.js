@@ -8,9 +8,9 @@ let currentPage = 0;
 let totalPages = 0;
 let filterNameByDefaul = 'sports';
 // searchByFilter();
-displayPagination()
+// displayPagination()
 export default function changeFilterName(name) {
-  currentPage = 0;
+  currentPage = 1;
   filterNameByDefaul = name;
   searchByFilter();
 }
@@ -26,7 +26,7 @@ async function searchByFilter() {
     );
     newsError.style.display = 'none';
     newsBox.style.display === 'none' && (newsBox.style.display = 'block');
-    paginationBox.style.display === 'none'&& (paginationBox.style.display = 'block');
+    paginationBox.style.display === 'none'&& (paginationBox.style.display = 'flex');
 
          const articles = response.data.response.docs.slice(0, 8); // 8 articles
 
@@ -144,7 +144,7 @@ function displayPagination() {
     firstPageButton.innerText = 1;
     firstPageButton.classList.add('paginator__button');
     firstPageButton.addEventListener('click', () => {
-      currentPage = 1;
+      currentPage = 0;
       window.scrollTo(0, 0);
       searchByFilter();
     });

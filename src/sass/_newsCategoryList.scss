@@ -112,7 +112,8 @@
         width: 14px;
         height: 14px;
         margin-left: 10px;
-   
+        transform: rotate(0); 
+        transition: transform 0.5s ease, content 0.5s ease-in-out;
         }
     &__btn__svg__up::after{
         content: url(../images/arrow-up.svg);   
@@ -125,6 +126,13 @@
     &__btn:hover{
         background-color: #4B48DB;
         color:#FFFFFF;
+    }
+    &__btn__svg:hover::after{
+        transform: rotate(360deg);
+        content: url(../images/arrow-up.svg);   
+        width: 14px;
+        height: 14px;
+        margin-left: 10px;
     }
     
 }
