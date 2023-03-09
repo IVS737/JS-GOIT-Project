@@ -2,14 +2,14 @@ import { format } from 'date-fns';
 
 // import imagesDesc from './images/notfoundDesc.png';
 // import imagesTab from './images/notfoundTab.png';
-import createEmptyMarkup from './renderEmptyMarkup'
+import createEmptyMarkup from './renderEmptyMarkup';
 // import imagesMob from './images/notfoundMob.png';
 // import imagesDesc from '../images/notfoundDesc.png';
 // import imagesTab from '../images/notfoundTab.png';
 import NewsServise from './newslist.js';
 // import imagesMob from '../images/notfoundMob.png';
 // import createEmptyMarkup from './renderEmptyMarkup';
-import geoWeatherApp from './weather'
+import geoWeatherApp from './weather';
 import makeMarkup from './CardRender/cardRender';
 import createEmptyMarkup from './renderEmptyMarkup';
 const LogNews = new NewsServise();
@@ -49,7 +49,6 @@ export let mar = 0;
 export let Value = '';
 
 function onFormSubmit(event) {
-
   Value = event.currentTarget.elements.newsField.value.trim();
   event.preventDefault();
   mar = 1;
@@ -61,15 +60,16 @@ function onFormSubmit(event) {
         newsList.innerHTML = '';
         return createEmptyMarkup();
       }
-      if (!localStorage.getItem("date")) {
+      if (!localStorage.getItem('date')) {
         LogNews.getSerchList().then((data) => {
           if (data.response.docs.length === 0) {
             form.reset();
             newsList.innerHTML = '';
-          return createEmptyMarkup();
+            return createEmptyMarkup();
           }
-          
-          makeMarkup(data.response.docs)})
+
+          makeMarkup(data.response.docs);
+        });
       }
       // else{
       //   LogNews.NewDate = localStorage.getItem("date")
@@ -180,70 +180,56 @@ function onOpenInputButtonClick(event) {
 newsList.addEventListener('click', addToFavorite);
 
 function addToFavorite(event) {
-  if (event.target.dataset.action === 'favourite-button') {
-    let cardItem = event.target.parentElement.parentElement.parentElement.dataset.id;
-    console.log(cardItem); // сardId
-    const card = event.currentTarget.firstChild; //li
-    const image = card.querySelector('.card-image'); //img
-    const category = card.querySelector('.card-news-category'); //categoryconst
-    const cardTitle = card.querySelector('.card-news-title'); //title
-    const newsDescription = card.querySelector('.card-news-description'); //description
-    const dateTime = card.querySelector('.card-datetime'); //date
-    const newsLink = card.querySelector('.card-link'); //link
-    // console.log(image);
-    // console.log(card);
-    // console.log(category);
-    // console.log(cardTitle);
-    // console.log(newsDescription);
-    // console.log(dateTime);
-    // console.log(newsLink);
+  if (event.target.dataset.action !== 'favourite-button') return;
 
-    const oneCard = {
-      cardEl: card.dataset.id,
-      image: image.src,
-      category: category.textContent,
-      title: cardTitle.textContent,
-      description: newsDescription.textContent,
-      data: dateTime.textContent,
-      link: newsLink.href,
-    };
-    console.log(oneCard);
+  let card = event.target.parentElement.parentElement.parentElement;
+  let cardId = card.dataset.id;
 
- const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+  const image = card.querySelector('.card-image').src;
+  const category = card.querySelector('.card-news-category').textContent;
+  const title = card.querySelector('.card-news-title').textContent;
+  const description = card.querySelector('.card-news-description').textContent;
+  const date = card.querySelector('.card-datetime').textContent;
+  const newsLink = card.querySelector('.card-link');
 
-    if (event.target.classList.contains('removefavourite-button')) {
-    const indexArray = favorites.map(el => el.title);
-    const index = indexArray.indexOf(oneCard.title);
+  const cardObj = {
+    id: cardId,
+    image,
+    category,
+    title,
+    description,
+    date: date,
+    link: newsLink.href,
+  };
+
+  const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+  if (event.target.classList.contains('removefavourite-button')) {
+    const indexArray = favorites.map((el) => el.title);
+    const index = indexArray.indexOf(cardObj.title);
 
     favorites.splice(index, 1);
     localStorage.setItem('favorites', JSON.stringify(favorites));
 
+    // const updatedFavorites = favorites.filter((favorite) => favorite.id == cardItem);
+    // localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
 
+    event.target.textContent = 'Add to favorites';
+    event.target.classList.remove('removefavourite-button');
+  } else {
+    favorites.push(cardObj);
+    localStorage.setItem('favorites', JSON.stringify(favorites));
 
-
-      // const updatedFavorites = favorites.filter((id) => id.cardEl == cardItem);
-      // localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
-
-      event.target.textContent = 'Add to favorites';
-      event.target.classList.remove('removefavourite-button');
-    } else {
-      favorites.push(oneCard);
-      localStorage.setItem('favorites', JSON.stringify(favorites));
-
-      event.target.textContent = 'Remove from favorites';
-      event.target.classList.add('removefavourite-button');
-    }
+    event.target.textContent = 'Remove from favorites';
+    event.target.classList.add('removefavourite-button');
   }
-
-
-
-  }
+}
 
 //     const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
 
 //     if (event.target.classList.contains('removefavourite-button')) {
 //       console.log('bye')
-//       // const updatedFavorites = favorites.filter((element) => element.cardEl != cardItem);
+//       // const updatedFavorites = favorites.filter((element) => element.id != cardId);
 //       // console.log(updatedFavorites);
 //       // localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
 
@@ -254,13 +240,13 @@ function addToFavorite(event) {
 //     }
 //     if (event.target.classList.contains('favourite-button')) {
 //       console.log('hi')
-//       // favorites.push(oneCard);
+//       // favorites.push(cardObj);
 //       // localStorage.setItem('favorites', JSON.stringify(favorites));
 
 //       event.target.textContent = 'Remove from favorites';
 //       event.target.classList.remove('favourite-button');
 //       event.target.classList.add('removefavourite-button');
-//       // 
+//       //
 //     }
 //   }
 // }
@@ -274,4 +260,3 @@ function addToFavorite(event) {
 // //       event.target.textContent = 'Add to favorites';
 // //       event.target.classList.remove('removefavourite-button');
 // //     }
-

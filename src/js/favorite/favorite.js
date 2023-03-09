@@ -2,10 +2,12 @@ const cardList = document.querySelector('.wrapper__list');
 
 function createGetCardList() {
   const array = localStorage.getItem('favorites');
-  const arparsed = JSON.parse(array);
+  const parsedArray = JSON.parse(array);
 
-  const news = arparsed.map((element) => 
-`<li class = "card-item" data-id = "${element.cardEl}">
+  const news = parsedArray
+    .map(
+      (element) =>
+        `<li class = "card-item" data-id = "${element.id}">
 
    <div class="card-wrapper">
     <div class="card-thumb">
@@ -24,11 +26,11 @@ function createGetCardList() {
         <a class="card-link" href="${element.link}" target="_blank" rel="noopener noreferrer nofollow">Read more</a>
       </div>
     </div>
- </li>`)
-  .join('');
+ </li>`,
+    )
+    .join('');
 
   cardList.innerHTML = news;
-
 }
 
 createGetCardList();
@@ -36,7 +38,6 @@ createGetCardList();
 cardList.addEventListener('click', removeToFavorite);
 
 function removeToFavorite(event) {
-
   if (event.target.dataset.action === 'favorite-button') {
     let cardItem = event.target.parentElement.parentElement.parentElement.dataset.id;
     console.log(cardItem); // сardId
@@ -54,9 +55,9 @@ function removeToFavorite(event) {
     // console.log(newsDescription);
     // console.log(dateTime);
     // console.log(newsLink);
-    
+
     const oneCard = {
-      cardEl: card.dataset.id,
+      id: card.dataset.id,
       image: image.src,
       category: category.textContent,
       title: cardTitle.textContent,
@@ -67,17 +68,14 @@ function removeToFavorite(event) {
     console.log(oneCard);
 
     const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
-    
-    if (event.target.classList.contains('removefavorite-button')) {
 
-      const updatedFavorites = favorites.filter((element) => element.cardEl != cardItem);
+    if (event.target.classList.contains('removefavorite-button')) {
+      const updatedFavorites = favorites.filter((element) => element.id != cardItem);
       console.log(updatedFavorites);
       localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
-      
     } else {
       favorites.push(oneCard);
       localStorage.setItem('favorites', JSON.stringify(favorites));
     }
-    
   }
 }
