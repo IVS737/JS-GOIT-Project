@@ -191,8 +191,8 @@ function addToFavorite(event) {
   const description = card.querySelector('.card-news-description').textContent;
   const date = card.querySelector('.card-datetime').textContent;
   const newsLink = card.querySelector('.card-link');
-  console.log(date)
-
+  
+  console.log(newsLink);
   const cardObj = {
     id: cardId,
     image,
@@ -202,7 +202,7 @@ function addToFavorite(event) {
     date,
     link: newsLink.href,
   };
-
+  console.log(cardObj);
   const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
 
   if (event.target.classList.contains('removefavourite-button')) {
