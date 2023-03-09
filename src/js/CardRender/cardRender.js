@@ -50,9 +50,7 @@ export default function Makemarkup(array) {
       <p class="card-news-description">${subTitle}</p>
       <div class="card-info-container">
         <p class="card-datetime">${format(new Date(date), 'dd/MM/yyyy')}</p>
-        <a id="${data.uri}" class="card-link" href="${
-        data.web_url
-      }" target="_blank" rel="noopener noreferrer nofollow">Read more</a>
+        <a id="${data.uri}" class="card-link" ${data.web_url}" target="_blank" rel="noopener noreferrer nofollow">Read more</a>
       </div>
     </div>
 </li>`;
