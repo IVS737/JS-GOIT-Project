@@ -3,7 +3,7 @@
 .weatherForecast {
     &_week-info-grid {
         display: grid;   
-        padding-top: 10px;
+        padding-top: 12px;
     }
     
     &_item {
@@ -12,7 +12,7 @@
         font-size: 18px;
         align-items: end;
 
-        padding-top: 10px;
+        padding-top: 9px;
         padding-bottom: 5px;
 }
 
@@ -25,7 +25,6 @@
         font-size: 18px;
         align-items: end;
 
-        padding-top: 20px;
 }
 
 
@@ -60,6 +59,9 @@
     
     @media screen and (min-width: 786px) {
         .weatherForecast {
+            &_week-info-grid {
+                padding-top: 10px;
+            }
     
             &_item {
                 font-size: 22px; 

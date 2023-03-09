@@ -3,10 +3,12 @@ import '../sass/_weatherForecast.scss'
 
 import moment from 'moment';
 import axios from 'axios';
+import _debounce from 'lodash.debounce';
 
 const URL = 'https://api.openweathermap.org/data/2.5/weather';
 const URL2 = 'https://api.openweathermap.org/data/2.5/forecast';
 
+const DEBOUNCE_DELAY = 300;
 const API_KEY = 'be0f81a8f9f4c462088b51501fa506a7'
 
 const weatherTemp = document.querySelector('#weather-block-temp');
@@ -17,13 +19,12 @@ const weatherDate = document.querySelector('#weather-block-date');
 const loadWeather = document.querySelector('#load-weather-button');
 const forDayEl = document.getElementById("for-day");
 const forWeekEl = document.getElementById("for-week");
-
-
+const seachEl = document.getElementById("weatherBlock_search")
 
 let day =  moment(new Date()).format('ddd')
 let date = moment(new Date()).format('DD MMM YYYY')
 
-
+// ---------------------------------------- Daily Weather -----------------------------
 const fetchWeatherGeo = async (lat, lon, units='metric') => {
  
   const { data } = await axios.get(`${URL}/?lat=${lat}&lon=${lon}&units=${units}&exclude=deyly&APPID=${API_KEY}`);
@@ -46,8 +47,7 @@ const fetchWeatherCity = async (
 }
 
 
-const geoWeatherApp = () => {
-// if (navigator.geolocation) {    
+const geoWeatherApp = () => {  
       navigator.geolocation.getCurrentPosition(function(position) {
         let lat = position.coords.latitude
         let lon = position.coords.longitude
@@ -58,15 +58,14 @@ const geoWeatherApp = () => {
             .catch(error => {});
         }) ?? 
        fetchWeatherCity()
-           .then(renderWeather)
+           .then(renderWeatherCityInput)
             .catch(error => {});
-    //   }
-    //   else {setWeatherLoader()}
     }
     
 const renderWeather = (weather) => {
-//   closetWeatherLoader();
   
+  weatherName.classList.remove("weatherBlock_hidden");
+  seachEl.classList.add("weatherBlock_hidden");
   forDayEl.classList.remove("weatherBlock_hidden");
   forWeekEl.classList.add("weatherBlock_hidden");
 
@@ -83,6 +82,22 @@ const renderWeather = (weather) => {
   loadWeather.classList.add("weatherBlock_weatherBtn")
   loadWeather.classList.remove("weatherForecast_weatherBtn")
 }
+
+
+const renderWeatherCityInput = (weather) => {
+
+
+  console.log('покажи погоду')
+  
+  renderWeather(weather)
+  weatherName.classList.add("weatherBlock_hidden");
+  seachEl.classList.remove("weatherBlock_hidden"); 
+  
+  seachEl.placeholder = `${weather.name}`
+  
+  
+}
+
 
 geoWeatherApp();
 
@@ -126,7 +141,8 @@ const fetchWeatherForecastCity = async (
 }
 
  const renderWeatherForecast = obj => {  
-            
+            weatherName.classList.remove("weatherBlock_hidden");
+            seachEl.classList.add("weatherBlock_hidden");
             forWeekEl.classList.remove("weatherBlock_hidden");
             forDayEl.classList.add("weatherBlock_hidden");
             
@@ -174,8 +190,6 @@ const fetchWeatherForecastCity = async (
            loadWeather.classList.remove("weatherBlock_weatherBtn")
             }
 
-
-
 // ---------- BUTTON
 
             document.addEventListener("click", (event)=>{
@@ -195,8 +209,45 @@ const fetchWeatherForecastCity = async (
                   )
 
 
+                  document.addEventListener('input', async (event)=>{
+                  if(event.target?.classList.contains("weatherBlock_seach")){    
+                    
+                    const input = seachEl.value.trim();
+                    // if(event.key === 'Enter') {
+                      fetchWeatherCity(input)
+                      .then(renderWeather)
+                      .catch(error => {});
+                   
+                  
+                      console.log(input)
+
+                      weatherName.classList.remove("weatherBlock_hidden");
+                      seachEl.classList.add("weatherBlock_hidden");
+
+                      loadWeather.classList.add("weatherBlock_weatherBtnInputCity")
+                      loadWeather.classList.remove("weatherForecast_weatherBtn")
 
 
+                      document.addEventListener("click", (event)=>{
+                        if(event.target?.classList.contains("weatherBlock_weatherBtnInputCity")){        
+                          // console.log('Покажи прогноз 5дней')    
+                          fetchWeatherForecastCity(input)
+                          .then(renderWeatherForecast)
+                                .catch(error => {});
+                        }
+                        
+
+                        loadWeather.classList.remove("weatherBlock_weatherBtnInputCity")
+                        seachEl.placeholder = `Seach city ...`
+
+                      }
+                          )
+
+                    }
+                  }            
+                      )
+
+                  
 
 
 export default geoWeatherApp();
