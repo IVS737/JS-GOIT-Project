@@ -8,7 +8,7 @@ import _debounce from 'lodash.debounce';
 const URL = 'https://api.openweathermap.org/data/2.5/weather';
 const URL2 = 'https://api.openweathermap.org/data/2.5/forecast';
 
-const DEBOUNCE_DELAY = 300;
+const STORAGE_KEY = 'city-input';
 const API_KEY = 'be0f81a8f9f4c462088b51501fa506a7'
 
 const weatherTemp = document.querySelector('#weather-block-temp');
@@ -28,7 +28,7 @@ let date = moment(new Date()).format('DD MMM YYYY')
 const fetchWeatherGeo = async (lat, lon, units='metric') => {
  
   const { data } = await axios.get(`${URL}/?lat=${lat}&lon=${lon}&units=${units}&exclude=deyly&APPID=${API_KEY}`);
-//   console.log(data)  
+ 
   return data;
  
  }
@@ -42,7 +42,7 @@ const fetchWeatherCity = async (
     const { data } = await axios.get(
         `${URL}?q=${cityName}&units=${units}&APPID=${API_KEY}`
     );
-    // console.log(data);
+
    return data;
 }
 
@@ -107,7 +107,7 @@ geoWeatherApp();
 const fetchWeatherForecast = async (lat, lon, units='metric') => {
  
   const { data } = await axios.get(`${URL2}?lat=${lat}&lon=${lon}&units=${units}&APPID=${API_KEY}`);
-    //  console.log(data)
+ 
      return data;
  }
 
@@ -117,7 +117,7 @@ const fetchWeatherForecastCity = async (
     units = "metric") => {
  
     const { data } = await axios.get(`${URL2}?q=${cityName}&units=${units}&APPID=${API_KEY}`);
-      //  console.log(data)
+   
        return data;
    }
 
@@ -194,7 +194,7 @@ const fetchWeatherForecastCity = async (
 
             document.addEventListener("click", (event)=>{
               if(event.target?.classList.contains("weatherBlock_weatherBtn")){ 
-                // console.log('Покажи прогноз неделя')   
+             
                 geoWeatherForecast()   
               
               }
@@ -202,26 +202,24 @@ const fetchWeatherForecastCity = async (
 
               document.addEventListener("click", (event)=>{
                 if(event.target?.classList.contains("weatherForecast_weatherBtn")){        
-                  // console.log('Покажи прогноз 5дней')    
+                
                   geoWeatherApp()
                 }
               }
                   )
 
 
-                  document.addEventListener('input', async (event)=>{
+                  document.addEventListener('change', async (event)=>{
                   if(event.target?.classList.contains("weatherBlock_seach")){    
                     
                     const input = seachEl.value.trim();
-                    // if(event.key === 'Enter') {
+                    localStorage.setItem(STORAGE_KEY, input);
+                    
                       fetchWeatherCity(input)
                       .then(renderWeather)
                       .catch(error => {});
                    
-                  
-                      console.log(input)
-
-                      weatherName.classList.remove("weatherBlock_hidden");
+                     weatherName.classList.remove("weatherBlock_hidden");
                       seachEl.classList.add("weatherBlock_hidden");
 
                       loadWeather.classList.add("weatherBlock_weatherBtnInputCity")
@@ -230,19 +228,19 @@ const fetchWeatherForecastCity = async (
 
                       document.addEventListener("click", (event)=>{
                         if(event.target?.classList.contains("weatherBlock_weatherBtnInputCity")){        
-                          // console.log('Покажи прогноз 5дней')    
-                          fetchWeatherForecastCity(input)
+                          const savedCityInput = localStorage.getItem(STORAGE_KEY);
+                          fetchWeatherForecastCity(savedCityInput)
                           .then(renderWeatherForecast)
                                 .catch(error => {});
                         }
                         
-
+                             
                         loadWeather.classList.remove("weatherBlock_weatherBtnInputCity")
-                        seachEl.placeholder = `Seach city ...`
 
                       }
                           )
-
+                          seachEl.value =  ``
+                          geoWeatherApp()
                     }
                   }            
                       )
