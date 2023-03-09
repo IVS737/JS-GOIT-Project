@@ -9,7 +9,6 @@ const refs = {
 const { form, input, submitButton, openInputButton, withoutNewsContainer, newsList } = refs;
 
 export default function MakeStartMarkup(array) {
-
   const markUp = array
     .map((data) => {
       const subTitle = data.abstract.slice(0, 100) + `...`;
@@ -35,8 +34,7 @@ export default function MakeStartMarkup(array) {
 
         <p class="card-text-read">Already read
         <svg width="18" height="18" class="check-icon"><use href="../images/symbol-defs.svg#icon-check"</svg></p>
-        <button class="favourite-button" type="button" data-action="favourite-button">Add to favorite</button>
-
+        <button id="${data.uri}" class="favourite-button" type="button" data-action="favourite-button">Add to favorite</button>
       </div>
       <h3 class="card-news-title">${data.title}</h3>
       <p class="card-news-description">${subTitle}</p>
