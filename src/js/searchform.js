@@ -239,15 +239,6 @@ function addToFavorite(event) {
 
   }
 
-
-
-
-
-
-
-
-
-
 //     const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
 
 //     if (event.target.classList.contains('removefavourite-button')) {

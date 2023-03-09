@@ -14,7 +14,9 @@ let totalPages = 0;
 let searchName = '';
 
 function setName(name) {
+  currentPage = 1;
   searchName = name;
+  searchArticles()
 }
 
 async function searchArticles() {
@@ -124,10 +126,15 @@ function displayPagination() {
   paginatorBtnTitleNext.innerText = 'Next';
   nextButton.classList.add('paginator__button', 'paginator__button-nav');
 
-  if (currentPage >= totalPages) {
-    nextButton.classList.add('isDisabled');
-    nextButton.setAttribute('disabled', true);
-  }
+  // if (currentPage >= totalPages) {
+  //   nextButton.classList.add('isDisabled');
+  //   nextButton.setAttribute('disabled', true);
+  // }
+    // змінив умову бо для коректної роботи після обможень в 200 кнопок
+    if (currentPage >= 199) {
+      nextButton.classList.add('isDisabled');
+      nextButton.setAttribute('disabled', true);
+    }
 
   nextButton.append(paginatorBtnTitleNext);
 
@@ -180,6 +187,11 @@ function displayPagination() {
   }
 
   for (let i = startPage; i <= endPage; i++) {
+    // ---------------------------------------------------------add for max create button = 200
+    if (i === 200) {
+      break;
+    }
+
     let numButtons = 0;
     const pageButton = document.createElement('button');
     pageButton.innerText = i;
@@ -199,18 +211,20 @@ function displayPagination() {
   }
 
   if (endPage < totalPages - 1) {
-    const dotsButton = document.createElement('button');
-    dotsButton.classList.add('paginator__button', 'paginator__button--notbordered');
+    // const dotsButton = document.createElement('button');
+    // dotsButton.classList.add('paginator__button', 'paginator__button--notbordered');
 
-    dotsButton.innerText = '...';
-    dotsButton.disabled = true;
-    paginator.appendChild(dotsButton);
-
+    // dotsButton.innerText = '...';
+    // dotsButton.disabled = true;
+    // paginator.appendChild(dotsButton);
+//----------------------закоментив dotsButton бо при кліку по послідній сторінкі там все було погано=)
     const lastPageButton = document.createElement('button');
-    lastPageButton.innerText = totalPages;
+    // ------------------------------------------------------------------------add end button value (max 200)
+    lastPageButton.innerText = totalPages > 200 ? 200 : totalPages;
+    // ------------------------------------------------------------------------
     lastPageButton.classList.add('paginator__button');
     lastPageButton.addEventListener('click', () => {
-      currentPage = totalPages;
+      currentPage = totalPages > 200 ? 200 : totalPages;
       window.scrollTo(0, 0);
       searchArticles();
     });
@@ -218,7 +232,9 @@ function displayPagination() {
     paginator.appendChild(nextButton);
   } else if (currentPage !== totalPages) {
     const lastPageButton = document.createElement('button');
-    lastPageButton.innerText = totalPages;
+    // ------------------------------------------------------------------------add end button value (max 200)
+    lastPageButton.innerText = totalPages > 200 ? 200 : totalPages;
+    // ------------------------------------------------------------------------
     lastPageButton.classList.add('paginator__button');
     paginator.appendChild(lastPageButton);
     paginator.appendChild(nextButton);
