@@ -4,13 +4,13 @@ const render = new RenderCategory();
 
 const paginator = document.getElementById('paginator');
 
-let currentPage = 1;
+let currentPage = 0;
 let totalPages = 0;
 let filterNameByDefaul = 'sports';
 // searchByFilter();
 displayPagination()
 export default function changeFilterName(name) {
-  currentPage = 1;
+  currentPage = 0;
   filterNameByDefaul = name;
   searchByFilter();
 }
@@ -21,7 +21,7 @@ async function searchByFilter() {
   try {
     const response = await axios.get(
       `https://api.nytimes.com/svc/search/v2/articlesearch.json?limit=8&fq=news_desk:(${filterNameByDefaul})&api-key=71s3mUNKm6z5TjxLJwNR66epaTNpAApf&page=${
-        currentPage - 1
+        currentPage
       }`,
     );
     newsError.style.display = 'none';
@@ -31,6 +31,7 @@ async function searchByFilter() {
          const articles = response.data.response.docs.slice(0, 8); // 8 articles
 
          totalPages = Math.ceil(response.data.response.meta.hits / 10);
+    totalPages = totalPages > 200 ? 200 : totalPages;
        
          newsListRender(articles);
        
@@ -98,16 +99,12 @@ function displayPagination() {
   paginatorBtnTitleNext.classList.add('paginator__button-title-next');
   paginatorBtnTitleNext.innerText = 'Next';
   nextButton.classList.add('paginator__button', 'paginator__button-nav');
-  console.log(currentPage , totalPages);
-  // if (currentPage >= totalPages) {
-  //   nextButton.classList.add('isDisabled');
-  //   nextButton.setAttribute('disabled', true);
-  // }
-  // змінив умову бо для коректної роботи після обможень в 200 кнопок
-  if (currentPage >= 199) {
+ 
+  if (currentPage >= totalPages) {
     nextButton.classList.add('isDisabled');
     nextButton.setAttribute('disabled', true);
   }
+
 
   nextButton.append(paginatorBtnTitleNext);
 
@@ -122,7 +119,7 @@ function displayPagination() {
 
   if (window.innerWidth >= 425) {
     maxVisibleButtons = 3;
-  // ---------------------------------------
+
   if (totalPages <= maxVisibleButtons) {
     startPage = 1;
     endPage = totalPages;
@@ -186,21 +183,20 @@ function displayPagination() {
   }
 
   if (endPage < totalPages - 1) {
-    // const dotsButton = document.createElement('button');
-    // dotsButton.classList.add('paginator__button--notbordered');
+    const dotsButton = document.createElement('button');
+    dotsButton.classList.add('paginator__button--notbordered');
 
-    // dotsButton.innerText = '...';
-    // dotsButton.disabled = true;
-    // paginator.appendChild(dotsButton);
-//----------------------закоментив dotsButton бо при кліку по послідній сторінкі там все було погано=)
+    dotsButton.innerText = '...';
+    dotsButton.disabled = true;
+    paginator.appendChild(dotsButton);
+
     const lastPageButton = document.createElement('button');
-    // ------------------------------------------------------------------------add end button value (max 200)
-    lastPageButton.innerText = totalPages > 200 ? 200 : totalPages;
-    // ------------------------------------------------------------------------
+
+    lastPageButton.innerText = totalPages;
+
     lastPageButton.classList.add('paginator__button');
     lastPageButton.addEventListener('click', () => {
-    // -------------------------------------------- 
-      currentPage = totalPages > 200 ? 200 : totalPages;
+      currentPage = totalPages;
       window.scrollTo(0, 0);
       searchByFilter();
     });

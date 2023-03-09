@@ -8,13 +8,13 @@ const searchInput = document.querySelector('.header-search-input');
 const paginator = document.getElementById('paginator');
 const newsList = document.querySelector('.wrapper__list');
 
-let currentPage = 1;
+let currentPage = 0;
 let totalPages = 0;
 
 let searchName = '';
 
 function setName(name) {
-  currentPage = 1;
+  currentPage = 0;
   searchName = name;
   searchArticles()
 }
@@ -27,7 +27,7 @@ async function searchArticles() {
   try {
     const response = await axios.get(
       `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${searchInput.value}&api-key=${apiKey}&page=${
-        currentPage - 1
+        currentPage
       }`,
     );
     
@@ -44,6 +44,7 @@ async function searchArticles() {
         const articles = response.data.response.docs.slice(0, 8); // 8 articles
 
         totalPages = Math.ceil(response.data.response.meta.hits / 1000);
+      totalPages = totalPages > 200 ? 200 : totalPages;
 
         makeMarkup(articles); 
         displayPagination();
@@ -126,15 +127,11 @@ function displayPagination() {
   paginatorBtnTitleNext.innerText = 'Next';
   nextButton.classList.add('paginator__button', 'paginator__button-nav');
 
-  // if (currentPage >= totalPages) {
-  //   nextButton.classList.add('isDisabled');
-  //   nextButton.setAttribute('disabled', true);
-  // }
-    // змінив умову бо для коректної роботи після обможень в 200 кнопок
-    if (currentPage >= 199) {
-      nextButton.classList.add('isDisabled');
-      nextButton.setAttribute('disabled', true);
-    }
+  if (currentPage >= totalPages) {
+    nextButton.classList.add('isDisabled');
+    nextButton.setAttribute('disabled', true);
+  }
+
 
   nextButton.append(paginatorBtnTitleNext);
 
@@ -187,10 +184,6 @@ function displayPagination() {
   }
 
   for (let i = startPage; i <= endPage; i++) {
-    // ---------------------------------------------------------add for max create button = 200
-    if (i === 200) {
-      break;
-    }
 
     let numButtons = 0;
     const pageButton = document.createElement('button');
@@ -211,17 +204,17 @@ function displayPagination() {
   }
 
   if (endPage < totalPages - 1) {
-    // const dotsButton = document.createElement('button');
-    // dotsButton.classList.add('paginator__button', 'paginator__button--notbordered');
+    const dotsButton = document.createElement('button');
+    dotsButton.classList.add('paginator__button', 'paginator__button--notbordered');
 
-    // dotsButton.innerText = '...';
-    // dotsButton.disabled = true;
-    // paginator.appendChild(dotsButton);
-//----------------------закоментив dotsButton бо при кліку по послідній сторінкі там все було погано=)
+    dotsButton.innerText = '...';
+    dotsButton.disabled = true;
+    paginator.appendChild(dotsButton);
+
     const lastPageButton = document.createElement('button');
-    // ------------------------------------------------------------------------add end button value (max 200)
-    lastPageButton.innerText = totalPages > 200 ? 200 : totalPages;
-    // ------------------------------------------------------------------------
+
+    lastPageButton.innerText = totalPages;
+
     lastPageButton.classList.add('paginator__button');
     lastPageButton.addEventListener('click', () => {
       currentPage = totalPages > 200 ? 200 : totalPages;
@@ -232,9 +225,9 @@ function displayPagination() {
     paginator.appendChild(nextButton);
   } else if (currentPage !== totalPages) {
     const lastPageButton = document.createElement('button');
-    // ------------------------------------------------------------------------add end button value (max 200)
-    lastPageButton.innerText = totalPages > 200 ? 200 : totalPages;
-    // ------------------------------------------------------------------------
+
+    lastPageButton.innerText = totalPages;
+
     lastPageButton.classList.add('paginator__button');
     paginator.appendChild(lastPageButton);
     paginator.appendChild(nextButton);
