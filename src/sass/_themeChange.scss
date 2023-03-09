@@ -20,8 +20,8 @@ body.darkTheme {
   }
 
   #nav-icon span {
-  background: $background-color;
-  border-color: $background-color;
+    background: $background-color;
+    border-color: $background-color;
   }
 
   .header-logo-text {
@@ -32,7 +32,6 @@ body.darkTheme {
     border: 1px solid $background-color;
     color: $background-color;
   }
-
 
   .header-search-input::placeholder {
     color: $background-color;
@@ -55,8 +54,6 @@ body.darkTheme {
     color: $primary-blue-color;
   }
 
-
-
   .withoutnews-title {
     color: $background-color;
   }
@@ -72,59 +69,56 @@ body.darkTheme {
   .category__list__btn:active,
   .category__list__btn:focus,
   .category__list__btn:hover {
-        background-color: $primary-blue-color;
-        color:$primary-white-color; 
-  } 
-
-    .category__active-btn {
-      background-color: $primary-blue-color;
-      color: $primary-white-color;
-    }
-
-    .calendar{
-          background-color: $background-dark-color;
-          color: $background-color;
-          border: 1px solid #F4F4F4;
-        }
-    .calendar__arrowSvg{
-      fill:$primary-white-color ;
-    }
+    background-color: $primary-blue-color;
+    color: $primary-white-color;
   }
 
-
-
-  .theme__dark {
-    color: $primary-blue-color;
+  .category__active-btn {
+    background-color: $primary-blue-color;
+    color: $primary-white-color;
   }
 
-  .sun {
-    fill: none;
-    stroke: $primary-grey-color;
-  }
-
-  .moon {
-    fill: none;
-    stroke: $primary-blue-color;
-  }
-
-  .withoutnews-title {
+  .calendar {
+    background-color: $background-dark-color;
     color: $background-color;
+    border: 1px solid #f4f4f4;
   }
-
-  .card-news-title {
-    color: $background-color;
+  .calendar__arrowSvg {
+    fill: $primary-white-color;
   }
+}
 
-  .card-news-description {
-    color: $background-color;
-  }
+.theme__dark {
+  color: $primary-blue-color;
+}
 
-  .category__list__btn {
-    background-color: $background-color;
+.sun {
+  fill: none;
+  stroke: $primary-grey-color;
+}
 
-    .category__active-btn {
-      background-color: $primary-blue-color;
-      color: $primary-white-color;
-    }
+.moon {
+  fill: none;
+  stroke: $primary-blue-color;
+}
+
+.withoutnews-title {
+  color: $background-color;
+}
+
+.card-news-title {
+  color: $background-color;
+}
+
+.card-news-description {
+  color: $background-color;
+}
+
+.category__list__btn {
+  background-color: $background-color;
+
+  .category__active-btn {
+    background-color: $primary-blue-color;
+    color: $primary-white-color;
   }
 }
