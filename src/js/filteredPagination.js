@@ -7,6 +7,7 @@ const paginator = document.getElementById('paginator');
 let currentPage = 1;
 let totalPages = 4;
 let offsetValue  = 0;
+let filterNameByDefaul;
 
 export default function changeFilterName(name) {
   currentPage = 1;
