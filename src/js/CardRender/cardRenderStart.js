@@ -11,8 +11,8 @@ const refs = {
 const { form, input, submitButton, openInputButton, withoutNewsContainer, newsList } = refs;
 
 export default function MakeStartMarkup(array) {
-  const favStorage = JSON.parse(localStorage.getItem('favorites'));
-  console.log(favStorage);
+  // const favStorage = JSON.parse(localStorage.getItem('favorites'));
+  // console.log(favStorage);
   const markUp = array
     .map((data) => {
       const subTitle = data.abstract.slice(0, 100) + `...`;
