@@ -1,0 +1,32 @@
+.removefavorite-button {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    // padding: 6px 12px;
+    width: 168px;
+    height: 28px;
+  
+    font-family: 'Manrope';
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 1.33;
+    text-align: center;
+    color: #111321;
+    background-color: #ffffff;
+    border-radius: 20px;
+    border-color: transparent;
+    cursor: pointer;
+  }
+  
+  .removefavorite-button::after {
+    content: '';
+    background-image: url('../images/filledheart.svg');
+    width: 16px;
+    height: 16px;
+    background-repeat: no-repeat;
+    margin-left: 4px;
+  }
+  

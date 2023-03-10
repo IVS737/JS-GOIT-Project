@@ -73,11 +73,17 @@
     
         color: #4440F7;
     }
-    &>li>a:hover,
+
     &>li>a:focus{
         cursor: pointer;
         text-decoration: underline;
     }
+
+    &>li>a:hover {
+    cursor: url("../images/cursor.svg"), auto;
+    text-decoration: underline;
+    }
+    
     &__btn{
         display: flex;
         flex-direction: row;
@@ -91,7 +97,7 @@
     
         border: 1px solid #4440F7;
         border-radius: 20px;
-        background-color: inherit;
+        background-color: #F8F8F8;
     
         font-style: normal;
         font-weight: 400;
@@ -106,7 +112,8 @@
         width: 14px;
         height: 14px;
         margin-left: 10px;
-   
+        transform: rotate(0); 
+        transition: transform 0.5s ease, content 0.5s ease-in-out;
         }
     &__btn__svg__up::after{
         content: url(../images/arrow-up.svg);   
@@ -119,6 +126,13 @@
     &__btn:hover{
         background-color: #4B48DB;
         color:#FFFFFF;
+    }
+    &__btn__svg:hover::after{
+        transform: rotate(360deg);
+        content: url(../images/arrow-up.svg);   
+        width: 14px;
+        height: 14px;
+        margin-left: 10px;
     }
     
 }
@@ -154,6 +168,7 @@
     color: #FFFFFF;
 }
 
+
 .category__is-hidden{
     z-index: 0;
     display: none;
@@ -176,4 +191,8 @@
     .category__list__btn__wrap{
         display: none;
     }
+}
+
+.category__list__btn:hover {
+cursor: url("../images/cursor.svg"), auto;
 }

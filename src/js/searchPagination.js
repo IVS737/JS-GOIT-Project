@@ -1,27 +1,105 @@
 import axios from 'axios';
-
+import { format } from 'date-fns';
+import RenderCategory from './CategoryList/renderCategoryList';
+const render = new RenderCategory();
 const apiKey = 'kAFi92vRzv66C7DQ6coSA3C5NLbSIILk';
 const searchForm = document.querySelector('.header-search-form');
 const searchInput = document.querySelector('.header-search-input');
 const paginator = document.getElementById('paginator');
+const newsList = document.querySelector('.wrapper__list');
 
-let currentPage = 1;
+let currentPage = 0;
 let totalPages = 0;
 
+let searchName = '';
+
+function setName(name) {
+  currentPage = 1;
+  searchName = name;
+  searchArticles()
+}
+
 async function searchArticles() {
+  const newsBox = document.querySelector('.news');
+  const paginationBox = document.getElementById('paginator');
+  const newsError = document.querySelector('.container__error')
+  
   try {
     const response = await axios.get(
       `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${searchInput.value}&api-key=${apiKey}&page=${
-        currentPage - 1
+        currentPage
       }`,
     );
-    const articles = response.data.response.docs.slice(0, 8); // 8 articles
-    totalPages = Math.ceil(response.data.response.meta.hits / 1000);
-    // foo(articles); ///? Тут рендер карток, передати аргументом articles
-    displayPagination();
+    
+    if (response.data.response.docs.length === 0) {
+      newsError.style.display === 'none' && (newsError.style.display = 'block');
+      paginationBox.style.display = 'none';
+      newsBox.style.display = 'none';
+      render.emptyMarkup();
+      return;
+    }
+    newsError.style.display = 'none';
+    newsBox.style.display === 'none' && (newsBox.style.display = 'block');
+    paginationBox.style.display === 'none'&& (paginationBox.style.display = 'flex');
+        const articles = response.data.response.docs.slice(0, 8); // 8 articles
+
+      totalPages = Math.ceil(response.data.response.meta.hits / 1000);
+      totalPages = totalPages > 200 ? 200 : totalPages;
+
+        makeMarkup(articles); 
+        displayPagination();
   } catch (error) {
-    console.error(error);
+    console.log(error);
+    newsError.style.display === 'none' && (newsError.style.display = 'block');
+    paginationBox.style.display = 'none';
+    newsBox.style.display = 'none';
+    render.emptyMarkup();
+    return;
   }
+}
+
+function makeMarkup(array) {
+  const markUp = array
+    .map((data) => {
+      const subTitle = data.abstract.slice(0, 100) + `...`;
+      const title = data.headline.main.slice(0, 60) + `...`;
+      const date = data.pub_date.toString().slice(0, 10).replace(`-`, '/').replace(`-`, '/');
+
+      let imageAddress;
+      let imageStartAddress;
+
+      if (data.multimedia.length === 0) {
+        imageAddress =
+          'https://st.depositphotos.com/1000558/53737/v/1600/depositphotos_537370102-stock-illustration-image-photo-sign-symbol-template.jpg';
+      } else if (data.multimedia.length > 0) {
+        imageStartAddress = 'https://static01.nyt.com/';
+        imageAddress = imageStartAddress + data.multimedia[0].url;
+      }
+
+      return `<li class = "card-item" data-id = "${data.uri}">
+
+    <div class="card-wrapper">
+      <div class="card-thumb">
+        <img class="card-image" src = "${imageAddress}" alt = "${data.byline}">
+        <p class="card-news-category">${data.section_name}</p>
+
+        <p class="card-text-read">Already read
+        <svg width="18" height="18" class="check-icon"><use href="../images/symbol-defs.svg#icon-check"</svg></p>
+        <button class="favourite-button" type="button" data-action="favourite-button">Add to favorite</button>
+
+      </div>
+      <h3 class="card-news-title">${title}</h3>
+      <p class="card-news-description">${subTitle}</p>
+      <div class="card-info-container">
+        <p class="card-datetime">${format(new Date(date), 'dd/MM/yyyy')}</p>
+        <a class="card-link" href="${data.web_url}" target="_blank" rel="noopener noreferrer nofollow">Read more</a>
+      </div>
+    </div>
+</li>`;
+    })
+    .join('');
+
+  newsList.innerHTML = markUp;
 }
 
 function displayPagination() {
@@ -34,7 +112,7 @@ function displayPagination() {
   paginatorBtnTitlePrew.innerText = 'Prew';
   if (currentPage <= 1) {
     prevButton.classList.add('isDisabled');
-    prevButton.setAttribute('disabled');
+    prevButton.setAttribute('disabled', true);
   }
 
   prevButton.prepend(paginatorBtnTitlePrew);
@@ -53,6 +131,7 @@ function displayPagination() {
     nextButton.classList.add('isDisabled');
     nextButton.setAttribute('disabled', true);
   }
+
 
   nextButton.append(paginatorBtnTitleNext);
 
@@ -89,7 +168,7 @@ function displayPagination() {
     firstPageButton.innerText = 1;
     firstPageButton.classList.add('paginator__button');
     firstPageButton.addEventListener('click', () => {
-      currentPage = 1;
+      currentPage = 0;
       window.scrollTo(0, 0);
       searchArticles();
     });
@@ -105,6 +184,7 @@ function displayPagination() {
   }
 
   for (let i = startPage; i <= endPage; i++) {
+
     let numButtons = 0;
     const pageButton = document.createElement('button');
     pageButton.innerText = i;
@@ -132,10 +212,12 @@ function displayPagination() {
     paginator.appendChild(dotsButton);
 
     const lastPageButton = document.createElement('button');
+
     lastPageButton.innerText = totalPages;
+
     lastPageButton.classList.add('paginator__button');
     lastPageButton.addEventListener('click', () => {
-      currentPage = totalPages;
+      currentPage = totalPages > 200 ? 200 : totalPages;
       window.scrollTo(0, 0);
       searchArticles();
     });
@@ -143,7 +225,9 @@ function displayPagination() {
     paginator.appendChild(nextButton);
   } else if (currentPage !== totalPages) {
     const lastPageButton = document.createElement('button');
+
     lastPageButton.innerText = totalPages;
+
     lastPageButton.classList.add('paginator__button');
     paginator.appendChild(lastPageButton);
     paginator.appendChild(nextButton);
@@ -168,12 +252,13 @@ function displayPagination() {
       window.scrollTo(0, 0);
     }
   }
-
-  searchForm.addEventListener('submit', (event) => {
-    event.preventDefault();
-
-    searchArticles();
-
-    window.scrollTo(0, 0);
-  });
 }
+
+searchForm.addEventListener('submit', (event) => {
+  event.preventDefault();
+
+  setName(event.currentTarget.elements.newsField.value.trim());
+  searchArticles();
+
+  window.scrollTo(0, 0);
+});

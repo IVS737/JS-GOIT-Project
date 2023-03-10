@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Favorite</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700&family=Poppins&family=Roboto&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./sass/index.scss" />
+    <link rel="stylesheet" href="./sass/_favoritePage.scss" />
+  </head>
+  <body>
+    <include src="./partials/header.html"></include>
+    <main>
+      <section class="container">
+        <div class="news">
+          <div class="wrapper__list"></div>
+        </div>
+      </section>
+    </main>
+    <include src="./partials/footer.html"></include>
+
+    <a class="to-top is-hidden-top">To Top</a>
+
+    <script type="module" src="./js/favorite/back-to-top.js"></script>
+    <script type="module" src="./js/favorite/favorite.js"></script>
+    <script type="module" src="js/index.js" defer></script>
+  </body>
+</html>

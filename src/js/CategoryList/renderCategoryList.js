@@ -45,7 +45,7 @@ export default class RenderCategory {
   </li>`;
       })
       .join('');
-  
+
     newsList.innerHTML = markUp;
   }
 emptyMarkup() {

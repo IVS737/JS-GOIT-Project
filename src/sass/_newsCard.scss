@@ -3,6 +3,15 @@
   border-radius: 4px;
   overflow: hidden;
 }
+.card-item {
+  opacity: 1;
+  transition: opacity .35s ease-in;
+}
+
+
+.addOverlay {
+  opacity: 0.4;
+};
 
 .card-image {
   height: 395px;
@@ -34,7 +43,6 @@
   right: 14px;
   // display: flex;
   align-items: center;
-
   font-weight: 700;
   font-size: 14px;
   line-height: 1.36;
@@ -47,6 +55,7 @@
   width: 18px;
   height: 18px;
   margin-left: 4px;
+
 }
 
 .favourite-button {
@@ -68,6 +77,7 @@
   background-color: $primary-white-color;
   border-radius: 20px;
   border-color: transparent;
+    cursor: url("../images/cursor.svg"), auto;
 }
 
 .favourite-button::after {
@@ -99,6 +109,7 @@
   background-color: $primary-white-color;
   border-radius: 20px;
   border-color: transparent;
+  cursor: url("../images/cursor.svg"), auto;
 }
 
 .removefavourite-button::after {
@@ -165,6 +176,7 @@
   line-height: 1.36;
   text-align: left;
   color: $primary-blue-color;
+  cursor: url("../images/cursor.svg"), auto;
 
   @media screen and (min-width: 768px) {
     font-size: 16px;
