@@ -252,7 +252,6 @@ function addToFavorite(event) {
 //   }
 // }
 
-
 // //     if (event.target.classList.contains('favourite-button')) {
 // //       const updatedFavorites = favorites.filter((id) => id !== cardItem);
 // //       localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
@@ -264,8 +263,7 @@ function addToFavorite(event) {
 newsList.addEventListener('click', addToRead);
 
 function addToRead(event) {
-
-  if (event.target.dataset.action !== 'link') return;
+  if (event.target.dataset.action === 'link') return;
   const readArticles = JSON.parse(localStorage.getItem('readArticles')) || []; ///масив прочитаних статей
   let card = event.target.parentElement.parentElement.parentElement;
   let cardId = card.dataset.id;
@@ -291,24 +289,15 @@ function addToRead(event) {
   };
 
   console.log(cardObj);
-  cardHasBeenRead.style.display = "flex";
-  card.classList.add("addOverlay");
+  cardHasBeenRead.style.display = 'flex';
+  card.classList.add('addOverlay');
 
   if (!readArticles) {
-  readArticles.push(cardObj);
-  localStorage.setItem('readArticles', JSON.stringify(readArticles));
-  } else {  
-    
+    readArticles.push(cardObj);
+    localStorage.setItem('readArticles', JSON.stringify(readArticles));
+  } else {
     const newArray = readArticles.sort((element) => element.id === cardObj.id);
     newArray.push(cardObj);
     localStorage.setItem('readArticles', JSON.stringify(readArticles));
   }
 }
-
-
-
-
-
-
-
-
