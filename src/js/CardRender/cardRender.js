@@ -31,8 +31,6 @@ export default function Makemarkup(array) {
             'https://st.depositphotos.com/1000558/53737/v/1600/depositphotos_537370102-stock-illustration-image-photo-sign-symbol-template.jpg';
         }
       }
-      if (condition) {
-      }
 
       return `<li class = "card-item" data-id = "${data.uri}">
 
