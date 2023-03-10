@@ -5,7 +5,7 @@ const undefinedReadeMore = document.querySelector('.underfined');
 function arrLocal() {
   const local = JSON.parse(localStorage.getItem('read_key'));
   if (local === null) {
-    undefinedReadeMore.classList.remove('underfined-hidden');
+    undefinedReadeMore.classList.remove('undefined-hidden');
     return;
   }
   return local;

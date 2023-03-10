@@ -10,13 +10,16 @@
       href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700&family=Poppins&family=Roboto&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="../sass/index.scss" />
+    <link rel="stylesheet" href="sass/index.scss" />
+    <link rel="stylesheet" href="sass/_read.scss" />
+
+    <script type="module" src="js/index.js"></script>
   </head>
-  <!-- <include src="../header.html"></include> -->
 
   <body>
+    <include src="./partials/header.html"></include>
     <main class="main">
-      <div class="container">
+      <!-- <div class="container">
         <ul class="date-list-search is-hidden"></ul>
         <ul class="list-news"></ul>
         <ul class="date-list"></ul>
@@ -55,11 +58,10 @@
             />
           </picture>
         </section>
-      </div>
+      </div> -->
     </main>
-    <!-- <include src="./footer.html"></include> -->
+    <include src="./partials/footer.html"></include>
 
-    <script type="module" src="../js/read.js"></script>
-    <!-- <script type="module" src="../js/readSearch.js"></script> -->
+    <script type="module" src="js/read.js"></script>
   </body>
 </html>

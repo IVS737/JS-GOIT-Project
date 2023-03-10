@@ -191,7 +191,7 @@ function addToFavorite(event) {
   const description = card.querySelector('.card-news-description').textContent;
   const date = card.querySelector('.card-datetime').textContent;
   const newsLink = card.querySelector('.card-link');
-  
+
   console.log(newsLink);
   const cardObj = {
     id: cardId,
