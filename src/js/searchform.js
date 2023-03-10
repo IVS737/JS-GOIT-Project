@@ -263,7 +263,10 @@ function addToFavorite(event) {
 newsList.addEventListener('click', addToRead);
 
 function addToRead(event) {
-  if (event.target.dataset.action === 'link') return;
+  if (event.target.nodeName !== 'A') {
+    return;
+  }
+  if (event.target.dataset.action === 'card-link') return;
   const readArticles = JSON.parse(localStorage.getItem('readArticles')) || []; ///масив прочитаних статей
   let card = event.target.parentElement.parentElement.parentElement;
   let cardId = card.dataset.id;
