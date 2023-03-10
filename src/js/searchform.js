@@ -180,6 +180,15 @@ function onOpenInputButtonClick(event) {
 newsList.addEventListener('click', addToFavorite);
 
 function addToFavorite(event) {
+  const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+  const indexArray = favorites.map((el) => el.title);
+  const index = indexArray.indexOf(cardObj.title);
+
+  if (event.target.textContent === 'Remove from favourites') {
+    favorites.splice(index, 1);
+    localStorage.setItem('favorites', JSON.stringify(favorites));
+    return;
+  }
   if (event.target.dataset.action !== 'favourite-button') return;
 
   let card = event.target.parentElement.parentElement.parentElement;
@@ -203,12 +212,8 @@ function addToFavorite(event) {
     link: newsLink.href,
   };
   console.log(cardObj);
-  const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
 
   if (event.target.classList.contains('removefavourite-button')) {
-    const indexArray = favorites.map((el) => el.title);
-    const index = indexArray.indexOf(cardObj.title);
-
     favorites.splice(index, 1);
     localStorage.setItem('favorites', JSON.stringify(favorites));
 

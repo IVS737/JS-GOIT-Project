@@ -41,7 +41,7 @@ function createGetCardList() {
 
 createGetCardList();
 
-// cardList.addEventListener('click', addToFavorite);
+cardList.addEventListener('click', addToFavorite);
 
 // function removeToFavorite(event) {
 //   if (event.target.dataset.action === 'favorite-button') {
@@ -86,43 +86,43 @@ createGetCardList();
 //   }
 // }
 
-// function addToFavorite(event) {
-//   let card = event.target.parentElement.parentElement.parentElement;
-//   let cardId = card.dataset.id;
+function addToFavorite(event) {
+  let card = event.target.parentElement.parentElement.parentElement;
+  let cardId = card.dataset.id;
 
-//   const image = card.querySelector('.card-image').src;
-//   const category = card.querySelector('.card-news-category').textContent;
-//   const title = card.querySelector('.card-news-title').textContent;
-//   const description = card.querySelector('.card-news-description').textContent;
-//   const date = card.querySelector('.card-datetime').textContent;
-//   const newsLink = card.querySelector('.card-link');
+  const image = card.querySelector('.card-image').src;
+  const category = card.querySelector('.card-news-category').textContent;
+  const title = card.querySelector('.card-news-title').textContent;
+  const description = card.querySelector('.card-news-description').textContent;
+  const date = card.querySelector('.card-datetime').textContent;
+  const newsLink = card.querySelector('.card-link');
 
-//   const cardObj = {
-//     id: cardId,
-//     image,
-//     category,
-//     title,
-//     description,
-//     date: date,
-//     link: newsLink.href,
-//   };
+  const cardObj = {
+    id: cardId,
+    image,
+    category,
+    title,
+    description,
+    date: date,
+    link: newsLink.href,
+  };
 
-//   const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+  const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
 
-//   if (event.target.classList.contains('removefavourite-button')) {
-//     const indexArray = favorites.map((el) => el.title);
-//     const index = indexArray.indexOf(cardObj.title);
+  if (event.target.classList.contains('removefavourite-button')) {
+    const indexArray = favorites.map((el) => el.title);
+    const index = indexArray.indexOf(cardObj.title);
 
-//     favorites.splice(index, 1);
-//     localStorage.setItem('favorites', JSON.stringify(favorites));
+    favorites.splice(index, 1);
+    localStorage.setItem('favorites', JSON.stringify(favorites));
 
-//     event.target.textContent = 'Add to favorites';
-//     event.target.classList.remove('removefavourite-button');
-//   } else {
-//     favorites.pop(cardObj);
-//     localStorage.setItem('favorites', JSON.stringify(favorites));
+    event.target.textContent = 'Add to favorites';
+    event.target.classList.remove('removefavourite-button');
+  } else {
+    favorites.pop(cardObj);
+    localStorage.setItem('favorites', JSON.stringify(favorites));
 
-//     event.target.textContent = 'Removed from favorites';
-//     event.target.classList.add('removefavourite-button');
-//   }
-// }
+    event.target.textContent = 'Removed from favorites';
+    event.target.classList.add('removefavourite-button');
+  }
+}

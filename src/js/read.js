@@ -224,7 +224,7 @@ function createGetCardList() {
   //       createEmptyMarkup()
   //       console.log('kjjk')
   //   }
-  if (parsedArray === null) {
+  if (news.length === null) {
     Notiflix.Notify.info('You havn`t read anything');
   }
 }
