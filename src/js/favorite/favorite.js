@@ -33,6 +33,10 @@ function createGetCardList() {
     .join('');
 
   cardList.innerHTML = news;
+
+  if (news.length === 0) {
+    return Notiflix.Notify.info('You don`t have favourite news');
+  }
 }
 
 createGetCardList();
