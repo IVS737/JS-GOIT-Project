@@ -41,8 +41,10 @@ export default function MakeStartMarkup(array) {
       <h3 class="card-news-title">${title}</h3>
       <p class="card-news-description">${subTitle}</p>
       <div class="card-info-container">
-        <p class="card-datetime">${format(new Date(date), 'dd/MM/yyyy')}</p>
-        <a id="${data.uri}" class="card-link" href="${data.url}" data-action="link" target="_blank" rel="noopener noreferrer nofollow">Read more</a>
+
+        <p class="card-datetime">${date}</p>
+        <a class="card-link" href="${data.url}" target="_blank" rel="noopener noreferrer nofollow">Read more</a>
+
       </div>
     </div>
 </li>`;
