@@ -4,14 +4,14 @@ const render = new RenderCategory();
 
 const paginator = document.getElementById('paginator');
 
-let currentPage = 0;
-let totalPages = 0;
-let filterNameByDefaul = 'sports';
-// searchByFilter();
-// displayPagination()
+let currentPage = 1;
+let totalPages = 4;
+let offsetValue  = 0;
+
 export default function changeFilterName(name) {
   currentPage = 1;
   filterNameByDefaul = name;
+  offsetValue = 0;
   searchByFilter();
 }
 async function searchByFilter() {
@@ -20,24 +20,23 @@ async function searchByFilter() {
   const newsError = document.querySelector('.container__error')
   try {
     const response = await axios.get(
-      `https://api.nytimes.com/svc/search/v2/articlesearch.json?limit=8&fq=news_desk:(${filterNameByDefaul})&api-key=71s3mUNKm6z5TjxLJwNR66epaTNpAApf&page=${
-        currentPage
-      }`,
+      `https://api.nytimes.com/svc/news/v3/content/all/${filterNameByDefaul}.json?limit=8&offset=${offsetValue}&api-key=kAFi92vRzv66C7DQ6coSA3C5NLbSIILk`,
     );
     newsError.style.display = 'none';
     newsBox.style.display === 'none' && (newsBox.style.display = 'block');
     paginationBox.style.display === 'none'&& (paginationBox.style.display = 'flex');
+       
+         const articles = response.data.results ;// 8 articles
+         
 
-         const articles = response.data.response.docs.slice(0, 8); // 8 articles
-
-         totalPages = Math.ceil(response.data.response.meta.hits / 10);
-    totalPages = totalPages > 200 ? 200 : totalPages;
+          
        
          newsListRender(articles);
        
          displayPagination();
         
   } catch (error) {
+    console.log(error);
     newsError.style.display === 'none' && (newsError.style.display = 'block');
     paginationBox.style.display = 'none'
     newsBox.style.display = 'none';
@@ -47,12 +46,15 @@ async function searchByFilter() {
 }
 
 function newsListRender(newsArray) {
+
+
   const newsBox = document.querySelector('.news');
 
   const articles = newsArray.map((result) => {
-    const date = result.pub_date.toString().slice(0, 10).replace(`-`, '/').replace(`-`, '/');
+    
+    const date = result.published_date.toString().slice(0, 10).replace(`-`, '/').replace(`-`, '/');
     const subTitle = result.abstract.slice(0, 100) + `...`;
-    const title = result.headline.main.slice(0, 60) + `...`;
+    const title = result.title.slice(0, 60) + `...`;
 
     return {
       title: title,
@@ -60,7 +62,7 @@ function newsListRender(newsArray) {
       description: subTitle,
       date: new Date(date),
       url: result.web_url,
-      section: result.section_name,
+      section: result.section,
       uri: result.uri,
     };
   });
@@ -68,11 +70,12 @@ function newsListRender(newsArray) {
 }
 
 function imageValidation(data) {
-  if (!data.multimedia || data.multimedia.length === 0) {
+  if (!data.multimedia || data.multimedia.length === 0 || data.multimedia.length === 2) {
     return 'https://st.depositphotos.com/1000558/53737/v/1600/depositphotos_537370102-stock-illustration-image-photo-sign-symbol-template.jpg';
   } else if (data.multimedia.length > 0) {
-    return `http://www.nytimes.com/${data.multimedia[0].url}`;
+    return `${data.multimedia[2].url}`;
   }
+  
 }
 
 function displayPagination() {
@@ -82,7 +85,8 @@ function displayPagination() {
 
   prevButton.classList.add('paginator__button', 'paginator__button-nav');
   paginatorBtnTitlePrew.classList.add('paginator__button-title-prew');
-  paginatorBtnTitlePrew.innerText = 'Prew';
+  paginatorBtnTitlePrew.innerText = 'Prev';
+
   if (currentPage <= 1) {
     prevButton.classList.add('isDisabled');
     prevButton.setAttribute('disabled', true);
@@ -108,84 +112,72 @@ function displayPagination() {
 
   nextButton.append(paginatorBtnTitleNext);
 
-  nextButton.addEventListener('click', () =>  goToNextPage());
+  nextButton.addEventListener('click', () => {
+    goToNextPage();
+  });
 
   paginator.appendChild(prevButton);
 
   let startPage, endPage;
-  let maxVisibleButtons = 2;
+  let maxVisibleButtons = 3;
 
-  if (window.innerWidth >= 425) {
-    maxVisibleButtons = 3;
-  }
 
-  if (totalPages <= maxVisibleButtons) {
-    startPage = 1;
-    endPage = totalPages;
-  } 
-  else {
-    const halfVisibleButtons = Math.floor((maxVisibleButtons - 1) / 2);
 
-    if (currentPage <= halfVisibleButtons + 1) {
+    if (totalPages <= maxVisibleButtons) {
       startPage = 1;
-      endPage = maxVisibleButtons;
-    } else if (currentPage >= totalPages - halfVisibleButtons) {
       endPage = totalPages;
-      startPage = endPage - (maxVisibleButtons - 1);
     } else {
-      startPage = currentPage - halfVisibleButtons;
-      endPage = currentPage + halfVisibleButtons;
+      const halfVisibleButtons = Math.floor((maxVisibleButtons - 1) / 2);
+
+      if (currentPage <= halfVisibleButtons + 1) {
+        startPage = 1;
+        endPage = maxVisibleButtons;
+      } else if (currentPage >= totalPages - halfVisibleButtons) {
+        endPage = totalPages;
+        startPage = endPage - (maxVisibleButtons - 1);
+      } else {
+        startPage = currentPage - halfVisibleButtons;
+        endPage = currentPage + halfVisibleButtons;
+      }
     }
-  }
 
-  if (startPage > 1) {
-    const firstPageButton = document.createElement('button');
-    firstPageButton.innerText = 1;
-    firstPageButton.classList.add('paginator__button');
-    firstPageButton.addEventListener('click', () => {
-      currentPage = 0;
-      window.scrollTo(0, 0);
-      searchByFilter();
-    });
+    if (startPage > 1) {
+      const firstPageButton = document.createElement('button');
+      firstPageButton.innerText = 1;
+      firstPageButton.classList.add('paginator__button');
+      firstPageButton.addEventListener('click', () => {
+        currentPage = 1;
+        offsetValue = 0;
+        searchByFilter();
+      });
 
-    paginator.appendChild(firstPageButton);
+      paginator.appendChild(firstPageButton);
 
-    const dotsButton = document.createElement('button');
-    dotsButton.classList.add('paginator__button--notbordered');
-    dotsButton.setAttribute('disabled', true);
-    dotsButton.innerText = '...';
-    dotsButton.disabled = true;
-    paginator.appendChild(dotsButton);
-  }
 
-  for (let i = startPage; i <= endPage; i++) {
-    // ---------------------------------------------------------add for max create button = 200
-
-    let numButtons = 0;
-    const pageButton = document.createElement('button');
-    pageButton.innerText = i;
-    pageButton.classList.add('paginator__button');
-
-    pageButton.addEventListener('click', () => {
-      currentPage = i;
-      searchByFilter();
-
-      window.scrollTo(0, 0);
-    });
-    paginator.appendChild(pageButton);
-    numButtons++;
-    if (i === currentPage) {
-      pageButton.classList.add('isSelected');
     }
-  }
 
-  if (endPage < totalPages - 1) {
-    const dotsButton = document.createElement('button');
-    dotsButton.classList.add('paginator__button--notbordered');
+    for (let i = startPage; i <= endPage; i++) {
+      const pageButton = document.createElement('button');
+      pageButton.innerText = i;
+      pageButton.classList.add('paginator__button');
 
-    dotsButton.innerText = '...';
-    dotsButton.disabled = true;
-    paginator.appendChild(dotsButton);
+      if (i === currentPage) {
+        pageButton.classList.add('isSelected');
+        pageButton.setAttribute('disabled', true);
+      } else {
+        pageButton.addEventListener('click', () => {
+          currentPage = i;
+          offsetValue = (currentPage - 1) * 10;
+          window.scrollTo(0, 0);
+          searchByFilter();
+        });
+      }
+
+      paginator.appendChild(pageButton);
+    }
+
+  if (endPage < totalPages) {
+   
 
     const lastPageButton = document.createElement('button');
 
@@ -194,39 +186,38 @@ function displayPagination() {
     lastPageButton.classList.add('paginator__button');
     lastPageButton.addEventListener('click', () => {
       currentPage = totalPages;
+      offsetValue = currentPage * 10;
       window.scrollTo(0, 0);
       searchByFilter();
     });
     paginator.appendChild(lastPageButton);
-    paginator.appendChild(nextButton);
-  } else if (currentPage !== totalPages) {
-    const lastPageButton = document.createElement('button');
-    lastPageButton.innerText = totalPages;
-    lastPageButton.classList.add('paginator__button');
-    paginator.appendChild(lastPageButton);
-    paginator.appendChild(nextButton);
-  }
+      paginator.appendChild(nextButton)}
+  //  else if (currentPage !== totalPages) {
+  //   const lastPageButton = document.createElement('button');
+  //   lastPageButton.innerText = totalPages;
+  //   lastPageButton.classList.add('paginator__button');
+  //   paginator.appendChild(lastPageButton);
+  //   paginator.appendChild(nextButton);
+  // }
 
   paginator.appendChild(nextButton);
 
-
-
-
-
-function goToPreviousPage() {
-  if (currentPage > 1) {
-    currentPage--;
-    searchByFilter();
-    window.scrollTo(0, 0);
+  function goToPreviousPage() {
+    if (currentPage > 1) {
+      currentPage --;
+      offsetValue -= 10;
+      searchByFilter();
+      window.scrollTo(0, 0);
+    }
   }
-}
 
-function goToNextPage() {
-  if (currentPage < totalPages) {
-    currentPage++;
-    searchByFilter();
-    window.scrollTo(0, 0);
+  function goToNextPage() {
+    if (currentPage < totalPages) {
+      currentPage ++;
+      offsetValue += 10;
+      searchByFilter();
+      window.scrollTo(0, 0);
+    }
   }
-}
 
 }
