@@ -30,12 +30,12 @@ export default function MakeStartMarkup(array) {
         imageStartAddress = 'https://static01.nyt.com/';
         imageAddress = data.multimedia[1].url;
       }
-      console.log(data.uri);
-      favStorage.map((el) => {
-        if (data.uri === el.id) {
-          btnText = 'Remove from favourite';
-        }
-      });
+      // console.log(data.uri);
+      // favStorage.map((el) => {
+      //   if (data.uri === el.id) {
+      //     btnText = 'Remove from favourite';
+      //   }
+      // });
 
       return `<li class = "card-item" data-id = "${data.uri}">
     <div class="card-wrapper">
