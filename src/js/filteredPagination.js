@@ -108,9 +108,7 @@ function displayPagination() {
 
   nextButton.append(paginatorBtnTitleNext);
 
-  nextButton.addEventListener('click', () => {
-    goToNextPage();
-  });
+  nextButton.addEventListener('click', () =>  goToNextPage());
 
   paginator.appendChild(prevButton);
 
@@ -119,6 +117,7 @@ function displayPagination() {
 
   if (window.innerWidth >= 425) {
     maxVisibleButtons = 3;
+  }
 
   if (totalPages <= maxVisibleButtons) {
     startPage = 1;
@@ -161,9 +160,7 @@ function displayPagination() {
 
   for (let i = startPage; i <= endPage; i++) {
     // ---------------------------------------------------------add for max create button = 200
-    if (i === 200) {
-      break;
-    }
+
     let numButtons = 0;
     const pageButton = document.createElement('button');
     pageButton.innerText = i;
@@ -212,20 +209,24 @@ function displayPagination() {
 
   paginator.appendChild(nextButton);
 
-  function goToPreviousPage() {
-    if (currentPage > 1) {
-      currentPage--;
-      searchByFilter();
-      window.scrollTo(0, 0);
-    }
-  }
 
-  function goToNextPage() {
-    if (currentPage < totalPages) {
-      currentPage++;
-      searchByFilter();
-      window.scrollTo(0, 0);
-    }
-  }
 
-}}
+
+
+function goToPreviousPage() {
+  if (currentPage > 1) {
+    currentPage--;
+    searchByFilter();
+    window.scrollTo(0, 0);
+  }
+}
+
+function goToNextPage() {
+  if (currentPage < totalPages) {
+    currentPage++;
+    searchByFilter();
+    window.scrollTo(0, 0);
+  }
+}
+
+}
