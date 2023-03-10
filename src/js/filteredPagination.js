@@ -119,10 +119,9 @@ function displayPagination() {
   paginator.appendChild(prevButton);
 
   let startPage, endPage;
-  let maxVisibleButtons = 2;
+  let maxVisibleButtons = 3;
 
-  if (window.innerWidth >= 425) {
-    maxVisibleButtons = 3;
+
 
     if (totalPages <= maxVisibleButtons) {
       startPage = 1;
@@ -187,6 +186,7 @@ function displayPagination() {
     lastPageButton.classList.add('paginator__button');
     lastPageButton.addEventListener('click', () => {
       currentPage = totalPages;
+      offsetValue = currentPage * 10;
       window.scrollTo(0, 0);
       searchByFilter();
     });
@@ -220,4 +220,4 @@ function displayPagination() {
     }
   }
 
-}}
+}
