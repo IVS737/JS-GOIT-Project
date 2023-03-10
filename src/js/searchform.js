@@ -157,7 +157,7 @@ function fetchNews(value) {
 //       <p class="card-news-description">${subTitle}</p>
 //       <div class="card-info-container">
 //         <p class="card-datetime">${format(new Date(date), 'dd/MM/yyyy')}</p>
-//         <a class="card-link" href="${data.web_url}" target="_blank" rel="noopener noreferrer nofollow">Read more</a>
+//         <a class="card-link" data-id="${data.uri}" data-action="link" "href="${data.web_url}" target="_blank" rel="noopener noreferrer nofollow">Read more</a>
 //       </div>
 //     </div>
 // </li>`;
@@ -252,7 +252,6 @@ function addToFavorite(event) {
 //   }
 // }
 
-// //
 
 // //     if (event.target.classList.contains('favourite-button')) {
 // //       const updatedFavorites = favorites.filter((id) => id !== cardItem);
@@ -261,3 +260,55 @@ function addToFavorite(event) {
 // //       event.target.textContent = 'Add to favorites';
 // //       event.target.classList.remove('removefavourite-button');
 // //     }
+
+newsList.addEventListener('click', addToRead);
+
+function addToRead(event) {
+
+  if (event.target.dataset.action !== 'link') return;
+  const readArticles = JSON.parse(localStorage.getItem('readArticles')) || []; ///масив прочитаних статей
+  let card = event.target.parentElement.parentElement.parentElement;
+  let cardId = card.dataset.id;
+
+  const image = card.querySelector('.card-image').src;
+  const category = card.querySelector('.card-news-category').textContent;
+  const title = card.querySelector('.card-news-title').textContent;
+  const description = card.querySelector('.card-news-description').textContent;
+  const cardDate = card.querySelector('.card-datetime').textContent;
+  const newsLink = card.querySelector('.card-link');
+
+  const cardHasBeenRead = card.querySelector('.card-text-read');
+  const date = new Date(Date.now()).toISOString();
+  const cardObj = {
+    id: cardId,
+    image,
+    category,
+    title,
+    description,
+    watchDate: date.trim(),
+    cardDate,
+    link: newsLink.href,
+  };
+
+  console.log(cardObj);
+  cardHasBeenRead.style.display = "flex";
+  card.classList.add("addOverlay");
+
+  if (!readArticles) {
+  readArticles.push(cardObj);
+  localStorage.setItem('readArticles', JSON.stringify(readArticles));
+  } else {  
+    
+    const newArray = readArticles.sort((element) => element.id === cardObj.id);
+    newArray.push(cardObj);
+    localStorage.setItem('readArticles', JSON.stringify(readArticles));
+  }
+}
+
+
+
+
+
+
+
+
