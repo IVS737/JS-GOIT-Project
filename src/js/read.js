@@ -1,3 +1,5 @@
+import Notiflix from 'notiflix';
+
 // const dateListEl = document.querySelector('.date-list');
 
 // const undefinedReadeMore = document.querySelector('.underfined');
@@ -143,8 +145,6 @@
 //   dateListEl.innerHTML = evt;
 // }
 
-
-
 console.log('hi');
 
 import { format } from 'date-fns';
@@ -155,23 +155,14 @@ import imagesMob from '../images/notfoundMob.png';
 
 import NewsServise from './newslist.js';
 import createEmptyMarkup from './renderEmptyMarkup';
-
-
-
-
-
-
+import Notiflix from 'notiflix';
 
 const refs = {
-  
   withoutNewsContainer: document.querySelector('.container__error'),
-newsList: document.querySelector('.wrapper__list'),
+  newsList: document.querySelector('.wrapper__list'),
   list: document.querySelector('.list'),
-    newsContainer: document.querySelector('.news'),
-  
+  newsContainer: document.querySelector('.news'),
 };
-
-
 
 //  function createEmptyMarkup() {
 //   const emptyMarkup = `<h2 class="withoutnews-title">We haven’t found news from <br> this category</h2><picture>               <source
@@ -199,7 +190,7 @@ newsList: document.querySelector('.wrapper__list'),
 //   refs.withoutNewsContainer.innerHTML = emptyMarkup;
 //  }
 
- function createGetCardList() {
+function createGetCardList() {
   const array = localStorage.getItem('readArticles');
   const parsedArray = JSON.parse(array);
   console.log(parsedArray);
@@ -229,11 +220,13 @@ newsList: document.querySelector('.wrapper__list'),
 
   refs.list.innerHTML = news;
 
-//   if (!parsedArray) {
-//       createEmptyMarkup()
-//       console.log('kjjk')
-//   }
+  //   if (!parsedArray) {
+  //       createEmptyMarkup()
+  //       console.log('kjjk')
+  //   }
+  if (parsedArray === null) {
+    Notiflix.Notify.info('You havn`t read anything');
+  }
 }
 
 createGetCardList();
-
