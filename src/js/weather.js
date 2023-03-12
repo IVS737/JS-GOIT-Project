@@ -10,6 +10,8 @@ const URL2 = 'https://api.openweathermap.org/data/2.5/forecast';
 
 const STORAGE_KEY_WEATHER = 'city-input';
 const API_KEY = 'be0f81a8f9f4c462088b51501fa506a7'
+const WEATHER_FOR_DAY = "weather for day";
+const WEATHER_FOR_WEEK = "weather for week";
 
 const weatherTemp = document.querySelector('#weather-block-temp');
 const weatherDescription = document.querySelector('#weather-block-description');
@@ -23,6 +25,11 @@ const seachEl = document.getElementById("weatherBlock_search")
 
 let day =  moment(new Date()).format('ddd')
 let date = moment(new Date()).format('DD MMM YYYY')
+
+// ------------------------ Flag -------------------------
+
+
+
 
 // ---------------------------------------- Daily Weather -----------------------------
 const fetchWeatherGeo = async (lat, lon, units='metric') => {
@@ -240,7 +247,6 @@ const fetchWeatherForecastCity = async (
                           
                     }
                     seachEl.value =  ``
-                    // geoWeatherApp()
                   }            
                   )
 
