@@ -72,7 +72,7 @@ function newsListRender(newsArray) {
 
 function imageValidation(data) {
   if (!data.multimedia || data.multimedia.length === 0 || data.multimedia.length === 2) {
-    return 'https://st.depositphotos.com/1000558/53737/v/1600/depositphotos_537370102-stock-illustration-image-photo-sign-symbol-template.jpg';
+    return 'https://cdn.pixabay.com/photo/2019/04/29/16/11/new-4166472_960_720.png';
   } else if (data.multimedia.length > 0) {
     return `${data.multimedia[2].url}`;
   }

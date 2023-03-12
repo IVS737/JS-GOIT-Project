@@ -25,7 +25,7 @@ export default function MakeStartMarkup(array) {
 
       if (data.multimedia.length === 0) {
         imageAddress =
-          'https://st.depositphotos.com/1000558/53737/v/1600/depositphotos_537370102-stock-illustration-image-photo-sign-symbol-template.jpg';
+          'https://cdn.pixabay.com/photo/2019/04/29/16/11/new-4166472_960_720.png';
       } else if (data.multimedia.length > 0) {
         imageStartAddress = 'https://static01.nyt.com/';
         imageAddress = data.multimedia[1].url;

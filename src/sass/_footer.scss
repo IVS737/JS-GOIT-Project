@@ -1,6 +1,7 @@
 .footer {
-  //border-top: 1px solid rgba(0, 0, 0, 0.2);
   background-color: #7a7a7a;
+  position: relative;
+  z-index: 1;
 
   &__container {
     display: flex;
