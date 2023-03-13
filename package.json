@@ -20,7 +20,9 @@
     "notiflix": "^3.2.6"
   },
   "devDependencies": {
+    "@parcel/packager-raw-url": "^2.8.3",
     "@parcel/transformer-sass": "^2.8.3",
+    "@parcel/transformer-webmanifest": "^2.8.3",
     "buffer": "^5.7.1",
     "eslint": "^8.35.0",
     "eslint-config-prettier": "^8.6.0",
