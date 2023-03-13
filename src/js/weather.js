@@ -3,11 +3,15 @@ import '../sass/_weatherForecast.scss'
 
 import moment from 'moment';
 import axios from 'axios';
+import _debounce from 'lodash.debounce';
 
 const URL = 'https://api.openweathermap.org/data/2.5/weather';
 const URL2 = 'https://api.openweathermap.org/data/2.5/forecast';
 
+const STORAGE_KEY_WEATHER = 'city-input';
 const API_KEY = 'be0f81a8f9f4c462088b51501fa506a7'
+const WEATHER_FOR_DAY = "weather for day";
+const WEATHER_FOR_WEEK = "weather for week";
 
 const weatherTemp = document.querySelector('#weather-block-temp');
 const weatherDescription = document.querySelector('#weather-block-description');
@@ -17,17 +21,21 @@ const weatherDate = document.querySelector('#weather-block-date');
 const loadWeather = document.querySelector('#load-weather-button');
 const forDayEl = document.getElementById("for-day");
 const forWeekEl = document.getElementById("for-week");
-
-
+const seachEl = document.getElementById("weatherBlock_search")
 
 let day =  moment(new Date()).format('ddd')
 let date = moment(new Date()).format('DD MMM YYYY')
 
+// ------------------------ Flag -------------------------
 
+
+
+
+// ---------------------------------------- Daily Weather -----------------------------
 const fetchWeatherGeo = async (lat, lon, units='metric') => {
  
   const { data } = await axios.get(`${URL}/?lat=${lat}&lon=${lon}&units=${units}&exclude=deyly&APPID=${API_KEY}`);
-//   console.log(data)  
+ 
   return data;
  
  }
@@ -41,13 +49,12 @@ const fetchWeatherCity = async (
     const { data } = await axios.get(
         `${URL}?q=${cityName}&units=${units}&APPID=${API_KEY}`
     );
-    // console.log(data);
+
    return data;
 }
 
 
-const geoWeatherApp = () => {
-// if (navigator.geolocation) {    
+const geoWeatherApp = () => {  
       navigator.geolocation.getCurrentPosition(function(position) {
         let lat = position.coords.latitude
         let lon = position.coords.longitude
@@ -58,15 +65,14 @@ const geoWeatherApp = () => {
             .catch(error => {});
         }) ?? 
        fetchWeatherCity()
-           .then(renderWeather)
+           .then(renderWeatherCityInput)
             .catch(error => {});
-    //   }
-    //   else {setWeatherLoader()}
     }
     
 const renderWeather = (weather) => {
-//   closetWeatherLoader();
   
+  weatherName.classList.remove("weatherBlock_hidden");
+  seachEl.classList.add("weatherBlock_hidden");
   forDayEl.classList.remove("weatherBlock_hidden");
   forWeekEl.classList.add("weatherBlock_hidden");
 
@@ -84,6 +90,19 @@ const renderWeather = (weather) => {
   loadWeather.classList.remove("weatherForecast_weatherBtn")
 }
 
+
+const renderWeatherCityInput = (weather) => {
+  
+  renderWeather(weather)
+  weatherName.classList.add("weatherBlock_hidden");
+  seachEl.classList.remove("weatherBlock_hidden"); 
+  
+  seachEl.placeholder = `${weather.name}`
+  
+  
+}
+
+
 geoWeatherApp();
 
 // // ----------------------------- 7 DAY -------------------------------
@@ -92,7 +111,7 @@ geoWeatherApp();
 const fetchWeatherForecast = async (lat, lon, units='metric') => {
  
   const { data } = await axios.get(`${URL2}?lat=${lat}&lon=${lon}&units=${units}&APPID=${API_KEY}`);
-    //  console.log(data)
+ 
      return data;
  }
 
@@ -102,7 +121,7 @@ const fetchWeatherForecastCity = async (
     units = "metric") => {
  
     const { data } = await axios.get(`${URL2}?q=${cityName}&units=${units}&APPID=${API_KEY}`);
-      //  console.log(data)
+   
        return data;
    }
 
@@ -126,7 +145,8 @@ const fetchWeatherForecastCity = async (
 }
 
  const renderWeatherForecast = obj => {  
-            
+            weatherName.classList.remove("weatherBlock_hidden");
+            seachEl.classList.add("weatherBlock_hidden");
             forWeekEl.classList.remove("weatherBlock_hidden");
             forDayEl.classList.add("weatherBlock_hidden");
             
@@ -174,13 +194,11 @@ const fetchWeatherForecastCity = async (
            loadWeather.classList.remove("weatherBlock_weatherBtn")
             }
 
-
-
 // ---------- BUTTON
 
             document.addEventListener("click", (event)=>{
               if(event.target?.classList.contains("weatherBlock_weatherBtn")){ 
-                // console.log('Покажи прогноз неделя')   
+             
                 geoWeatherForecast()   
               
               }
@@ -188,15 +206,51 @@ const fetchWeatherForecastCity = async (
 
               document.addEventListener("click", (event)=>{
                 if(event.target?.classList.contains("weatherForecast_weatherBtn")){        
-                  // console.log('Покажи прогноз 5дней')    
+                
                   geoWeatherApp()
                 }
               }
                   )
 
 
+                  document.addEventListener('change', async (event)=>{
+                  if(event.target?.classList.contains("weatherBlock_seach")){    
+                    
+                    const input = seachEl.value.trim();
+                    localStorage.setItem(STORAGE_KEY_WEATHER, input);
+                    
+                      fetchWeatherCity(input)
+                      .then(renderWeather)
+                      .catch(error => {});
+                   
+                     weatherName.classList.remove("weatherBlock_hidden");
+                      seachEl.classList.add("weatherBlock_hidden");
+
+                      loadWeather.classList.add("weatherBlock_weatherBtnInputCity")
+                      loadWeather.classList.remove("weatherForecast_weatherBtn")
 
 
+                      document.addEventListener("click", (event)=>{
+                        if(event.target?.classList.contains("weatherBlock_weatherBtnInputCity")){        
+                          const savedCityInput = localStorage.getItem(STORAGE_KEY_WEATHER);
+                          console.log("сохраненный город", savedCityInput)
+                          fetchWeatherForecastCity(savedCityInput)
+                          .then(renderWeatherForecast)
+                                .catch(error => {});
+                        }
+                        
+                             
+                        loadWeather.classList.remove("weatherBlock_weatherBtnInputCity")
+
+                      }
+                          )
+                          
+                    }
+                    seachEl.value =  ``
+                  }            
+                  )
+
+                  
 
 
 export default geoWeatherApp();
