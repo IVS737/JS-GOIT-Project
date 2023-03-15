@@ -254,6 +254,19 @@ function displayPagination() {
   }
 }
 
+//mob menu
+
+const mobileMenu = document.querySelector('.js-menu-container');
+const openMenuBtn = document.querySelector('.burger-btn-open');
+
+const toggleMenu = () => {
+  const isMenuOpen = openMenuBtn.getAttribute('aria-expanded') === 'true' || false;
+  openMenuBtn.setAttribute('aria-expanded', !isMenuOpen);
+  mobileMenu.classList.toggle('is-open');
+};
+
+//
+
 searchForm.addEventListener('submit', (event) => {
   event.preventDefault();
 
@@ -261,4 +274,8 @@ searchForm.addEventListener('submit', (event) => {
   searchArticles();
 
   window.scrollTo(0, 0);
+
+  if (mobileMenu.classList.contains('is-open')) {
+    toggleMenu();
+  }
 });
