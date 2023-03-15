@@ -25,18 +25,18 @@ const refs = {
   newsContainer: document.querySelector('.news'),
 };
 
-//mob menu
+// //mob menu
 
-const mobileMenu = document.querySelector('.js-menu-container');
-const openMenuBtn = document.querySelector('.burger-btn-open');
+// const mobileMenu = document.querySelector('.js-menu-container');
+// const openMenuBtn = document.querySelector('.burger-btn-open');
 
-const toggleMenu = () => {
-  const isMenuOpen = openMenuBtn.getAttribute('aria-expanded') === 'true' || false;
-  openMenuBtn.setAttribute('aria-expanded', !isMenuOpen);
-  mobileMenu.classList.toggle('is-open');
-};
+// const toggleMenu = () => {
+//   const isMenuOpen = openMenuBtn.getAttribute('aria-expanded') === 'true' || false;
+//   openMenuBtn.setAttribute('aria-expanded', !isMenuOpen);
+//   mobileMenu.classList.toggle('is-open');
+// };
 
-//
+// //
 
 const { form, input, submitButton, openInputButton, withoutNewsContainer, newsList, weatherContainer, newsContainer } =
   refs;
