@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { format } from 'date-fns';
-import RenderCategory from './CategoryList/renderCategoryList';
-const render = new RenderCategory();
+import createEmptyMarkup from './renderEmptyMarkup';
+
 const apiKey = 'kAFi92vRzv66C7DQ6coSA3C5NLbSIILk';
 const searchForm = document.querySelector('.header-search-form');
 const searchInput = document.querySelector('.header-search-input');
@@ -16,44 +16,42 @@ let searchName = '';
 function setName(name) {
   currentPage = 1;
   searchName = name;
-  searchArticles()
+  searchArticles();
 }
 
 async function searchArticles() {
   const newsBox = document.querySelector('.news');
   const paginationBox = document.getElementById('paginator');
-  const newsError = document.querySelector('.container__error')
-  
+  const newsError = document.querySelector('.container__error');
+
   try {
     const response = await axios.get(
-      `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${searchInput.value}&api-key=${apiKey}&page=${
-        currentPage
-      }`,
+      `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${searchInput.value}&api-key=${apiKey}&page=${currentPage}`,
     );
-    
+
     if (response.data.response.docs.length === 0) {
       newsError.style.display === 'none' && (newsError.style.display = 'block');
       paginationBox.style.display = 'none';
       newsBox.style.display = 'none';
-      render.emptyMarkup();
+      createEmptyMarkup();
       return;
     }
     newsError.style.display = 'none';
     newsBox.style.display === 'none' && (newsBox.style.display = 'block');
-    paginationBox.style.display === 'none'&& (paginationBox.style.display = 'flex');
-        const articles = response.data.response.docs.slice(0, 8); // 8 articles
+    paginationBox.style.display === 'none' && (paginationBox.style.display = 'flex');
+    const articles = response.data.response.docs.slice(0, 8); // 8 articles
 
-      totalPages = Math.ceil(response.data.response.meta.hits / 1000);
-      totalPages = totalPages > 200 ? 200 : totalPages;
+    totalPages = Math.ceil(response.data.response.meta.hits / 1000);
+    totalPages = totalPages > 200 ? 200 : totalPages;
 
-        makeMarkup(articles); 
-        displayPagination();
+    makeMarkup(articles);
+    displayPagination();
   } catch (error) {
     console.log(error);
     newsError.style.display === 'none' && (newsError.style.display = 'block');
     paginationBox.style.display = 'none';
     newsBox.style.display = 'none';
-    render.emptyMarkup();
+    createEmptyMarkup();
     return;
   }
 }
@@ -69,8 +67,7 @@ function makeMarkup(array) {
       let imageStartAddress;
 
       if (data.multimedia.length === 0) {
-        imageAddress =
-          'https://cdn.pixabay.com/photo/2019/04/29/16/11/new-4166472_960_720.png';
+        imageAddress = 'https://cdn.pixabay.com/photo/2019/04/29/16/11/new-4166472_960_720.png';
       } else if (data.multimedia.length > 0) {
         imageStartAddress = 'https://static01.nyt.com/';
         imageAddress = imageStartAddress + data.multimedia[0].url;
@@ -132,7 +129,6 @@ function displayPagination() {
     nextButton.setAttribute('disabled', true);
   }
 
-
   nextButton.append(paginatorBtnTitleNext);
 
   nextButton.addEventListener('click', () => {
@@ -184,7 +180,6 @@ function displayPagination() {
   }
 
   for (let i = startPage; i <= endPage; i++) {
-
     let numButtons = 0;
     const pageButton = document.createElement('button');
     pageButton.innerText = i;

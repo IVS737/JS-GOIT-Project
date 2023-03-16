@@ -1,12 +1,17 @@
-import Notiflix from 'notiflix';
+import createEmptyMarkup from '../renderEmptyMarkup';
 
 const cardList = document.querySelector('.wrapper__list');
+const favoritesList = document.querySelector('.favorites__list');
 
 function createGetCardList() {
-  const array = localStorage.getItem('favorites');
-  const parsedArray = JSON.parse(array);
-  console.log(parsedArray);
-  const news = parsedArray
+  if (window.location.pathname !== '/favoritePage.html') return;
+  cardList.style.display = 'block';
+  const array = localStorage.getItem('favorites') && JSON.parse(localStorage.getItem('favorites'));
+  if (!array || array.length === 0) {
+    createEmptyMarkup();
+    return;
+  }
+  const news = array
     .map(
       (element) =>
         `<li class = "card-item" data-id = "${element.id}">
@@ -18,7 +23,7 @@ function createGetCardList() {
 
        <p class="card-text-read">Already read
          <svg width="18" height="18" class="check-icon"><use href="../images/symbol-defs.svg#icon-check"</svg></p>
-        <button class="removefavorite-button" type="button" data-action="removefavorite-button">Remove to favorite</button>
+        <button class="removefavorite-button" type="button" data-action="removefavorite-button">Removed from favorites</button>
 
       </div>
       <h3 class="card-news-title">${element.title}</h3>
@@ -32,97 +37,51 @@ function createGetCardList() {
     )
     .join('');
 
-  cardList.innerHTML = news;
-
-  if (news.length === 0) {
-    return Notiflix.Notify.info('You don`t have favourite news');
-  }
+  favoritesList.innerHTML = news;
 }
-
 createGetCardList();
-
 cardList.addEventListener('click', addToFavorite);
 
-// function removeToFavorite(event) {
-//   if (event.target.dataset.action === 'favorite-button') {
-//     let cardItem = event.target.parentElement.parentElement.parentElement.dataset.id;
-//     console.log(cardItem); // сardId
-//     const card = event.currentTarget.firstChild; //li
-//     const image = card.querySelector('.card-image'); //img
-//     const category = card.querySelector('.card-news-category'); //categoryconst
-//     const cardTitle = card.querySelector('.card-news-title'); //title
-//     const newsDescription = card.querySelector('.card-news-description'); //description
-//     const dateTime = card.querySelector('.card-datetime'); //date
-//     const newsLink = card.querySelector('.card-link'); //link
-//     // console.log(image);
-//     // console.log(card);
-//     // console.log(category);
-//     // console.log(cardTitle);
-//     // console.log(newsDescription);
-//     // console.log(dateTime);
-//     // console.log(newsLink);
-
-//     const oneCard = {
-//       id: card.dataset.id,
-//       image: image.src,
-//       category: category.textContent,
-//       title: cardTitle.textContent,
-//       description: newsDescription.textContent,
-//       data: dateTime.textContent,
-//       link: newsLink.href,
-//     };
-//     console.log(oneCard);
-
-//     const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
-
-//     if (event.target.classList.contains('removefavorite-button')) {
-//       const updatedFavorites = favorites.filter((element) => element.id != cardItem);
-//       console.log(updatedFavorites);
-//       localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
-//     } else {
-//       favorites.push(oneCard);
-//       localStorage.setItem('favorites', JSON.stringify(favorites));
-//     }
-//   }
-// }
-
 function addToFavorite(event) {
+  if (event.target.nodeName !== 'BUTTON') return;
+
   let card = event.target.parentElement.parentElement.parentElement;
-  let cardId = card.dataset.id;
-
-  const image = card.querySelector('.card-image').src;
-  const category = card.querySelector('.card-news-category').textContent;
-  const title = card.querySelector('.card-news-title').textContent;
-  const description = card.querySelector('.card-news-description').textContent;
-  const date = card.querySelector('.card-datetime').textContent;
-  const newsLink = card.querySelector('.card-link');
-
   const cardObj = {
-    id: cardId,
-    image,
-    category,
-    title,
-    description,
-    date: date,
-    link: newsLink.href,
+    id: card.dataset.id,
+    image: card.querySelector('.card-image').src,
+    category: card.querySelector('.card-news-category').textContent,
+    title: card.querySelector('.card-news-title').textContent,
+    description: card.querySelector('.card-news-description').textContent,
+    date: card.querySelector('.card-datetime').textContent,
+    link: card.querySelector('.card-link').href,
   };
 
   const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
 
-  if (event.target.classList.contains('removefavourite-button')) {
-    const indexArray = favorites.map((el) => el.title);
-    const index = indexArray.indexOf(cardObj.title);
-
-    favorites.splice(index, 1);
-    localStorage.setItem('favorites', JSON.stringify(favorites));
-
-    event.target.textContent = 'Add to favorites';
-    event.target.classList.remove('removefavourite-button');
-  } else {
-    favorites.pop(cardObj);
-    localStorage.setItem('favorites', JSON.stringify(favorites));
-
-    event.target.textContent = 'Removed from favorites';
-    event.target.classList.add('removefavourite-button');
+  const idFavorites = favorites.map((el) => el.id);
+  if (idFavorites.includes(cardObj.id) || event.target.classList.contains('removefavorite-button')) {
+    removeFromFavorites(event, cardObj);
+    return;
   }
+
+  if (!event.target.classList.contains('removefavorite-button')) {
+    favorites.push(cardObj);
+    localStorage.setItem('favorites', JSON.stringify(favorites));
+    event.target.textContent = 'Remove from favorites';
+    event.target.classList.toggle('removefavorite-button');
+    event.target.classList.toggle('favourite-button');
+  }
+}
+function removeFromFavorites(event, { id }) {
+  if (window.location.pathname === '/index.html') {
+    event.target.textContent = 'Add to favourite';
+    event.target.classList.toggle('removefavorite-button');
+    event.target.classList.toggle('favourite-button');
+  }
+  const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+  const indexArray = favorites.map((el) => el.id);
+  const index = indexArray.indexOf(id);
+  favorites.splice(index, 1);
+  localStorage.setItem('favorites', JSON.stringify(favorites));
+  createGetCardList();
 }
