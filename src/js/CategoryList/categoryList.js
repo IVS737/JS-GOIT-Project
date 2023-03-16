@@ -1,11 +1,11 @@
 let debounce = require('lodash.debounce');
 import NewsApiService from './fetchNews';
 const fetchNews = new NewsApiService();
-import RenderCategory from './renderCategoryList';
+
 import changeFilterName from '../filteredPagination';
-const render = new RenderCategory();
 
 export default (() => {
+  if (window.location.pathname !== '/index.html') return;
   const categoryListWrap = document.getElementById('categoryList');
   const openCategoryListBtn = document.querySelector('.category__list__open__btn');
   const categoryListButtonWrap = document.querySelector('.category__list__btn__wrap');
@@ -55,48 +55,8 @@ export default (() => {
       currentBtn(e);
 
       changeFilterName(e.target.dataset.name);
-      // categoryListResult();
     }
   }
-  // function categoryListResult() {
-  //   const newsBox = document.querySelector('.news');
-  //   fetchNews
-  //     .fetchNewsListOfCategory()
-  //     .then((prom) => {
-  //       return prom.results;
-  //     })
-  //     .then((newsArray) => {
-  //       if (newsBox.style.display === 'none') {
-  //         newsBox.style.display = 'block';
-  //       }
-
-  //       const articles = newsArray.map((result) => {
-  //         const date = result.published_date.toString().slice(0, 10).replace(`-`, '/').replace(`-`, '/');
-  //         return {
-  //           title: result.title,
-  //           image: imageValidation(result),
-  //           description: result.abstract,
-  //           date: new Date(date),
-  //           url: result.url,
-  //           section: result.section,
-  //           uri: result.uri,
-  //         };
-  //       });
-
-  //       render.makeMarkup(articles);
-  //     })
-  //     .catch((error) => {
-  //       newsBox.style.display = 'none';
-  //       render.emptyMarkup();
-  //     });
-  // }
-  // function imageValidation(data) {
-  //   if (!data.multimedia) {
-  //     return 'https://st.depositphotos.com/1000558/53737/v/1600/depositphotos_537370102-stock-illustration-image-photo-sign-symbol-template.jpg';
-  //   } else if (data.multimedia.length > 0) {
-  //     return data.multimedia[2].url;
-  //   }
-  // }
 
   function currentBtn(e) {
     const currentActiveBtn = document.querySelector('.category__active-btn');
@@ -142,7 +102,6 @@ export default (() => {
     }
 
     changeFilterName(e.target.dataset.name);
-    // categoryListResult();------------------------------------------прибрати цю строчку
 
     currentBtn(e);
     svgToggle(e);
